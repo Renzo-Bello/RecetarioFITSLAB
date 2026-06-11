@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0A">
+<title>STRENGTHLAB | Recetario Fitness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+:root{
+  --lime:#C9A96E;--lime-dim:#8A6D3F;--lime-glow:rgba(201,169,110,0.12);--lime-line:rgba(201,169,110,0.25);
+  --ink:#0A0A0A;--ink2:#141414;--ink3:#1E1E1E;--ink4:#2A2A2A;--ink5:#363636;
+  --text:#F0EDE8;--text2:#B8B4AD;--text3:#6E6A63;
+  --mint:#4DC4A0;--mint-bg:rgba(77,196,160,0.1);
+  --ember:#E87040;--ember-bg:rgba(232,112,64,0.1);
+  --sky:#5AAAD4;--sky-bg:rgba(90,170,212,0.1);
+  --rose:#D44F7A;--rose-bg:rgba(212,79,122,0.1);
+  --gold:#C9A96E;--gold-bg:rgba(201,169,110,0.12);
+  --r-safe-top:env(safe-area-inset-top,0px);--r-safe-bottom:env(safe-area-inset-bottom,0px);
+}
+
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--lime-dim);border-radius:2px}
+
+/* ─── HEADER ─── */
+.app-header{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--lime-line);padding:calc(10px + var(--r-safe-top)) 20px 10px;}
+.header-inner{display:flex;align-items:center;justify-content:space-between;max-width:520px;margin:0 auto;}
+.header-brand{display:flex;align-items:center;gap:10px;}
+.header-icon{width:32px;height:32px;background:var(--lime-glow);border:1px solid var(--lime-line);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.header-texts{display:flex;flex-direction:column;gap:1px;}
+.header-eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--lime);font-weight:600;}
+.header-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:900;color:var(--text);line-height:1;}
+.header-filters{display:flex;gap:6px;align-items:center;}
+.filter-chip{font-size:10px;font-weight:500;padding:4px 9px;border-radius:12px;border:1px solid var(--ink5);color:var(--text3);background:none;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.filter-chip.active{background:var(--lime-glow);border-color:var(--lime-dim);color:var(--lime);}
+.filter-chip:active{opacity:0.7}
+
+/* ─── NAV ─── */
+.sticky-nav{position:sticky;top:53px;z-index:99;background:var(--ink2);}
+.nav-tabs{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:var(--ink2);border-bottom:1px solid var(--lime-line);padding:0 8px;max-width:100%;}
+.nav-tabs::-webkit-scrollbar{display:none}
+.nav-tab{flex-shrink:0;font-family:'Outfit',sans-serif;font-size:12px;font-weight:400;color:var(--text3);padding:11px 13px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;letter-spacing:0.2px;}
+.nav-tab.active{color:var(--lime);border-bottom-color:var(--lime);font-weight:600;}
+.nav-tab:active{opacity:0.7}
+
+/* ─── PANEL ─── */
+.panel{display:none;max-width:520px;margin:0 auto;}
+.panel.active{display:block}
+
+/* ─── HERO ─── */
+.hero{background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:30px 20px 26px;border-bottom:1px solid var(--lime-line);}
+.hero-eyebrow{font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.hero-eyebrow::before{content:'';width:18px;height:1px;background:var(--lime);display:block;}
+.hero-h{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:10px;}
+.hero-h em{color:var(--lime);font-style:italic;}
+.hero-p{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:16px;}
+.hero-pills{display:flex;flex-wrap:wrap;gap:7px;}
+.hero-pill{font-size:10px;font-weight:500;padding:5px 10px;border-radius:20px;border:1px solid var(--ink5);color:var(--text3);}
+.hero-pill.active{background:var(--lime-glow);border-color:var(--lime-dim);color:var(--lime);}
+
+/* ─── FILTER BAR ─── */
+.filter-bar{padding:14px 20px 10px;border-bottom:1px solid var(--ink4);}
+.filter-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:600;margin-bottom:8px;}
+.chips-wrap{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{font-family:'Outfit',sans-serif;font-size:11px;font-weight:400;color:var(--text3);padding:6px 12px;border-radius:16px;border:1px solid var(--ink5);background:none;cursor:pointer;transition:all 0.15s;}
+.chip.v{border-color:#4DC4A0;color:#4DC4A0;background:rgba(77,196,160,0.08);}
+.chip.gl{border-color:#C9A96E;color:#C9A96E;background:rgba(201,169,110,0.08);}
+.chip.lac{border-color:#5AAAD4;color:#5AAAD4;background:rgba(90,170,212,0.08);}
+.chip.vn{border-color:#D44F7A;color:#D44F7A;background:rgba(212,79,122,0.08);}
+.chip.eco{border-color:#A8D44F;color:#A8D44F;background:rgba(168,212,79,0.08);}
+
+/* ─── SECTION HEADERS ─── */
+.section-head{padding:20px 20px 14px;display:flex;align-items:center;gap:12px;}
+.section-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.section-icon.lime{background:var(--lime-glow);border:1px solid var(--lime-line);}
+.section-icon.mint{background:var(--mint-bg);border:1px solid rgba(77,196,160,0.25);}
+.section-icon.ember{background:var(--ember-bg);border:1px solid rgba(232,112,64,0.25);}
+.section-icon.sky{background:var(--sky-bg);border:1px solid rgba(90,170,212,0.25);}
+.section-icon.rose{background:var(--rose-bg);border:1px solid rgba(212,79,122,0.25);}
+.section-icon.gold{background:var(--gold-bg);border:1px solid rgba(201,169,110,0.25);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--text);line-height:1.1;}
+.section-sub{font-size:11px;color:var(--text3);margin-top:3px;}
+
+/* ─── RECIPE CARDS ─── */
+.recipe-grid{padding:0 16px 6px;display:flex;flex-direction:column;gap:10px;}
+.recipe-card{background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.recipe-card:hover,.recipe-card:focus{border-color:var(--lime-dim);}
+.recipe-card.featured{border-color:var(--lime-dim);}
+.recipe-card-head{padding:14px 16px;display:flex;align-items:flex-start;gap:13px;}
+.recipe-emoji{font-size:28px;flex-shrink:0;margin-top:1px;}
+.recipe-info{flex:1;min-width:0;}
+.recipe-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:2px;}
+.recipe-desc{font-size:12px;color:var(--text2);line-height:1.5;}
+.recipe-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
+.meta-badge{font-size:10px;font-weight:500;padding:3px 8px;border-radius:6px;letter-spacing:0.2px;}
+.meta-badge.kcal{background:var(--lime-glow);color:var(--lime);border:1px solid var(--lime-line);}
+.meta-badge.time{background:var(--ink3);color:var(--text2);border:1px solid var(--ink5);}
+.meta-badge.prot{background:rgba(90,170,212,0.12);color:var(--sky);border:1px solid rgba(90,170,212,0.2);}
+.meta-badge.tag-v{background:var(--mint-bg);color:var(--mint);border:1px solid rgba(77,196,160,0.2);}
+.meta-badge.tag-gl{background:var(--gold-bg);color:var(--gold);border:1px solid rgba(201,169,110,0.2);}
+.meta-badge.tag-lac{background:var(--sky-bg);color:var(--sky);border:1px solid rgba(90,170,212,0.2);}
+.meta-badge.tag-vn{background:var(--rose-bg);color:var(--rose);border:1px solid rgba(212,79,122,0.2);}
+.meta-badge.tag-eco{background:var(--lime-glow);color:var(--lime);border:1px solid var(--lime-line);}
+.meta-badge.presup-bajo{background:rgba(77,196,160,0.1);color:var(--mint);}
+.meta-badge.presup-medio{background:rgba(201,169,110,0.1);color:var(--gold);}
+.meta-badge.presup-alto{background:rgba(232,112,64,0.1);color:var(--ember);}
+.recipe-expand{display:none;padding:0 16px 14px;border-top:1px solid var(--ink4);margin-top:0;}
+.recipe-expand.open{display:block;}
+.recipe-expand-inner{padding-top:12px;}
+.ing-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:600;margin-bottom:8px;}
+.ing-list{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.ing-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);}
+.ing-dot{width:5px;height:5px;border-radius:50%;background:var(--lime);flex-shrink:0;}
+.steps-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+.step-row{display:flex;gap:10px;align-items:flex-start;}
+.step-num{width:20px;height:20px;border-radius:50%;background:var(--lime-glow);border:1px solid var(--lime-line);color:var(--lime);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-txt{font-size:12.5px;color:var(--text2);line-height:1.55;flex:1;}
+.macro-strip{display:flex;gap:0;border:1px solid var(--ink5);border-radius:10px;overflow:hidden;margin-top:4px;}
+.macro-cell{flex:1;padding:9px 6px;text-align:center;border-right:1px solid var(--ink5);}
+.macro-cell:last-child{border-right:none;}
+.macro-cell-val{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--text);}
+.macro-cell-key{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:2px;}
+.tip-strip{margin-top:10px;padding:10px 12px;background:var(--ink3);border-radius:9px;border-left:2px solid var(--lime-dim);}
+.tip-txt{font-size:12px;color:var(--text2);line-height:1.55;}
+.tip-txt strong{color:var(--text);}
+.recipe-star{position:absolute;top:12px;right:12px;font-size:12px;color:var(--lime);}
+.card-toggle-btn{width:100%;padding:8px;background:var(--ink3);border:none;color:var(--text3);font-size:11px;font-family:'Outfit',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:color 0.15s;}
+.card-toggle-btn:hover{color:var(--lime);}
+.toggle-arrow{transition:transform 0.2s;display:inline-block;}
+.toggle-arrow.open{transform:rotate(180deg);}
+
+/* ─── SECTION DIVIDER ─── */
+.gold-divider{height:1px;background:var(--lime-line);margin:8px 16px 16px;}
+.section-gap{height:24px;}
+
+/* ─── INFO CARDS ─── */
+.info-card{margin:0 16px 12px;background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;padding:16px;}
+.info-card.highlight{border-color:var(--lime-dim);background:linear-gradient(135deg,#1A1308,#0F0B05);}
+.info-h{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;}
+.info-p{font-size:12.5px;color:var(--text2);line-height:1.6;}
+
+/* ─── DIETS PANEL ─── */
+.diet-card{margin:0 16px 12px;background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;overflow:hidden;}
+.diet-head{padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;background:linear-gradient(90deg,#1A1308,#111);}
+.diet-emoji{font-size:26px;}
+.diet-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text);}
+.diet-tagline{font-size:11px;color:var(--text3);margin-top:2px;}
+.diet-arrow{margin-left:auto;color:var(--lime);font-size:16px;transition:transform 0.2s;}
+.diet-arrow.open{transform:rotate(180deg);}
+.diet-body{display:none;padding:16px;border-top:1px solid var(--ink4);}
+.diet-body.open{display:block;}
+.diet-section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:600;margin:12px 0 7px;}
+.diet-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;padding:9px 11px;background:var(--ink3);border-radius:10px;}
+.diet-item-e{font-size:18px;flex-shrink:0;}
+.diet-item-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;}
+.diet-item-w{font-size:12px;color:var(--text2);line-height:1.45;}
+.alert-mini{padding:10px 12px;border-radius:9px;font-size:12px;line-height:1.55;margin-bottom:10px;}
+.alert-mini.lime{background:var(--lime-glow);border:1px solid var(--lime-line);color:var(--lime);}
+.alert-mini.sky{background:var(--sky-bg);border:1px solid rgba(90,170,212,0.25);color:var(--sky);}
+.alert-mini.rose{background:var(--rose-bg);border:1px solid rgba(212,79,122,0.25);color:var(--rose);}
+.alert-mini.mint{background:var(--mint-bg);border:1px solid rgba(77,196,160,0.25);color:var(--mint);}
+.alert-mini.gold{background:var(--gold-bg);border:1px solid rgba(201,169,110,0.25);color:var(--gold);}
+
+/* ─── BUDGET PANEL ─── */
+.budget-tier{margin:0 16px 12px;background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;overflow:hidden;}
+.budget-header{padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;}
+.budget-level{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.budget-level.bajo{background:rgba(77,196,160,0.12);border:1px solid rgba(77,196,160,0.25);}
+.budget-level.medio{background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.25);}
+.budget-level.alto{background:rgba(232,112,64,0.12);border:1px solid rgba(232,112,64,0.25);}
+.budget-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text);}
+.budget-range{font-size:11px;margin-top:2px;}
+.budget-range.bajo{color:var(--mint);}
+.budget-range.medio{color:var(--gold);}
+.budget-range.alto{color:var(--ember);}
+.budget-body{display:none;padding:14px 16px;border-top:1px solid var(--ink4);}
+.budget-body.open{display:block;}
+.shopping-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--ink4);}
+.shopping-item:last-child{border-bottom:none;}
+.shop-name{font-size:13px;color:var(--text);font-weight:500;}
+.shop-note{font-size:11px;color:var(--text3);margin-top:1px;}
+.shop-price{font-size:12px;color:var(--text2);text-align:right;flex-shrink:0;}
+
+/* ─── QUICK PANEL ─── */
+.quick-card{margin:0 16px 10px;background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;padding:14px 16px;display:flex;gap:13px;align-items:flex-start;}
+.quick-card.lime-border{border-color:var(--lime-dim);}
+.quick-emoji{font-size:26px;flex-shrink:0;}
+.quick-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.quick-time{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:4px;}
+.quick-steps{font-size:12px;color:var(--text2);line-height:1.55;}
+.quick-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+
+/* ─── MEAL PLAN ─── */
+.plan-day{margin:0 16px 14px;background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;overflow:hidden;}
+.plan-day-head{padding:12px 16px;background:linear-gradient(90deg,#1A1308,#111);display:flex;align-items:center;justify-content:space-between;}
+.plan-day-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--text);}
+.plan-day-kcal{font-size:11px;color:var(--lime);font-weight:600;}
+.plan-meal-row{padding:11px 16px;display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--ink4);}
+.plan-meal-row:last-child{border-bottom:none;}
+.plan-meal-time{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);font-weight:600;width:70px;flex-shrink:0;}
+.plan-meal-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.plan-meal-dot.lime{background:var(--lime);}
+.plan-meal-dot.mint{background:var(--mint);}
+.plan-meal-dot.sky{background:var(--sky);}
+.plan-meal-dot.rose{background:var(--rose);}
+.plan-meal-dot.gold{background:var(--gold);}
+.plan-meal-name{font-size:13px;color:var(--text);flex:1;}
+.plan-meal-kcal{font-size:11px;color:var(--text3);flex-shrink:0;}
+
+/* ─── SAFE BOTTOM ─── */
+.safe-bottom{height:calc(24px + var(--r-safe-bottom))}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.fade-up{animation:fadeUp 0.3s ease;}
+
+@media(min-width:520px){
+  .app-header,.hero,.panel,.filter-bar,.sticky-nav{max-width:520px;margin-left:auto;margin-right:auto;}
+  .sticky-nav{max-width:100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="header-brand">
+      <div class="header-texts">
+        <span class="header-eyebrow">STRENGTHLAB | ASESORÍAS PERSONALIZADAS</span>
+        <span class="header-title">RECETARIO FITNESS</span>
+      </div>
+    </div>
+    <span style="font-size:10px;font-weight:500;background:var(--lime-glow);border:1px solid var(--lime-line);color:var(--lime);padding:4px 10px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;">@reennzolifts</span>
+  </div>
+</header>
+
+<!-- ─── NAV ─── -->
+<div class="sticky-nav">
+  <nav class="nav-tabs" role="tablist">
+    <button class="nav-tab active" onclick="switchTab('desayunos',this)">☀️ Desayunos</button>
+    <button class="nav-tab" onclick="switchTab('almuerzos',this)">🥙 Almuerzos</button>
+    <button class="nav-tab" onclick="switchTab('cenas',this)">🌙 Cenas</button>
+    <button class="nav-tab" onclick="switchTab('rapidas',this)">⚡ Rápidas</button>
+    <button class="nav-tab" onclick="switchTab('dietas',this)">🌿 Dietas</button>
+    <button class="nav-tab" onclick="switchTab('presupuesto',this)">💰 Presupuesto</button>
+    <button class="nav-tab" onclick="switchTab('plan',this)">📅 Plan Semanal</button>
+  </nav>
+</div>
+
+<!-- ════════════════════════════════════════
+  PANEL: DESAYUNOS
+════════════════════════════════════════ -->
+<section class="panel active fade-up" id="panel-desayunos">
+
+  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
+    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 01</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Desayunos <em style="color:var(--lime);font-style:italic;">que potencian</em></h1>
+    <p style="font-size:13px;color:var(--text2);line-height:1.65;">La primera comida define tu energía, foco y rendimiento en el entreno. Proteína primero, siempre.</p>
+  </div>
+
+  <div class="section-head">
+    <div class="section-icon lime">💪</div>
+    <div><div class="section-title">Alto en proteína</div><div class="section-sub">Para construir músculo desde la primera comida</div></div>
+  </div>
+  <div class="recipe-grid" id="desayunos-prot"></div>
+
+  <div class="gold-divider"></div>
+
+  <div class="section-head">
+    <div class="section-icon mint">🌿</div>
+    <div><div class="section-title">Plant-based</div><div class="section-sub">Veggie, vegano y sin gluten</div></div>
+  </div>
+  <div class="recipe-grid" id="desayunos-plant"></div>
+
+  <div class="gold-divider"></div>
+
+  <div class="section-head">
+    <div class="section-icon ember">🔥</div>
+    <div><div class="section-title">Pre-entreno</div><div class="section-sub">Energía rápida antes de entrenar</div></div>
+  </div>
+  <div class="recipe-grid" id="desayunos-pretreno"></div>
+
+  <div class="safe-bottom"></div>
+</section>
+
+<!-- ════════════════════════════════════════
+  PANEL: ALMUERZOS
+════════════════════════════════════════ -->
+<section class="panel fade-up" id="panel-almuerzos">
+
+  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
+    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 02</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Almuerzos <em style="color:var(--lime);font-style:italic;">de rendimiento</em></h1>
+    <p style="font-size:13px;color:var(--text2);line-height:1.65;">La comida más importante del día para un atleta. Más macros, más densidad nutricional.</p>
+  </div>
+
+  <div class="section-head">
+    <div class="section-icon sky">🐟</div>
+    <div><div class="section-title">Proteína animal</div><div class="section-sub">Pollo, pescado, carne magra</div></div>
+  </div>
+  <div class="recipe-grid" id="almuerzos-animal"></div>
+
+  <div class="gold-divider"></div>
+
+  <div class="section-head">
+    <div class="section-icon mint">🌱</div>
+    <div><div class="section-title">Proteína vegetal</div><div class="section-sub">Legumbres, tofu, tempeh</div></div>
+  </div>
+  <div class="recipe-grid" id="almuerzos-vegetal"></div>
+
+  <div class="safe-bottom"></div>
+</section>
+
+<!-- ════════════════════════════════════════
+  PANEL: CENAS
+════════════════════════════════════════ -->
+<section class="panel fade-up" id="panel-cenas">
+
+  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
+    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 03</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Cenas <em style="color:var(--lime);font-style:italic;">que recuperan</em></h1>
+    <p style="font-size:13px;color:var(--text2);line-height:1.65;">La cena es reparación muscular. Proteína de digestión lenta, menos CHO refinados, más micronutrientes.</p>
+  </div>
+
+  <div class="section-head">
+    <div class="section-icon rose">🌙</div>
+    <div><div class="section-title">Ligeras y reparadoras</div><div class="section-sub">300–450 kcal · Antiinflamatorias</div></div>
+  </div>
+  <div class="recipe-grid" id="cenas-light"></div>
+
+  <div class="gold-divider"></div>
+
+  <div class="section-head">
+    <div class="section-icon gold">🧠</div>
+    <div><div class="section-title">Post-entreno nocturno</div><div class="section-sub">Para quien entrena tarde o noche</div></div>
+  </div>
+  <div class="recipe-grid" id="cenas-posttreno"></div>
+
+  <div class="safe-bottom"></div>
+</section>
+
+<!-- ════════════════════════════════════════
+  PANEL: RÁPIDAS
+════════════════════════════════════════ -->
+<section class="panel fade-up" id="panel-rapidas">
+
+  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
+    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 04</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">En <em style="color:var(--lime);font-style:italic;">15 minutos</em></h1>
+    <p style="font-size:13px;color:var(--text2);line-height:1.65;">Sin excusas. Estas recetas son tan rápidas que tardarás más en buscar el delivery.</p>
+  </div>
+
+  <div style="padding:14px 16px 0;">
+    <div class="alert-mini lime">⚡ <strong>Regla de oro:</strong> Ingredientes pre-cocidos + proteína rápida + vegetal crudo = receta fitness lista en 10 min.</div>
+  </div>
+
+  <div class="section-head" style="padding-top:12px;">
+    <div class="section-icon lime">⚡</div>
+    <div><div class="section-title">10 min o menos</div><div class="section-sub">Sin cocción, sin drama</div></div>
+  </div>
+  <div id="rapidas-10" style="padding:0 16px 0;display:flex;flex-direction:column;gap:10px;"></div>
+
+  <div class="gold-divider" style="margin-top:14px;"></div>
+
+  <div class="section-head">
+    <div class="section-icon mint">🥣</div>
+    <div><div class="section-title">Meal prep express</div><div class="section-sub">Preparás 1 vez, comés toda la semana</div></div>
+  </div>
+  <div id="rapidas-mealprep" style="padding:0 16px 0;display:flex;flex-direction:column;gap:10px;"></div>
+
+  <div class="gold-divider" style="margin-top:14px;"></div>
+
+  <div class="section-head">
+    <div class="section-icon sky">🥤</div>
+    <div><div class="section-title">Batidos & snacks</div><div class="section-sub">Sin lactosa, veganos y con proteína</div></div>
+  </div>
+  <div id="rapidas-batidos" style="padding:0 16px 0;display:flex;flex-direction:column;gap:10px;"></div>
+
+  <div class="safe-bottom"></div>
+</section>
+
+<!-- ════════════════════════════════════════
+  PANEL: DIETAS
+════════════════════════════════════════ -->
+<section class="panel fade-up" id="panel-dietas">
+
+  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
+    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1pt;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 05</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Tu <em style="color:var(--lime);font-style:italic;">estilo de vida</em></h1>
+    <p style="font-size:13px;color:var(--text2);line-height:1.65;">Guía completa por restricción: qué comer, qué evitar y cómo no quedarte sin proteína.</p>
+  </div>
+
+  <div style="height:14px;"></div>
+  <div id="dietas-content"></div>
+  <div class="safe-bottom"></div>
+</section>
+
+<!-- ════════════════════════════════════════
+  PANEL: PRESUPUESTO
+════════════════════════════════════════ -->
+<section class="panel fade-up" id="panel-presupuesto">
+
+  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
+    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 06</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Comer fit <em style="color:var(--lime);font-style:italic;">sin arruinarte</em></h1>
+    <p style="font-size:13px;color:var(--text2);line-height:1.65;">Comer bien no requiere gastar más. Estrategia inteligente para cada bolsillo.</p>
+  </div>
+
+  <div style="height:14px;"></div>
+  <div id="presupuesto-content"></div>
+  <div class="safe-bottom"></div>
+</section>
+
+<!-- ════════════════════════════════════════
+  PANEL: PLAN SEMANAL
+════════════════════════════════════════ -->
+<section class="panel fade-up" id="panel-plan">
+
+  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
+    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 07</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Plan <em style="color:var(--lime);font-style:italic;">de la semana</em></h1>
+    <p style="font-size:13px;color:var(--text2);line-height:1.65;">Un plan de 7 días completo, equilibrado y variado. ~1800–2200 kcal/día según tamaño de porciones.</p>
+  </div>
+
+  <div style="height:14px;"></div>
+  <div id="plan-content"></div>
+  <div class="safe-bottom"></div>
+</section>
+
+<div style="text-align:center;padding:24px 20px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--lime-line);background:var(--ink2);margin-top:0;">
+  <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;">STRENGTHLAB</div>
+  <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--lime);font-weight:500;margin-bottom:2px;">Asesorías Personalizadas</div>
+  <div style="font-size:11px;color:var(--text3);margin-top:6px;">@reennzolifts</div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+//  DATA
+// ══════════════════════════════════════════════
+
+const DESAYUNOS_PROT = [
+  {
+    emoji:'🥚', name:'Tortilla de claras con espinaca y queso sin lactosa',
+    desc:'Alta en proteína, baja en grasa. El desayuno del atleta sin excusas.',
+    kcal:320, time:'12 min', prot:'28g', tags:['Sin lactosa'],
+    presup:'bajo', featured:true,
+    ing:['6 claras de huevo','1 huevo entero','1 taza espinaca baby','30g queso sin lactosa','Sal, pimienta, aceite de oliva'],
+    steps:['Batir claras con el huevo entero. Salpimentar.','Saltear espinaca 2 min en sartén antiadherente con spray.','Verter mezcla de huevo sobre espinaca. Cocinar 3 min.','Añadir queso, doblar la tortilla y servir.',],
+    macros:{kcal:'320',prot:'28g',cho:'4g',gra:'12g'},
+    tip:'<strong>Pro tip:</strong> Prepará las claras la noche anterior y guardá en un recipiente cerrado.'
+  },
+  {
+    emoji:'🍳', name:'Huevos revueltos con salmón ahumado y aguacate',
+    desc:'Proteína + omega-3 + grasas monoinsaturadas. La trifecta del desayuno fitness.',
+    kcal:440, time:'10 min', prot:'32g', tags:['Sin gluten','Sin lactosa'],
+    presup:'alto',
+    ing:['3 huevos enteros','80g salmón ahumado','½ aguacate','Eneldo fresco','Aceite de oliva, sal y pimienta'],
+    steps:['Batir huevos con sal y pimienta.','Cocinar a fuego bajo con aceite de oliva, revolviendo lento.','Servir sobre pan sin gluten (o directo) con láminas de salmón y aguacate.'],
+    macros:{kcal:'440',prot:'32g',cho:'6g',gra:'28g'},
+    tip:'<strong>Sin gluten:</strong> Perfecto solo o con crackers de arroz integral.'
+  },
+  {
+    emoji:'🥣', name:'Bowl de queso cottage con frutos rojos y nueces',
+    desc:'Caseína natural para absorción lenta. Ideal antes de dormir o como desayuno.',
+    kcal:290, time:'5 min', prot:'25g', tags:['Veggie','Sin gluten'],
+    presup:'medio',
+    ing:['200g queso cottage natural','½ taza arándanos frescos','1 cdita miel de abeja','20g nueces picadas','1 cdita semillas de chía'],
+    steps:['Verter cottage en bowl.','Añadir arándanos, nueces y semillas de chía.','Rociar miel y servir frío.'],
+    macros:{kcal:'290',prot:'25g',cho:'18g',gra:'10g'},
+    tip:'<strong>Sin lactosa:</strong> Reemplazá el cottage por yogur de coco + proteína en polvo de guisante.'
+  }
+];
+
+const DESAYUNOS_PLANT = [
+  {
+    emoji:'🍌', name:'Smoothie bowl vegano de plátano y chía',
+    desc:'Sin lácteos, sin gluten. Cargado de omega-3, potasio y fibra soluble.',
+    kcal:380, time:'8 min', prot:'18g', tags:['Vegano','Sin gluten','Sin lactosa'],
+    presup:'bajo', featured:true,
+    ing:['2 plátanos congelados','1 taza leche de avena (o almendra)','3 cdas proteína de guisante en polvo','2 cdas semillas de chía','Granola sin gluten (topping)','Frutas de temporada'],
+    steps:['Licuar plátanos congelados con leche vegetal y proteína hasta cremoso.','Verter en bowl.','Añadir chía, granola y frutas encima.','Consumir inmediatamente.'],
+    macros:{kcal:'380',prot:'18g',cho:'52g',gra:'9g'},
+    tip:'<strong>Pro tip:</strong> Congelá los plátanos en rodajas la noche anterior. Textura 100% más densa.'
+  },
+  {
+    emoji:'🌾', name:'Avena proteica overnight con mantequilla de almendras',
+    desc:'Sin cocción. Preparás la noche anterior y desayunás en 2 minutos.',
+    kcal:420, time:'5 min (noche antes)', prot:'22g', tags:['Vegano','Sin lactosa'],
+    presup:'bajo',
+    ing:['80g avena en copos','250ml leche de avena','2 cdas proteína de guisante','1 cda mantequilla de almendras','1 cdita semillas de lino molido','Plátano en rodajas'],
+    steps:['Mezclar avena, leche vegetal, proteína y lino en frasco.','Tapar y refrigerar mínimo 6 horas.','Por la mañana añadir mantequilla de almendras y plátano.'],
+    macros:{kcal:'420',prot:'22g',cho:'55g',gra:'14g'},
+    tip:'<strong>Sin gluten:</strong> Usá avena certificada sin gluten. No todas son iguales.'
+  },
+  {
+    emoji:'🫐', name:'Tostadas de arroz con hummus y aguacate',
+    desc:'100% sin gluten, sin lactosa y vegano. Carbohidratos + grasas buenas.',
+    kcal:260, time:'5 min', prot:'8g', tags:['Vegano','Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['3 tostadas de arroz integral','3 cdas hummus casero','½ aguacate maduro','Semillas de sésamo','Páprika, limón y sal'],
+    steps:['Untar hummus sobre tostadas de arroz.','Añadir rodajas de aguacate.','Espolvorear páprika y sésamo. Rociar limón.'],
+    macros:{kcal:'260',prot:'8g',cho:'30g',gra:'14g'},
+    tip:'<strong>Para más proteína:</strong> Añadir 1 huevo pochado encima o 2 cdas de semillas de cáñamo.'
+  }
+];
+
+const DESAYUNOS_PRETRENO = [
+  {
+    emoji:'🍌', name:'Pre-entreno: banana con mantequilla de maní',
+    desc:'Glucosa + grasa de digestión media. Energía que dura todo el entreno.',
+    kcal:280, time:'2 min', prot:'8g', tags:['Vegano','Sin gluten','Sin lactosa'],
+    presup:'bajo', featured:true,
+    ing:['1 banana grande','2 cdas mantequilla de maní natural','Opcional: pizca de canela'],
+    steps:['Comer la banana con la mantequilla 45–60 min antes de entrenar.'],
+    macros:{kcal:'280',prot:'8g',cho:'38g',gra:'14g'},
+    tip:'<strong>Timing:</strong> 45–60 min antes del entreno. No más cercano o molesta el estómago.'
+  },
+  {
+    emoji:'🍚', name:'Bowl de arroz blanco con pollo y plátano',
+    desc:'El clásico pre-entreno del atleta. CHO rápidos + proteína = rendimiento máximo.',
+    kcal:490, time:'15 min', prot:'35g', tags:['Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['150g arroz blanco cocido','120g pechuga de pollo','1 plátano','Sal, aceite en spray'],
+    steps:['Cocinar o recalentar arroz y pollo previamente preparados.','Servir en bowl con plátano al lado.'],
+    macros:{kcal:'490',prot:'35g',cho:'68g',gra:'5g'},
+    tip:'<strong>Meal prep:</strong> Cocinás arroz y pollo el domingo y tenés pre-entreno para 4 días.'
+  }
+];
+
+const ALMUERZOS_ANIMAL = [
+  {
+    emoji:'🍗', name:'Bowl de pollo mediterráneo con quinoa y vegetales asados',
+    desc:'Proteína completa, CHO complejos y micronutrientes en un solo bowl.',
+    kcal:580, time:'25 min', prot:'45g', tags:['Sin gluten','Sin lactosa'],
+    presup:'medio', featured:true,
+    ing:['150g pechuga de pollo','100g quinoa cocida','1 zucchini','1 morrón rojo','½ berenjena','2 cdas aceite de oliva','Orégano, ajo, limón, sal'],
+    steps:['Cortar vegetales y marinar con oliva, ajo y orégano.','Asar vegetales en horno 200°C por 20 min.','Saltear o asar pollo con las mismas especias.','Armar bowl con quinoa base, vegetales y pollo en tiras.'],
+    macros:{kcal:'580',prot:'45g',cho:'42g',gra:'16g'},
+    tip:'<strong>Prep ahead:</strong> Quinoa y vegetales asados duran 4 días en la heladera. Solo calentás y agregás proteína.'
+  },
+  {
+    emoji:'🐟', name:'Salmón al horno con batata y brócoli al vapor',
+    desc:'Omega-3 antiinflamatorio + vitamina A + sulforafano. El almuerzo de recuperación definitivo.',
+    kcal:520, time:'22 min', prot:'38g', tags:['Sin gluten','Sin lactosa'],
+    presup:'alto',
+    ing:['200g filet de salmón','1 batata mediana','200g brócoli','1 cda aceite de oliva','Sal, pimienta, eneldo, limón'],
+    steps:['Precalentar horno a 200°C.','Cortar batata en cubos, rociar con oliva y sal. Hornear 15 min.','Agregar salmón a la bandeja, condimentar. Hornear 12 min más.','Cocinar brócoli al vapor 5 min. Servir con limón.'],
+    macros:{kcal:'520',prot:'38g',cho:'34g',gra:'22g'},
+    tip:'<strong>Sin gluten certificado:</strong> Todo este plato es naturalmente libre de gluten sin modificaciones.'
+  },
+  {
+    emoji:'🥩', name:'Tira de lomo magra con arroz y ensalada de rúcula',
+    desc:'Hierro hemo, zinc y creatina natural. Para días de entrenamiento de fuerza.',
+    kcal:610, time:'18 min', prot:'48g', tags:['Sin gluten','Sin lactosa'],
+    presup:'alto',
+    ing:['200g lomo de vaca','150g arroz blanco cocido','2 tazas rúcula','1 tomate','½ cebolla morada','Aceite de oliva, sal, limón'],
+    steps:['Sellar el lomo en sartén bien caliente 3 min por lado. Dejar reposar.','Calentar arroz.','Mezclar rúcula, tomate y cebolla morada con oliva y limón.','Servir corte en fetas sobre arroz con ensalada.'],
+    macros:{kcal:'610',prot:'48g',cho:'45g',gra:'14g'},
+    tip:'<strong>Post-entreno de fuerza:</strong> El hierro hemo y la creatina de la carne roja son únicos. No los subestimes.'
+  },
+  {
+    emoji:'🫙', name:'Atún natural con garbanzos, tomate y aceitunas',
+    desc:'Proteína + legumbres + grasas buenas. Sin necesidad de cocción.',
+    kcal:420, time:'5 min', prot:'36g', tags:['Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['1 lata atún al natural (160g)','200g garbanzos cocidos (lata)','1 tomate grande','50g aceitunas negras','2 cdas aceite de oliva','Perejil, limón, sal'],
+    steps:['Escurrir atún y garbanzos.','Cortar tomate en cubos.','Mezclar todo con oliva, limón y perejil.','Servir frío o a temperatura ambiente.'],
+    macros:{kcal:'420',prot:'36g',cho:'28g',gra:'16g'},
+    tip:'<strong>Meal prep:</strong> Sin cocción = ideal para llevar al trabajo. Conservar garbanzos cocidos en heladera hasta 5 días.'
+  }
+];
+
+const ALMUERZOS_VEGETAL = [
+  {
+    emoji:'🫘', name:'Dal de lentejas rojas con arroz de coliflor',
+    desc:'Plato vegano antiinflamatorio. Proteína completa cuando se combina con CHO.',
+    kcal:480, time:'25 min', prot:'26g', tags:['Vegano','Sin gluten','Sin lactosa'],
+    presup:'bajo', featured:true,
+    ing:['200g lentejas rojas','½ cabeza de coliflor','1 cebolla','2 dientes de ajo','400ml leche de coco light','Cúrcuma, comino, jengibre, sal','Cilantro fresco'],
+    steps:['Procesar coliflor en robot hasta textura arroz. Saltear en sartén seca 5 min.','Saltear cebolla y ajo. Añadir especias y cocinar 1 min.','Agregar lentejas lavadas y leche de coco. Cocinar 15 min hasta espesar.','Servir dal sobre arroz de coliflor con cilantro.'],
+    macros:{kcal:'480',prot:'26g',cho:'62g',gra:'12g'},
+    tip:'<strong>Hierro:</strong> Añadir jugo de limón al plato mejora la absorción del hierro no-hemo de las lentejas hasta 3x.'
+  },
+  {
+    emoji:'🥗', name:'Tempeh a la plancha con quinoa y tahini',
+    desc:'Proteína de soja fermentada + aminoácidos completos. El almuerzo vegano de alto rendimiento.',
+    kcal:520, time:'20 min', prot:'30g', tags:['Vegano','Sin lactosa'],
+    presup:'medio',
+    ing:['200g tempeh','120g quinoa cocida','2 cdas tahini','Salsa de soja sin gluten','1 cdita jengibre rallado','Edamame, zanahoria rallada'],
+    steps:['Marinar tempeh en rodajas con soja y jengibre 10 min.','Sellar en sartén caliente 3 min por lado.','Preparar salsa: tahini + limón + agua caliente hasta cremoso.','Armar bowl con quinoa, tempeh y vegetales. Bañar con tahini.'],
+    macros:{kcal:'520',prot:'30g',cho:'48g',gra:'18g'},
+    tip:'<strong>Fermentado:</strong> El tempeh es más nutritivo que el tofu regular. Mejor absorción de zinc y hierro.'
+  },
+  {
+    emoji:'🌯', name:'Wrap de tofu salteado con vegetales y guacamole',
+    desc:'Sin lactosa, sin gluten (con wrap de maíz). Proteína vegetal completa.',
+    kcal:440, time:'15 min', prot:'22g', tags:['Vegano','Sin lactosa','Sin gluten'],
+    presup:'medio',
+    ing:['150g tofu firme prensado','1 morrón','1 zucchini','½ cebolla morada','2 wraps de maíz','½ aguacate','Salsa sriracha, limón, comino'],
+    steps:['Prensar tofu y cortar en cubos. Saltear en sartén bien caliente con spray.','Añadir vegetales cortados. Cocinar 8 min.','Condimentar con comino, sal y sriracha.','Preparar guacamole express: aguacate + limón + sal.','Armar wraps con tofu, vegetales y guacamole.'],
+    macros:{kcal:'440',prot:'22g',cho:'40g',gra:'20g'},
+    tip:'<strong>Proteína extra:</strong> Añadir 2 cdas de semillas de cáñamo para +7g de proteína sin cambiar el sabor.'
+  }
+];
+
+const CENAS_LIGHT = [
+  {
+    emoji:'🥦', name:'Salmón al vapor con puré de coliflor y espárragos',
+    desc:'Antiinflamatorio, bajo en CHO refinados. Recuperación muscular máxima.',
+    kcal:380, time:'18 min', prot:'34g', tags:['Sin gluten','Sin lactosa'],
+    presup:'alto', featured:true,
+    ing:['170g filet de salmón','½ cabeza de coliflor','8 espárragos','1 cda aceite de oliva','Sal, pimienta, cúrcuma, eneldo'],
+    steps:['Cocinar coliflor al vapor 12 min. Procesar con oliva, sal y cúrcuma.','Cocinar salmón al vapor o horno 12 min.','Saltear espárragos 4 min.','Servir sobre puré de coliflor con espárragos.'],
+    macros:{kcal:'380',prot:'34g',cho:'14g',gra:'22g'},
+    tip:'<strong>Pre-cama:</strong> El salmón tiene triptófano que favorece la síntesis de melatonina. Cena perfecta.'
+  },
+  {
+    emoji:'🍳', name:'Revuelto de champiñones con espinaca y huevo',
+    desc:'Ligero, rápido y cargado de vitamina D, hierro y B12.',
+    kcal:290, time:'12 min', prot:'22g', tags:['Veggie','Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['3 huevos','200g champiñones','2 tazas espinaca','2 dientes de ajo','1 cda aceite de oliva','Sal, pimienta, páprika ahumada'],
+    steps:['Saltear ajo y champiñones en oliva 5 min.','Añadir espinaca y cocinar hasta que se marchite.','Batir huevos y volcar. Cocinar revolviendo suave hasta cuajar.'],
+    macros:{kcal:'290',prot:'22g',cho:'6g',gra:'16g'},
+    tip:'<strong>Vitamina D:</strong> Los champiñones expuestos al sol tienen niveles de vitamina D comparables al pescado.'
+  },
+  {
+    emoji:'🥗', name:'Ensalada de pollo grillado con aguacate y pepino',
+    desc:'Cena fresca y antiinflamatoria. Sin cocinar carbohidratos densos.',
+    kcal:340, time:'15 min', prot:'36g', tags:['Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['140g pechuga de pollo grillada','1 taza hojas mixtas','½ aguacate','1 pepino','Cherry tomatoes','2 cdas aceite de oliva','Limón, sal, mostaza sin gluten'],
+    steps:['Grillar pollo y cortar en tiras.','Cortar pepino, aguacate y tomates.','Mezclar hojas con aderezo de oliva + limón + mostaza.','Armar ensalada con pollo encima.'],
+    macros:{kcal:'340',prot:'36g',cho:'10g',gra:'18g'},
+    tip:'<strong>Más llenador:</strong> Añadir ½ taza de garbanzos cocidos para +7g proteína y más saciedad.'
+  }
+];
+
+const CENAS_POSTTRENO = [
+  {
+    emoji:'🍚', name:'Arroz integral con tofu teriyaki y brócoli',
+    desc:'Carbohidratos de recuperación + proteína vegetal. Para quien entrena de noche.',
+    kcal:480, time:'20 min', prot:'24g', tags:['Vegano','Sin lactosa'],
+    presup:'bajo', featured:true,
+    ing:['130g arroz integral cocido','150g tofu firme','2 tazas brócoli','2 cdas salsa de soja sin gluten','1 cda miel de abeja (o sirope de arroz)','1 cdita sésamo','Jengibre, ajo'],
+    steps:['Preparar salsa teriyaki: soja + miel + jengibre + ajo.','Saltear tofu en cubos hasta dorado. Bañar con salsa.','Cocinar brócoli al vapor 5 min.','Servir arroz con tofu y brócoli. Espolvorear sésamo.'],
+    macros:{kcal:'480',prot:'24g',cho:'62g',gra:'12g'},
+    tip:'<strong>Post-entreno nocturno:</strong> Los CHO ayudan a reponer glucógeno muscular. No los temas de noche si entrenaste.'
+  },
+  {
+    emoji:'🥚', name:'Tortilla de batata con ricota sin lactosa',
+    desc:'Proteína lenta (caseína) + CHO de índice medio. Ideal antes de dormir.',
+    kcal:420, time:'20 min', prot:'28g', tags:['Veggie','Sin lactosa','Sin gluten'],
+    presup:'medio',
+    ing:['1 batata pequeña (150g cocida)','4 huevos','100g ricota sin lactosa','Ciboulette, sal, pimienta','1 cda aceite de oliva'],
+    steps:['Cocinar batata cortada en rodajas al microondas 5 min.','Batir huevos con sal, pimienta y ricota.','Armar en sartén: base de batata, verter huevos.','Cocinar tapado a fuego bajo 8 min.'],
+    macros:{kcal:'420',prot:'28g',cho:'28g',gra:'18g'},
+    tip:'<strong>Proteína de absorción lenta:</strong> La ricota tiene caseína que alimenta el músculo durante el sueño.'
+  }
+];
+
+const RAPIDAS_10 = [
+  {
+    emoji:'🥫', name:'Bowl de atún con arroz y palta',
+    time:'5 min', kcal:380, prot:'32g',
+    tags:['Sin gluten','Sin lactosa'], presup:'bajo',
+    desc:'El almuerzo fitness más rápido y económico que existe.',
+    steps:'Mezclar 1 lata de atún (escurrido) con 150g arroz cocido (del día anterior) y ½ palta. Sal, limón y listo.'
+  },
+  {
+    emoji:'🥗', name:'Ensalada de garbanzos express',
+    time:'3 min', kcal:320, prot:'16g',
+    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'bajo',
+    desc:'Sin cocción. Abrir lata, mezclar, comer.',
+    steps:'Escurrir 1 lata de garbanzos. Añadir tomate cherry, pepino, aceite de oliva, limón y orégano. Mezclar y servir.'
+  },
+  {
+    emoji:'🧀', name:'Tostadas de arroz con cottage y pavo',
+    time:'4 min', kcal:260, prot:'24g',
+    tags:['Sin gluten'], presup:'bajo',
+    desc:'Sin cocción. Proteína rápida en menos de 5 minutos.',
+    steps:'Untar cottage sobre tostadas de arroz. Añadir fetas de pavo cocido, rúcula y tomate cherry. Listo.'
+  }
+];
+
+const RAPIDAS_MEALPREP = [
+  {
+    emoji:'🍱', name:'Pollo horneado batch (para 5 días)',
+    time:'30 min (1 vez)', kcal:160, prot:'30g',
+    tags:['Sin gluten','Sin lactosa'], presup:'bajo',
+    desc:'Cocinás 1 kg de pollo el domingo y tenés proteína lista para toda la semana.',
+    steps:'Marinar 1 kg de pechugas con oliva, ajo, limón y orégano. Hornear 25 min a 200°C. Refrigerar. Usarlo en bowls, ensaladas, wraps o solo.'
+  },
+  {
+    emoji:'🫘', name:'Legumbres cocidas en cantidad',
+    time:'40 min (1 vez)', kcal:200, prot:'12g',
+    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'muy bajo',
+    desc:'Las legumbres secas cuestan 5x menos que las de lata. Cocinás y congelás.',
+    steps:'Remojar 500g de lentejas/garbanzos 8 horas. Cocinar 30–40 min. Dividir en porciones de 200g y congelar. Descongelar en microondas en 3 minutos.'
+  }
+];
+
+const RAPIDAS_BATIDOS = [
+  {
+    emoji:'🥤', name:'Batido proteico verde vegano',
+    time:'4 min', kcal:340, prot:'28g',
+    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'medio',
+    desc:'Proteína completa sin ningún producto animal.',
+    steps:'Licuar: 300ml leche de avena + 2 cdas proteína de guisante + 1 banana congelada + 1 puñado espinaca + 1 cda mantequilla de almendras. Añadir hielo y procesar.'
+  },
+  {
+    emoji:'🍫', name:'Shake de chocolate sin lactosa',
+    time:'3 min', kcal:290, prot:'25g',
+    tags:['Sin lactosa','Sin gluten'], presup:'bajo',
+    desc:'Para cuando el antojo de dulce y la proteína tienen que convivir.',
+    steps:'Licuar: 300ml leche sin lactosa + 2 cdas proteína whey isolada (sin lactosa) + 1 cda cacao puro + 1 cdita canela + 3 hielos. Batir y tomar.'
+  },
+  {
+    emoji:'🥭', name:'Batido post-entreno de mango y jengibre',
+    time:'3 min', kcal:310, prot:'22g',
+    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'medio',
+    desc:'Antiinflamatorio. El jengibre reduce el dolor muscular de aparición tardía.',
+    steps:'Licuar: 1 taza mango congelado + 250ml leche de coco + 2 cdas proteína de guisante + 1 cdita jengibre fresco rallado + zumo de limón. Servir frío.'
+  }
+];
+
+const DIETAS_DATA = [
+  {
+    emoji:'🌿', name:'Vegetariana fitness',
+    tagline:'Huevos, lácteos, legumbres — sin carne ni pescado',
+    alerta:{tipo:'lime', txt:'✅ La dieta vegetariana bien planificada puede cubrir todos los requerimientos. La clave es combinar fuentes proteicas para obtener aminoácidos completos.'},
+    claves:[
+      {e:'🥚', n:'Huevo entero', w:'La proteína de mayor valor biológico. 6 unidades por día es completamente seguro.'},
+      {e:'🧀', n:'Queso cottage / yogur griego', w:'Proteína + calcio + probióticos. Base del desayuno y snack.'},
+      {e:'🫘', n:'Lentejas + arroz', w:'Combinación que forma proteína completa con todos los aminoácidos esenciales.'},
+      {e:'🌱', n:'Quinoa', w:'La única planta con proteína completa. Contiene los 9 aminoácidos esenciales.'},
+      {e:'🥜', n:'Almendras y nueces', w:'Grasas, vitamina E, calcio y proteína vegetal extra.'},
+    ],
+    evitar:['Subestimar la proteína — necesitás 1.6–2g/kg igual que un omnívoro','Depender solo de verduras sin legumbres ni huevos','Ignorar la vitamina B12 — considerar suplementación'],
+    suplementos:['Vitamina B12 (especialmente si sos veggie estricto)','Omega-3 de algas (EPA/DHA si no comés pescado)','Opcional: hierro + vitamina C si el análisis lo indica']
+  },
+  {
+    emoji:'🌾', name:'Sin gluten',
+    tagline:'Celíaco o sensibilidad al gluten — comer fit igual',
+    alerta:{tipo:'gold', txt:'⚠ Muchos productos "fit" tienen gluten oculto (avena no certificada, salsas, proteína en polvo). Leer siempre etiquetas.'},
+    claves:[
+      {e:'🍚', n:'Arroz blanco / integral', w:'El carbohidrato base sin gluten más accesible. Post-entreno ideal.'},
+      {e:'🌽', n:'Maíz y polenta', w:'Sin gluten naturalmente. Versátil como acompañamiento.'},
+      {e:'🌿', n:'Quinoa', w:'CHO + proteína completa. Sin gluten certificado.'},
+      {e:'🍠', n:'Batata y papa', w:'CHO densos sin rastro de gluten.'},
+      {e:'🌰', n:'Harina de almendras', w:'Para preparaciones sin gluten con más proteína y grasas buenas.'},
+    ],
+    evitar:['Avena no certificada sin gluten','Salsas de soja convencionales (usar tamari)','Pan, pasta y cereales sin certificación','Proteínas en polvo sin etiqueta sin gluten'],
+    suplementos:['Revisar que todos los suplementos estén certificados sin gluten','Vitamina D si hay malabsorción intestinal previa']
+  },
+  {
+    emoji:'🥛', name:'Sin lactosa',
+    tagline:'Intolerancia a la lactosa — la proteína no está solo en los lácteos',
+    alerta:{tipo:'sky', txt:'💡 La intolerancia a la lactosa no es alergia a las proteínas de la leche. Muchos toleran queso curado, yogur griego y whey isolada (casi sin lactosa).'},
+    claves:[
+      {e:'🥚', n:'Huevo entero', w:'Proteína completa sin ninguna lactosa. Usalo como base.'},
+      {e:'🐟', n:'Pescado y mariscos', w:'Proteína + omega-3. Sin lactosa por naturaleza.'},
+      {e:'🫘', n:'Legumbres', w:'Proteína vegetal + fibra. Sin lactosa.'},
+      {e:'🌰', n:'Leches vegetales (avena, almendra, coco)', w:'Reemplazo directo para batidos, avenas y recetas.'},
+      {e:'🧀', n:'Quesos duros curados', w:'La lactosa se reduce drásticamente con la maduración. Suelen tolerarse.'},
+    ],
+    evitar:['Leche fluida, yogur convencional, queso fresco','Whey concentrate — usar whey isolate o proteína vegetal','Helados y postres lácteos convencionales'],
+    suplementos:['Enzima lactasa (si comés lácteos esporádicamente)','Calcio vegetal si eliminás todos los lácteos']
+  },
+  {
+    emoji:'🌱', name:'Vegana fitness',
+    tagline:'Sin ningún producto animal — alto rendimiento igual',
+    alerta:{tipo:'rose', txt:'❗ La dieta vegana requiere planificación extra. Vitamina B12 y omega-3 EPA/DHA no están en plantas — suplementación esencial.'},
+    claves:[
+      {e:'🌱', n:'Tofu y tempeh', w:'Proteína completa. El tempeh además tiene probióticos por ser fermentado.'},
+      {e:'🌿', n:'Proteína de guisante en polvo', w:'La mejor proteína vegana — perfil de aminoácidos cercano al whey.'},
+      {e:'🫘', n:'Legumbres variadas', w:'Lentejas, garbanzos, porotos. Rotar para cubrir aminoácidos distintos.'},
+      {e:'🌻', n:'Semillas de cáñamo', w:'3 cdas = 10g proteína completa. Las mejores semillas para veganos.'},
+      {e:'🥜', n:'Mantequilla de almendras / maní', w:'Grasas + proteína. Base de batidos y desayunos.'},
+    ],
+    evitar:['Subestimar B12 — deficiencia grave a largo plazo sin suplementar','Creer que las plantas tienen EPA/DHA (solo ALA, que se convierte muy poco)','No rotar legumbres (cada una tiene distintos aminoácidos limitantes)'],
+    suplementos:['Vitamina B12 — obligatoria','Omega-3 de algas (EPA + DHA directo, no ALA)','Vitamina D3 vegana (de liquen)','Zinc y hierro — chequear con análisis']
+  }
+];
+
+const PRESUPUESTO_DATA = [
+  {
+    nivel:'bajo', icon:'🟢', name:'Presupuesto bajo',
+    desc:'Comés fit gastando poco. Estos son los mejores ingredientes por precio/proteína.',
+    range:'Económico — máximo rendimiento por peso',
+    items:[
+      {n:'Huevo entero', nota:'La proteína más barata por gramo. Comprar en docena.', macro:'6g prot/unidad'},
+      {n:'Lentejas secas', nota:'500g rinden para semanas. Cocinarlas uno mismo.', macro:'9g prot/100g cocida'},
+      {n:'Atún en lata', nota:'Proteína rápida, práctica y sin cocción.', macro:'23g prot/lata'},
+      {n:'Pollo (muslo o pechuga)', nota:'Muslo es más barato y más sabroso. Igual de proteico.', macro:'26g prot/100g'},
+      {n:'Avena', nota:'Desayuno por céntimos con fibra y CHO de calidad.', macro:'13g prot/100g'},
+      {n:'Arroz blanco o integral', nota:'CHO base. Un kilo dura semanas.', macro:'7g prot/100g cocido'},
+      {n:'Banana', nota:'Pre-entreno económico. Potasio + glucosa.', macro:'1g prot · 23g CHO'},
+      {n:'Zanahoria y repollo', nota:'Las verduras más baratas con mejor densidad nutricional.', macro:'Fibra + vitamina C'},
+    ]
+  },
+  {
+    nivel:'medio', icon:'🟡', name:'Presupuesto medio',
+    desc:'Podés incorporar más variedad sin salirte del presupuesto mensual.',
+    range:'Equilibrado — calidad y variedad',
+    items:[
+      {n:'Salmón rosado (no premium)', nota:'Omega-3 real a precio accesible. Buscar congelado.', macro:'20g prot/100g'},
+      {n:'Queso cottage', nota:'Caseína natural para antes de dormir.', macro:'11g prot/100g'},
+      {n:'Yogur griego sin azúcar', nota:'Proteína + probióticos. Marca blanca es igual de nutritivo.', macro:'10g prot/100g'},
+      {n:'Quinoa', nota:'Un paquete rinde bastante. Vale la inversión por semana.', macro:'14g prot/100g'},
+      {n:'Nueces y almendras (a granel)', nota:'Comprar a granel reduce el precio 40%.', macro:'Omega-3 + vitamina E'},
+      {n:'Tofu firme', nota:'Proteína vegetal más económica que carnes premium.', macro:'8–12g prot/100g'},
+      {n:'Mantequilla de maní natural', nota:'Frasco grande + proteína + grasas. Buena inversión.', macro:'8g prot/2 cdas'},
+      {n:'Leche de avena (caja grande)', nota:'Base de batidos sin lactosa. La más económica de las vegetales.', macro:'Sin lactosa natural'},
+    ]
+  },
+  {
+    nivel:'alto', icon:'🔴', name:'Presupuesto alto',
+    desc:'Cuando priorizás lo mejor de lo mejor. No significa mejor resultado — solo más opciones.',
+    range:'Premium — lo óptimo sin límite',
+    items:[
+      {n:'Salmón salvaje fresco', nota:'Omega-3 concentrado, sin aditivos. Sabor superior.', macro:'20g prot · omega-3 alto'},
+      {n:'Proteína whey isolate importada', nota:'99% libre de lactosa. Mejor ratio precio/calidad en dólar.', macro:'25g prot/medida'},
+      {n:'Carne wagyu o cortes premium', nota:'Hierro hemo máximo + sabor. Para ocasiones especiales.', macro:'26–30g prot/100g'},
+      {n:'Aguacate Hass importado', nota:'Grasas monoinsaturadas de calidad superior.', macro:'15g grasas/100g'},
+      {n:'Arándanos orgánicos', nota:'Antioxidantes sin pesticidas. Para quienes priorizan lo orgánico.', macro:'Polifenoles altos'},
+      {n:'Aceite de oliva extra virgen frío', nota:'Máxima calidad antiinflamatoria.', macro:'Oleocantal activo'},
+    ]
+  }
+];
+
+const PLAN_SEMANAL = [
+  {
+    dia:'Lunes', total:'1.950 kcal',
+    comidas:[
+      {t:'Desayuno',dot:'lime',n:'Tortilla de claras con espinaca',kcal:'320 kcal'},
+      {t:'Media mañana',dot:'mint',n:'Banana + mantequilla de maní',kcal:'280 kcal'},
+      {t:'Almuerzo',dot:'sky',n:'Bowl de pollo mediterráneo + quinoa',kcal:'580 kcal'},
+      {t:'Snack',dot:'gold',n:'Queso cottage con arándanos',kcal:'200 kcal'},
+      {t:'Cena',dot:'rose',n:'Salmón al vapor + puré de coliflor',kcal:'380 kcal'},
+    ]
+  },
+  {
+    dia:'Martes', total:'1.880 kcal',
+    comidas:[
+      {t:'Desayuno',dot:'lime',n:'Smoothie bowl vegano de plátano',kcal:'380 kcal'},
+      {t:'Pre-entreno',dot:'mint',n:'Arroz blanco + pollo',kcal:'490 kcal'},
+      {t:'Almuerzo',dot:'sky',n:'Atún con garbanzos y tomate',kcal:'420 kcal'},
+      {t:'Cena',dot:'rose',n:'Revuelto de champiñones y espinaca',kcal:'290 kcal'},
+    ]
+  },
+  {
+    dia:'Miércoles', total:'2.020 kcal',
+    comidas:[
+      {t:'Desayuno',dot:'lime',n:'Avena overnight con almendras',kcal:'420 kcal'},
+      {t:'Almuerzo',dot:'sky',n:'Salmón con batata y brócoli',kcal:'520 kcal'},
+      {t:'Snack',dot:'gold',n:'Bowl de cottage con nueces',kcal:'290 kcal'},
+      {t:'Cena',dot:'rose',n:'Arroz integral con tofu teriyaki',kcal:'480 kcal'},
+    ]
+  },
+  {
+    dia:'Jueves', total:'1.910 kcal',
+    comidas:[
+      {t:'Desayuno',dot:'lime',n:'Huevos con salmón ahumado + palta',kcal:'440 kcal'},
+      {t:'Almuerzo',dot:'sky',n:'Dal de lentejas + arroz de coliflor',kcal:'480 kcal'},
+      {t:'Snack',dot:'gold',n:'Batido verde vegano',kcal:'340 kcal'},
+      {t:'Cena',dot:'rose',n:'Ensalada de pollo con aguacate',kcal:'340 kcal'},
+    ]
+  },
+  {
+    dia:'Viernes', total:'2.080 kcal',
+    comidas:[
+      {t:'Desayuno',dot:'lime',n:'Tostadas de arroz con hummus',kcal:'260 kcal'},
+      {t:'Almuerzo',dot:'sky',n:'Lomo magro con arroz y rúcula',kcal:'610 kcal'},
+      {t:'Snack',dot:'gold',n:'Batido de chocolate sin lactosa',kcal:'290 kcal'},
+      {t:'Cena',dot:'rose',n:'Tortilla de batata con ricota',kcal:'420 kcal'},
+    ]
+  },
+  {
+    dia:'Sábado', total:'1.840 kcal',
+    comidas:[
+      {t:'Desayuno',dot:'lime',n:'Smoothie bowl con granola',kcal:'380 kcal'},
+      {t:'Almuerzo',dot:'sky',n:'Tempeh con quinoa y tahini',kcal:'520 kcal'},
+      {t:'Snack',dot:'gold',n:'Banana + nueces',kcal:'220 kcal'},
+      {t:'Cena',dot:'rose',n:'Ensalada garbanzos express',kcal:'320 kcal'},
+    ]
+  },
+  {
+    dia:'Domingo', total:'2.100 kcal',
+    comidas:[
+      {t:'Desayuno',dot:'lime',n:'Meal prep: huevos revueltos + palta',kcal:'440 kcal'},
+      {t:'Almuerzo',dot:'sky',n:'Bowl pollo + vegetales asados + quinoa',kcal:'580 kcal'},
+      {t:'Snack',dot:'gold',n:'Batido mango y jengibre',kcal:'310 kcal'},
+      {t:'Cena',dot:'rose',n:'Wrap tofu + guacamole',kcal:'440 kcal'},
+    ]
+  }
+];
+
+// ══════════════════════════════════════════════
+//  BUILDERS
+// ══════════════════════════════════════════════
+
+function tagsToHTML(tags, presup){
+  let h = '';
+  const tagMap = {
+    'Sin lactosa':'tag-lac','Sin gluten':'tag-gl','Vegano':'tag-vn','Veggie':'tag-v','Sin lactosa':'tag-lac'
+  };
+  tags.forEach(t => {
+    const cls = tagMap[t] || 'tag-v';
+    h += `<span class="meta-badge ${cls}">${t}</span>`;
+  });
+  const presupMap = {bajo:'presup-bajo',medio:'presup-medio',alto:'presup-alto',muy_bajo:'presup-bajo'};
+  const presupLabel = {bajo:'💚 Económico',medio:'💛 Medio',alto:'🔴 Premium','muy bajo':'💚 Muy bajo'};
+  if(presup) h += `<span class="meta-badge ${presupMap[presup] || 'presup-bajo'}">${presupLabel[presup] || presup}</span>`;
+  return h;
+}
+
+function buildRecipeCard(r, idx, prefix){
+  const id = `${prefix}-${idx}`;
+  return `
+    <div class="recipe-card ${r.featured?'featured':''}" id="card-${id}">
+      <div class="recipe-card-head">
+        <div class="recipe-emoji">${r.emoji}</div>
+        <div class="recipe-info">
+          <div class="recipe-name">${r.name}</div>
+          <div class="recipe-desc">${r.desc}</div>
+          <div class="recipe-meta">
+            <span class="meta-badge kcal">🔥 ${r.kcal} kcal</span>
+            <span class="meta-badge time">⏱ ${r.time}</span>
+            <span class="meta-badge prot">💪 ${r.prot} prot</span>
+            ${tagsToHTML(r.tags, r.presup)}
+          </div>
+        </div>
+      </div>
+      <button class="card-toggle-btn" onclick="toggleCard('${id}')">
+        Ver receta completa <span class="toggle-arrow" id="arr-${id}">⌄</span>
+      </button>
+      <div class="recipe-expand" id="exp-${id}">
+        <div class="recipe-expand-inner">
+          <div class="ing-title">Ingredientes</div>
+          <div class="ing-list">${r.ing.map(i=>`<div class="ing-row"><div class="ing-dot"></div>${i}</div>`).join('')}</div>
+          <div class="ing-title">Preparación</div>
+          <div class="steps-list">${r.steps.map((s,n)=>`<div class="step-row"><div class="step-num">${n+1}</div><div class="step-txt">${s}</div></div>`).join('')}</div>
+          <div class="macro-strip">
+            <div class="macro-cell"><div class="macro-cell-val">${r.macros.kcal}</div><div class="macro-cell-key">Kcal</div></div>
+            <div class="macro-cell"><div class="macro-cell-val">${r.macros.prot}</div><div class="macro-cell-key">Proteína</div></div>
+            <div class="macro-cell"><div class="macro-cell-val">${r.macros.cho}</div><div class="macro-cell-key">Carbos</div></div>
+            <div class="macro-cell"><div class="macro-cell-val">${r.macros.gra}</div><div class="macro-cell-key">Grasas</div></div>
+          </div>
+          ${r.tip ? `<div class="tip-strip"><div class="tip-txt">${r.tip}</div></div>` : ''}
+        </div>
+      </div>
+    </div>`;
+}
+
+function buildQuickCard(r, idx, prefix){
+  const id = `qk-${prefix}-${idx}`;
+  return `
+    <div class="quick-card ${r.presup==='bajo'?'lime-border':''}">
+      <div class="quick-emoji">${r.emoji}</div>
+      <div>
+        <div class="quick-time">⏱ ${r.time}</div>
+        <div class="quick-name">${r.name}</div>
+        <div class="quick-steps">${r.steps}</div>
+        <div class="quick-badges">
+          <span class="meta-badge kcal">🔥 ${r.kcal} kcal</span>
+          <span class="meta-badge prot">💪 ${r.prot}</span>
+          ${tagsToHTML(r.tags, r.presup)}
+        </div>
+      </div>
+    </div>`;
+}
+
+function buildDietas(){
+  let h = '';
+  DIETAS_DATA.forEach((d,i) => {
+    h += `
+    <div class="diet-card">
+      <div class="diet-head" onclick="toggleDiet(${i})">
+        <div class="diet-emoji">${d.emoji}</div>
+        <div>
+          <div class="diet-name">${d.name}</div>
+          <div class="diet-tagline">${d.tagline}</div>
+        </div>
+        <div class="diet-arrow" id="diet-arr-${i}">⌄</div>
+      </div>
+      <div class="diet-body" id="diet-body-${i}">
+        <div class="alert-mini ${d.alerta.tipo}">${d.alerta.txt}</div>
+        <div class="diet-section-label">Alimentos clave</div>
+        ${d.claves.map(c=>`
+          <div class="diet-item">
+            <div class="diet-item-e">${c.e}</div>
+            <div><div class="diet-item-name">${c.n}</div><div class="diet-item-w">${c.w}</div></div>
+          </div>`).join('')}
+        <div class="diet-section-label">A evitar o tener en cuenta</div>
+        ${d.evitar.map(e=>`<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:12.5px;color:var(--text2)"><span style="color:var(--ember);flex-shrink:0">✗</span>${e}</div>`).join('')}
+        <div class="diet-section-label">Suplementos recomendados</div>
+        ${d.suplementos.map(s=>`<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:12.5px;color:var(--text2)"><span style="color:var(--lime);flex-shrink:0">✓</span>${s}</div>`).join('')}
+      </div>
+    </div>`;
+  });
+  document.getElementById('dietas-content').innerHTML = h;
+}
+
+function buildPresupuesto(){
+  let h = '';
+  PRESUPUESTO_DATA.forEach((p,i) => {
+    h += `
+    <div class="budget-tier">
+      <div class="budget-header" onclick="toggleBudget(${i})">
+        <div class="budget-level ${p.nivel}">${p.icon}</div>
+        <div>
+          <div class="budget-name">${p.name}</div>
+          <div class="budget-range ${p.nivel}">${p.range}</div>
+        </div>
+        <div style="margin-left:auto;color:var(--lime);font-size:16px;transition:transform 0.2s" id="bud-arr-${i}">⌄</div>
+      </div>
+      <div class="budget-body" id="bud-body-${i}">
+        <p style="font-size:12.5px;color:var(--text2);margin-bottom:12px;line-height:1.5;">${p.desc}</p>
+        ${p.items.map(it=>`
+          <div class="shopping-item">
+            <div><div class="shop-name">${it.n}</div><div class="shop-note">${it.nota}</div></div>
+            <div class="shop-price">${it.macro}</div>
+          </div>`).join('')}
+      </div>
+    </div>`;
+  });
+  document.getElementById('presupuesto-content').innerHTML = h;
+}
+
+function buildPlan(){
+  let h = '';
+  PLAN_SEMANAL.forEach(d => {
+    h += `
+    <div class="plan-day">
+      <div class="plan-day-head">
+        <div class="plan-day-name">${d.dia}</div>
+        <div class="plan-day-kcal">🔥 ${d.total}</div>
+      </div>
+      ${d.comidas.map(c=>`
+        <div class="plan-meal-row">
+          <div class="plan-meal-time">${c.t}</div>
+          <div class="plan-meal-dot ${c.dot}"></div>
+          <div class="plan-meal-name">${c.n}</div>
+          <div class="plan-meal-kcal">${c.kcal}</div>
+        </div>`).join('')}
+    </div>`;
+  });
+  document.getElementById('plan-content').innerHTML = h;
+}
+
+// ══════════════════════════════════════════════
+//  TOGGLE FUNCTIONS
+// ══════════════════════════════════════════════
+
+function toggleCard(id){
+  const exp = document.getElementById('exp-'+id);
+  const arr = document.getElementById('arr-'+id);
+  const btn = exp.previousElementSibling;
+  const isOpen = exp.classList.contains('open');
+  exp.classList.toggle('open');
+  arr.classList.toggle('open');
+  btn.querySelector('span:first-child') && null;
+  btn.childNodes.forEach(n => { if(n.nodeType === 3) n.textContent = isOpen ? 'Ver receta completa ' : 'Cerrar receta '; });
+}
+
+function toggleDiet(i){
+  const body = document.getElementById('diet-body-'+i);
+  const arr = document.getElementById('diet-arr-'+i);
+  body.classList.toggle('open');
+  arr.classList.toggle('open');
+}
+
+function toggleBudget(i){
+  const body = document.getElementById('bud-body-'+i);
+  const arr = document.getElementById('bud-arr-'+i);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  arr.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+
+function switchTab(id, btn){
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  if(btn){ btn.classList.add('active'); btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }
+}
+
+// ══════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════
+
+function init(){
+  // Desayunos
+  document.getElementById('desayunos-prot').innerHTML = DESAYUNOS_PROT.map((r,i)=>buildRecipeCard(r,i,'dp')).join('');
+  document.getElementById('desayunos-plant').innerHTML = DESAYUNOS_PLANT.map((r,i)=>buildRecipeCard(r,i,'dpl')).join('');
+  document.getElementById('desayunos-pretreno').innerHTML = DESAYUNOS_PRETRENO.map((r,i)=>buildRecipeCard(r,i,'dpt')).join('');
+  // Almuerzos
+  document.getElementById('almuerzos-animal').innerHTML = ALMUERZOS_ANIMAL.map((r,i)=>buildRecipeCard(r,i,'aa')).join('');
+  document.getElementById('almuerzos-vegetal').innerHTML = ALMUERZOS_VEGETAL.map((r,i)=>buildRecipeCard(r,i,'av')).join('');
+  // Cenas
+  document.getElementById('cenas-light').innerHTML = CENAS_LIGHT.map((r,i)=>buildRecipeCard(r,i,'cl')).join('');
+  document.getElementById('cenas-posttreno').innerHTML = CENAS_POSTTRENO.map((r,i)=>buildRecipeCard(r,i,'cp')).join('');
+  // Rápidas
+  document.getElementById('rapidas-10').innerHTML = RAPIDAS_10.map((r,i)=>buildQuickCard(r,i,'r10')).join('');
+  document.getElementById('rapidas-mealprep').innerHTML = RAPIDAS_MEALPREP.map((r,i)=>buildQuickCard(r,i,'rmp')).join('');
+  document.getElementById('rapidas-batidos').innerHTML = RAPIDAS_BATIDOS.map((r,i)=>buildQuickCard(r,i,'rb')).join('');
+  // Dietas, Presupuesto, Plan
+  buildDietas();
+  buildPresupuesto();
+  buildPlan();
+}
+
+init();
+</script>
+</body>
+</html>
