@@ -13,6 +13,24 @@
 html{font-size:16px;scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 
+/* ─── PASSWORD GATE ─── */
+#gate{position:fixed;inset:0;z-index:9999;background:#0A0A0A;display:flex;align-items:center;justify-content:center;padding:24px;}
+#gate-box{width:100%;max-width:340px;text-align:center;}
+#gate-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:#F0EDE8;margin-bottom:4px;}
+#gate-eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#C9A96E;font-weight:500;margin-bottom:6px;}
+#gate-handle{font-size:11px;color:#6E6A63;margin-bottom:32px;}
+#gate-divider{width:40px;height:1px;background:rgba(201,169,110,0.3);margin:0 auto 32px;}
+#gate-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6E6A63;font-weight:500;margin-bottom:10px;}
+#gate-input{width:100%;font-family:'Outfit',sans-serif;font-size:15px;font-weight:400;color:#F0EDE8;background:#1E1E1E;border:1px solid #2A2A2A;border-radius:12px;padding:14px 16px;text-align:center;letter-spacing:3px;outline:none;transition:border-color 0.2s;margin-bottom:12px;}
+#gate-input:focus{border-color:#8A6D3F;}
+#gate-input.error{border-color:#C0514A;animation:shake 0.3s ease;}
+#gate-btn{width:100%;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#0A0A0A;background:#C9A96E;border:none;border-radius:12px;padding:15px;cursor:pointer;transition:opacity 0.2s;}
+#gate-btn:active{opacity:0.8;}
+#gate-error{font-size:12px;color:#C0514A;margin-top:10px;min-height:18px;transition:opacity 0.2s;}
+#gate-footer{font-size:10px;color:#3A3A3A;margin-top:32px;letter-spacing:1px;}
+#app{display:none;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
 :root{
   --lime:#C9A96E;--lime-dim:#8A6D3F;--lime-glow:rgba(201,169,110,0.12);--lime-line:rgba(201,169,110,0.25);
   --ink:#0A0A0A;--ink2:#141414;--ink3:#1E1E1E;--ink4:#2A2A2A;--ink5:#363636;
@@ -227,6 +245,24 @@ body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height
 </style>
 </head>
 <body>
+
+<!-- ─── PASSWORD GATE ─── -->
+<div id="gate">
+  <div id="gate-box">
+    <div id="gate-eyebrow">Asesorías Personalizadas</div>
+    <div id="gate-logo">STRENGTHLAB</div>
+    <div id="gate-handle">@reennzolifts</div>
+    <div id="gate-divider"></div>
+    <div id="gate-label">Código de acceso</div>
+    <input id="gate-input" type="password" placeholder="··········" autocomplete="off" onkeydown="if(event.key==='Enter')checkPass()">
+    <button id="gate-btn" onclick="checkPass()">INGRESAR</button>
+    <div id="gate-error"></div>
+    <div id="gate-footer">Contenido exclusivo para asesorados</div>
+  </div>
+</div>
+
+<!-- ─── APP ─── -->
+<div id="app">
 
 <!-- ─── HEADER ─── -->
 <header class="app-header">
@@ -565,7 +601,58 @@ const ALMUERZOS_ANIMAL = [
     macros:{kcal:'610',prot:'48g',cho:'45g',gra:'14g'},
     tip:'<strong>Post-entreno de fuerza:</strong> El hierro hemo y la creatina de la carne roja son únicos. No los subestimes.'
   },
+
+  ,{
+    emoji:'🍤', name:'Camarones salteados con arroz de coliflor y mango',
+    desc:'Proteína magra de mar + antioxidantes. Bajo en calorías, alto en sabor.',
+    kcal:390, time:'15 min', prot:'34g', tags:['Sin gluten','Sin lactosa'],
+    presup:'medio',
+    ing:['200g camarones pelados','½ cabeza coliflor procesada','½ mango en cubos','1 morrón rojo','2 cdas salsa de soja (tamari)','Ajo, jengibre, aceite de sésamo'],
+    steps:['Procesar coliflor y saltear en sartén seca hasta secar. Reservar.','Saltear ajo y jengibre en aceite de sésamo 1 min.','Añadir camarones y morrón. Saltear 4 min.','Agregar tamari y mango. Mezclar con arroz de coliflor.'],
+    macros:{kcal:'390',prot:'34g',cho:'28g',gra:'10g'},
+    tip:'<strong>Pro:</strong> Los camarones tienen uno de los ratios proteína/caloría más altos del reino animal.'
+  },
   {
+    emoji:'🥙', name:'Pechuga al curry con lentejas y espinaca',
+    desc:'Especias antiinflamatorias + legumbres + proteína animal. Un combo que no falla.',
+    kcal:540, time:'25 min', prot:'46g', tags:['Sin gluten','Sin lactosa'],
+    presup:'bajo', featured:true,
+    ing:['160g pechuga de pollo','150g lentejas cocidas','2 tazas espinaca baby','1 cebolla','2 cdas curry en polvo','400ml leche de coco light','Ajo, sal, aceite de oliva'],
+    steps:['Dorar cebolla y ajo. Añadir curry y cocinar 1 min.','Agregar pollo cortado en cubos. Sellar 3 min.','Incorporar lentejas, leche de coco y espinaca.','Cocinar 10 min a fuego medio hasta espesar.'],
+    macros:{kcal:'540',prot:'46g',cho:'38g',gra:'16g'},
+    tip:'<strong>Cúrcuma + pimienta negra:</strong> Añadir ambas potencia la absorción de curcumina hasta 20x.'
+  },
+  {
+    emoji:'🐔', name:'Muslos de pollo al horno con papas y romero',
+    desc:'El clásico reconfortante hecho fitness. Más sabroso y económico que la pechuga.',
+    kcal:560, time:'35 min', prot:'42g', tags:['Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['2 muslos de pollo sin piel','2 papas medianas','1 cdita romero','4 dientes ajo','2 cdas aceite de oliva','Sal, pimienta, páprika ahumada'],
+    steps:['Precalentar horno a 210°C.','Cortar papas en gajos, mezclar con oliva, ajo, páprika y romero.','Añadir muslos a la fuente. Condimentar con sal y pimienta.','Hornear 30–35 min hasta dorado.'],
+    macros:{kcal:'560',prot:'42g',cho:'40g',gra:'18g'},
+    tip:'<strong>Económico:</strong> El muslo de pollo tiene igual proteína que la pechuga y cuesta la mitad. Sin excusas.'
+  },
+  {
+    emoji:'🐟', name:'Merluza al limón con quinoa y tomates cherry',
+    desc:'Pescado blanco magro + grano completo. Liviano, completo y antiinflamatorio.',
+    kcal:430, time:'20 min', prot:'40g', tags:['Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['200g filet de merluza','100g quinoa cocida','1 taza tomates cherry','Zumo de 1 limón','2 cdas aceite de oliva','Perejil, ajo, sal, pimienta'],
+    steps:['Marinar merluza con limón, ajo y sal 5 min.','Cocinar en sartén con oliva, 4 min por lado.','Saltear tomates cherry 2 min hasta que revienten.','Servir sobre quinoa con tomates y perejil fresco.'],
+    macros:{kcal:'430',prot:'40g',cho:'34g',gra:'12g'},
+    tip:'<strong>Bajo en mercurio:</strong> La merluza es de los pescados con menor contenido de mercurio. Podés comerla 4–5 veces por semana.'
+  },
+  {
+    emoji:'🥚', name:'Frittata de atún con zucchini y pimiento',
+    desc:'Entre tortilla y quiche. Proteína doble (huevo + atún) horneada sin grasa extra.',
+    kcal:380, time:'22 min', prot:'38g', tags:['Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['4 huevos enteros + 3 claras','1 lata atún al natural','1 zucchini','1 pimiento rojo','½ cebolla morada','Sal, orégano, aceite en spray'],
+    steps:['Precalentar horno a 190°C.','Saltear cebolla, pimiento y zucchini en sartén apta horno 5 min.','Batir huevos con claras, sal y orégano. Añadir atún escurrido.','Verter sobre vegetales. Hornear 12 min hasta cuajar.'],
+    macros:{kcal:'380',prot:'38g',cho:'8g',gra:'16g'},
+    tip:'<strong>Meal prep:</strong> La frittata aguanta 4 días en heladera. Comé fría o calentar 1 min en microondas.'
+  }
+  ,{
     emoji:'🫙', name:'Atún natural con garbanzos, tomate y aceitunas',
     desc:'Proteína + legumbres + grasas buenas. Sin necesidad de cocción.',
     kcal:420, time:'5 min', prot:'36g', tags:['Sin gluten','Sin lactosa'],
@@ -598,7 +685,58 @@ const ALMUERZOS_VEGETAL = [
     macros:{kcal:'520',prot:'30g',cho:'48g',gra:'18g'},
     tip:'<strong>Fermentado:</strong> El tempeh es más nutritivo que el tofu regular. Mejor absorción de zinc y hierro.'
   },
+
+  ,{
+    emoji:'🫛', name:'Edamame bowl con arroz integral y aderezo de sésamo',
+    desc:'Proteína de soja completa + CHO complejos + grasas de sésamo. Bowl vegano de alto rendimiento.',
+    kcal:490, time:'10 min', prot:'28g', tags:['Vegano','Sin gluten','Sin lactosa'],
+    presup:'medio',
+    ing:['200g edamame cocido y pelado','150g arroz integral cocido','1 zanahoria rallada','½ pepino en rodajas','2 cdas tahini','1 cda salsa de soja (tamari)','Semillas de sésamo, limón'],
+    steps:['Preparar aderezo: tahini + tamari + limón + agua hasta cremoso.','Armar bowl: arroz base, edamame, zanahoria y pepino.','Bañar con aderezo y espolvorear sésamo.'],
+    macros:{kcal:'490',prot:'28g',cho:'58g',gra:'16g'},
+    tip:'<strong>Soja completa:</strong> El edamame es de las pocas plantas con los 9 aminoácidos esenciales en buena proporción.'
+  },
   {
+    emoji:'🌮', name:'Tacos de jackfruit especiado con guacamole',
+    desc:'El pulled pork vegano. Textura carnosa, proteína vegetal y fibra alta.',
+    kcal:420, time:'20 min', prot:'14g', tags:['Vegano','Sin lactosa'],
+    presup:'medio',
+    ing:['1 lata jackfruit (en agua, escurrida)','3 tortillas de maíz','½ aguacate','1 lata porotos negros','Comino, páprika, ajo en polvo, sal','Repollo morado, limón, cilantro'],
+    steps:['Escurrir jackfruit y desmenuzar con tenedor.','Saltear con especias 8 min hasta dorar y caramelizar.','Calentar porotos negros y aplastar parcialmente.','Armar tacos con porotos, jackfruit, repollo y guacamole.'],
+    macros:{kcal:'420',prot:'14g',cho:'62g',gra:'14g'},
+    tip:'<strong>Proteína extra:</strong> Añadir 2 cdas de semillas de cáñamo al guacamole para +7g proteína sin cambiar el sabor.'
+  },
+  {
+    emoji:'🍛', name:'Curry de garbanzos con espinaca y leche de coco',
+    desc:'Chana masala express. Hierro + proteína vegetal + cúrcuma antiinflamatoria.',
+    kcal:460, time:'20 min', prot:'20g', tags:['Vegano','Sin gluten','Sin lactosa'],
+    presup:'bajo', featured:true,
+    ing:['400g garbanzos cocidos (lata)','3 tazas espinaca','400ml leche de coco light','1 cebolla','2 tomates maduros','Cúrcuma, comino, garam masala, ajo, jengibre'],
+    steps:['Saltear cebolla, ajo y jengibre hasta dorar.','Añadir tomates y especias. Cocinar 5 min.','Incorporar garbanzos y leche de coco. Cocinar 10 min.','Agregar espinaca al final, cocinar 2 min más.'],
+    macros:{kcal:'460',prot:'20g',cho:'54g',gra:'16g'},
+    tip:'<strong>Hierro:</strong> Siempre acompañar legumbres con vitamina C (tomate, limón) para triplicar la absorción del hierro vegetal.'
+  },
+  {
+    emoji:'🥬', name:'Bowl de tofu crujiente con brócoli y salsa de maní',
+    desc:'Textura crujiente sin fritura. La salsa de maní eleva el plato a otro nivel.',
+    kcal:500, time:'18 min', prot:'26g', tags:['Vegano','Sin lactosa'],
+    presup:'medio',
+    ing:['180g tofu extra firme','2 tazas brócoli','150g fideos de arroz cocidos','3 cdas mantequilla de maní','2 cdas salsa de soja (tamari)','1 cda miel (o sirope de arce)','Ajo, jengibre, semillas de sésamo'],
+    steps:['Prensar tofu y cortar en cubos. Hornear a 200°C 20 min hasta crujiente.','Cocinar brócoli al vapor 5 min.','Mezclar salsa: maní + tamari + miel + ajo rallado + agua caliente.','Servir fideos con brócoli, tofu y salsa. Espolvorear sésamo.'],
+    macros:{kcal:'500',prot:'26g',cho:'52g',gra:'20g'},
+    tip:'<strong>Tofu crujiente sin freír:</strong> Prensar bien el tofu con papel absorbente es el secreto. Mínimo 10 minutos de presión.'
+  },
+  {
+    emoji:'🌽', name:'Polenta cremosa con portobellos y espinaca salteada',
+    desc:'Sin gluten natural, vegetariana. Confort food fitness con proteína de hongos.',
+    kcal:380, time:'20 min', prot:'14g', tags:['Vegano','Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['100g polenta rápida','250ml caldo de verduras','200g hongos portobello','2 tazas espinaca','2 dientes ajo','2 cdas levadura nutricional','Aceite de oliva, sal, romero'],
+    steps:['Cocinar polenta con caldo según paquete. Agregar levadura nutricional al final.','Saltear ajo en oliva, añadir portobellos laminados. Cocinar 8 min.','Incorporar espinaca y saltear 2 min más.','Servir polenta cremosa con hongos y espinaca encima.'],
+    macros:{kcal:'380',prot:'14g',cho:'52g',gra:'12g'},
+    tip:'<strong>Levadura nutricional:</strong> Añade sabor a queso sin lactosa + vitaminas del grupo B. Indispensable en la cocina vegana.'
+  }
+  ,{
     emoji:'🌯', name:'Wrap de tofu salteado con vegetales y guacamole',
     desc:'Sin lactosa, sin gluten (con wrap de maíz). Proteína vegetal completa.',
     kcal:440, time:'15 min', prot:'22g', tags:['Vegano','Sin lactosa','Sin gluten'],
@@ -621,7 +759,58 @@ const CENAS_LIGHT = [
     macros:{kcal:'380',prot:'34g',cho:'14g',gra:'22g'},
     tip:'<strong>Pre-cama:</strong> El salmón tiene triptófano que favorece la síntesis de melatonina. Cena perfecta.'
   },
+
+  ,{
+    emoji:'🥒', name:'Pechuga de pavo al limón con ensalada de pepino y yogur',
+    desc:'La cena más limpia del recetario. Proteína magra + probióticos + cero CHO refinados.',
+    kcal:310, time:'15 min', prot:'38g', tags:['Sin gluten'],
+    presup:'bajo',
+    ing:['150g pechuga de pavo','1 pepino grande','150g yogur griego sin azúcar','Eneldo fresco','Zumo de 1 limón','Ajo en polvo, sal, aceite de oliva'],
+    steps:['Cocinar pavo en sartén con oliva y ajo en polvo, 4 min por lado.','Cortar pepino en rodajas o cubos.','Mezclar yogur con eneldo, limón y sal (tzatziki express).','Servir pavo con pepino y salsa de yogur al lado.'],
+    macros:{kcal:'310',prot:'38g',cho:'8g',gra:'10g'},
+    tip:'<strong>Pre-cama:</strong> El yogur griego tiene caseína de absorción lenta. Perfecto como última comida del día.'
+  },
   {
+    emoji:'🍲', name:'Sopa de miso con tofu sedoso y algas wakame',
+    desc:'Probióticos, minerales marinos y proteína. La cena japonesa del atleta de recuperación.',
+    kcal:210, time:'10 min', prot:'16g', tags:['Vegano','Sin gluten','Sin lactosa'],
+    presup:'medio',
+    ing:['2 cdas pasta de miso blanco','150g tofu sedoso','10g algas wakame secas','3 tazas agua caliente','2 cebollas de verdeo','1 cdita salsa de soja (tamari)'],
+    steps:['Hidratar algas en agua fría 5 min. Escurrir.','Calentar agua sin hervir (el miso no debe hervir para conservar probióticos).','Disolver miso en el agua caliente.','Añadir tofu cortado en cubos, algas y cebolla de verdeo.'],
+    macros:{kcal:'210',prot:'16g',cho:'10g',gra:'8g'},
+    tip:'<strong>Importante:</strong> No hervir el miso — el calor excesivo destruye las bacterias beneficiosas que lo hacen especial.'
+  },
+  {
+    emoji:'🫑', name:'Relleno de morrón con carne magra y quinoa',
+    desc:'Un clásico reconvertido. Presentación elegante, nutrición completa.',
+    kcal:420, time:'30 min', prot:'36g', tags:['Sin gluten','Sin lactosa'],
+    presup:'medio', featured:true,
+    ing:['2 morrones grandes','150g carne magra picada','80g quinoa cocida','1 tomate','½ cebolla','Comino, orégano, sal, ajo','Perejil fresco'],
+    steps:['Cortar tapa a los morrones y vaciar semillas. Reservar.','Saltear cebolla y ajo. Añadir carne, cocinar 5 min.','Mezclar con quinoa, tomate picado y especias.','Rellenar morrones y hornear a 190°C por 20 min.'],
+    macros:{kcal:'420',prot:'36g',cho:'32g',gra:'12g'},
+    tip:'<strong>Vitamina C:</strong> El morrón rojo tiene más vitamina C que la naranja. Mejora la absorción del hierro de la carne.'
+  },
+  {
+    emoji:'🥗', name:'Ensalada tibia de lentejas con huevo pochado',
+    desc:'Proteína doble: legumbre + huevo. Cena completa sin cocción larga.',
+    kcal:350, time:'15 min', prot:'24g', tags:['Veggie','Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['200g lentejas cocidas (lata)','2 huevos','2 tazas rúcula','1 tomate','½ cebolla morada','2 cdas vinagre de manzana','Mostaza, aceite de oliva, sal'],
+    steps:['Calentar lentejas con un chorrito de vinagre.','Pochar huevos: agua hirviendo con vinagre, cocinar 3 min.','Armar ensalada: rúcula, tomate, cebolla y lentejas tibias.','Coronar con huevos pochados y aderezo de mostaza + oliva.'],
+    macros:{kcal:'350',prot:'24g',cho:'32g',gra:'12g'},
+    tip:'<strong>Huevo pochado perfecto:</strong> Agua a punto de hervir (no burbujeo fuerte), agregar vinagre y crear un remolino antes de romper el huevo.'
+  },
+  {
+    emoji:'🐟', name:'Ceviche de merluza con batata y maíz',
+    desc:'Sin cocción por calor. Proteína + CHO moderados. Refrescante y antiinflamatorio.',
+    kcal:340, time:'20 min (+ 15 maceración)', prot:'32g', tags:['Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['200g merluza fresca en cubos','Zumo de 3 limones','½ ají rojo sin semillas','½ cebolla morada en juliana','Cilantro fresco','1 batata pequeña cocida','½ choclo cocido'],
+    steps:['Cubrir merluza con zumo de limón. Dejar macerar 15 min en heladera.','Escurrir el exceso de limón.','Mezclar con cebolla, ají y cilantro.','Servir con batata cocida y granos de choclo al lado.'],
+    macros:{kcal:'340',prot:'32g',cho:'28g',gra:'6g'},
+    tip:'<strong>Seguridad:</strong> Usar pescado fresco o congelado de calidad. El limón "cocina" la proteína pero no elimina parásitos como el calor.'
+  }
+  ,{
     emoji:'🍳', name:'Revuelto de champiñones con espinaca y huevo',
     desc:'Ligero, rápido y cargado de vitamina D, hierro y B12.',
     kcal:290, time:'12 min', prot:'22g', tags:['Veggie','Sin gluten','Sin lactosa'],
@@ -654,7 +843,58 @@ const CENAS_POSTTRENO = [
     macros:{kcal:'480',prot:'24g',cho:'62g',gra:'12g'},
     tip:'<strong>Post-entreno nocturno:</strong> Los CHO ayudan a reponer glucógeno muscular. No los temas de noche si entrenaste.'
   },
+
+  ,{
+    emoji:'🍝', name:'Pasta de lentejas rojas con salsa de tomate y albahaca',
+    desc:'Pasta sin gluten de legumbres = doble proteína que la pasta normal. Recuperación real.',
+    kcal:490, time:'15 min', prot:'28g', tags:['Vegano','Sin gluten','Sin lactosa'],
+    presup:'medio',
+    ing:['90g pasta de lentejas rojas','1 lata tomate triturado','2 dientes ajo','Albahaca fresca','1 cdita aceite de oliva','Sal, pimienta, orégano'],
+    steps:['Cocinar pasta según paquete (suele ser 8 min).','Saltear ajo en oliva. Añadir tomate y cocinar 8 min.','Condimentar con albahaca, orégano y sal.','Servir pasta con salsa y hojas frescas de albahaca.'],
+    macros:{kcal:'490',prot:'28g',cho:'68g',gra:'8g'},
+    tip:'<strong>Pasta de legumbres:</strong> 90g aportan ~28g de proteína vs los ~10g de la pasta de trigo. No es lo mismo.'
+  },
   {
+    emoji:'🥩', name:'Hamburguesa de carne magra sin pan con camote frito al horno',
+    desc:'Toda la proteína de una hamburguesa, sin el pan vacío. CHO de calidad.',
+    kcal:520, time:'25 min', prot:'40g', tags:['Sin gluten','Sin lactosa'],
+    presup:'medio', featured:true,
+    ing:['180g carne magra picada','1 camote mediano','½ aguacate','Lechuga, tomate','Sal, pimienta, ajo en polvo','Mostaza sin gluten, aceite en spray'],
+    steps:['Cortar camote en bastones. Spray + sal. Hornear 20 min a 200°C.','Formar hamburguesa y condimentar. Grillar 4 min por lado.','Servir sin pan: lechuga como base, burger, tomate y palta.','Acompañar con camote frito al horno.'],
+    macros:{kcal:'520',prot:'40g',cho:'36g',gra:'20g'},
+    tip:'<strong>Sin pan y sin culpa:</strong> El camote tiene índice glucémico más bajo que las papas y es rico en beta-caroteno.'
+  },
+  {
+    emoji:'🍗', name:'Pollo desmechado con puré de batata y chía',
+    desc:'Proteína de cocción lenta, CHO complejos y omega-3 de chía. El post-entreno nocturno definitivo.',
+    kcal:500, time:'20 min (con pollo pre-cocido)', prot:'44g', tags:['Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['160g pollo cocido y desmechado','2 batatas medianas cocidas','1 cdas semillas de chía','1 cda aceite de oliva','Sal, ajo en polvo, cúrcuma','Caldo de pollo sin sal'],
+    steps:['Procesar batatas con oliva, cúrcuma y caldo hasta cremoso.','Calentar pollo desmechado con ajo en polvo y sal.','Servir puré con pollo encima.','Espolvorear chía y un hilo de oliva al servir.'],
+    macros:{kcal:'500',prot:'44g',cho:'42g',gra:'14g'},
+    tip:'<strong>Meal prep:</strong> Desmechar pollo en cantidad el domingo. Rinde para 4 noches distintas con diferentes acompañamientos.'
+  },
+  {
+    emoji:'🌾', name:'Bowl de quinoa negra con edamame y aderezo tahini',
+    desc:'Proteína completa vegana + hierro + calcio. Para noches de recuperación intensa.',
+    kcal:470, time:'15 min', prot:'24g', tags:['Vegano','Sin gluten','Sin lactosa'],
+    presup:'medio',
+    ing:['120g quinoa negra cocida','150g edamame cocido','1 zanahoria','½ pepino','2 cdas tahini','Zumo de limón, tamari, sésamo'],
+    steps:['Preparar aderezo: tahini + limón + tamari + agua tibia.','Cortar zanahoria en juliana y pepino en rodajas.','Armar bowl: quinoa, edamame, vegetales.','Bañar con aderezo y espolvorear sésamo negro.'],
+    macros:{kcal:'470',prot:'24g',cho:'54g',gra:'16g'},
+    tip:'<strong>Quinoa negra:</strong> Tiene más antioxidantes que la blanca. Textura más firme y nuttier. Vale la diferencia de precio.'
+  },
+  {
+    emoji:'🥘', name:'Cazuela de pollo y garbanzos con cúrcuma',
+    desc:'Una sola olla, máximo sabor. Proteína animal + vegetal + antiinflamatorio potente.',
+    kcal:540, time:'30 min', prot:'46g', tags:['Sin gluten','Sin lactosa'],
+    presup:'bajo',
+    ing:['150g pechuga de pollo','200g garbanzos cocidos','1 zanahoria','1 cebolla','2 tomates','1 cdita cúrcuma','½ cdita páprika','Ajo, oliva, caldo de verduras, sal'],
+    steps:['Dorar pollo en trozos. Retirar y reservar.','Saltear cebolla, zanahoria y ajo en la misma olla.','Añadir tomates, especias y caldo. Cocinar 5 min.','Incorporar pollo y garbanzos. Cocinar 15 min a fuego bajo.'],
+    macros:{kcal:'540',prot:'46g',cho:'44g',gra:'12g'},
+    tip:'<strong>Una sola olla:</strong> Menos lavar, más tiempo libre. Esta cazuela dura 3 días en heladera y mejora de sabor con el tiempo.'
+  }
+  ,{
     emoji:'🥚', name:'Tortilla de batata con ricota sin lactosa',
     desc:'Proteína lenta (caseína) + CHO de índice medio. Ideal antes de dormir.',
     kcal:420, time:'20 min', prot:'28g', tags:['Veggie','Sin lactosa','Sin gluten'],
@@ -687,6 +927,41 @@ const RAPIDAS_10 = [
     tags:['Sin gluten'], presup:'bajo',
     desc:'Sin cocción. Proteína rápida en menos de 5 minutos.',
     steps:'Untar cottage sobre tostadas de arroz. Añadir fetas de pavo cocido, rúcula y tomate cherry. Listo.'
+  },
+  {
+    emoji:'🥚', name:'Huevos revueltos en microondas con queso',
+    time:'3 min', kcal:280, prot:'22g',
+    tags:['Sin gluten','Veggie'], presup:'bajo',
+    desc:'La receta más rápida del universo fitness. Sin sartén, sin lavar.',
+    steps:'Romper 3 huevos en taza grande. Batir con tenedor. Agregar sal y 20g queso rallado. Microondas 90 segundos, revolver a mitad. Listo.'
+  },
+  {
+    emoji:'🍌', name:'Bowl de banana con mantequilla de almendras y proteína',
+    time:'2 min', kcal:320, prot:'22g',
+    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'bajo',
+    desc:'Sin cocción. Pre o post-entreno. Energía + proteína en 2 minutos.',
+    steps:'Cortar 1 banana en rodajas en un bowl. Añadir 2 cdas mantequilla de almendras + 1 scoop proteína de guisante + 1 cda semillas de cáñamo. Mezclar y comer.'
+  },
+  {
+    emoji:'🫙', name:'Skyr con nueces y arándanos',
+    time:'2 min', kcal:250, prot:'20g',
+    tags:['Sin gluten','Veggie'], presup:'medio',
+    desc:'El yogur islandés con más proteína del mercado. Sin azúcar agregada.',
+    steps:'Servir 200g skyr natural en bowl. Añadir puñado de arándanos + 15g nueces. Opcional: cdita de miel. Sin más pasos.'
+  },
+  {
+    emoji:'🌯', name:'Wrap de pechuga con palta y mostaza',
+    time:'5 min', kcal:380, prot:'34g',
+    tags:['Sin lactosa'], presup:'bajo',
+    desc:'Con pechuga pre-cocida del meal prep. Wrap listo en 5 minutos.',
+    steps:'Untar 1 tortilla integral con mostaza. Añadir 120g pechuga desmechada, ½ palta en rodajas, rúcula y tomate. Enrollar y comer.'
+  },
+  {
+    emoji:'🍳', name:'Huevo frito con arroz y kimchi',
+    time:'6 min', kcal:350, prot:'18g',
+    tags:['Sin gluten','Sin lactosa'], presup:'bajo',
+    desc:'El bowl de huevo coreano. Probióticos del kimchi + proteína + CHO de calidad.',
+    steps:'Freír 2 huevos en sartén con aceite mínimo. Calentar 150g arroz cocido en microondas. Armar bowl: arroz + huevo + 3 cdas kimchi. Salsa de soja al gusto.'
   }
 ];
 
@@ -704,6 +979,27 @@ const RAPIDAS_MEALPREP = [
     tags:['Vegano','Sin gluten','Sin lactosa'], presup:'muy bajo',
     desc:'Las legumbres secas cuestan 5x menos que las de lata. Cocinás y congelás.',
     steps:'Remojar 500g de lentejas/garbanzos 8 horas. Cocinar 30–40 min. Dividir en porciones de 200g y congelar. Descongelar en microondas en 3 minutos.'
+  },
+  {
+    emoji:'🥚', name:'Huevos duros en batch (12 unidades)',
+    time:'12 min (1 vez)', kcal:78, prot:'6g',
+    tags:['Sin gluten','Sin lactosa','Veggie'], presup:'muy bajo',
+    desc:'La proteína más portable que existe. Preparás 12 y tenés snack para toda la semana.',
+    steps:'Poner 12 huevos en olla con agua fría. Llevar a hervor. Cocinar 10 min. Enfriar en agua con hielo. Pelar y refrigerar hasta 7 días. Comer solos, con sal o con mostaza.'
+  },
+  {
+    emoji:'🥣', name:'Avena overnight en frascos (5 días)',
+    time:'15 min (domingo)', kcal:400, prot:'20g',
+    tags:['Vegano','Sin lactosa'], presup:'bajo',
+    desc:'Preparás 5 frascos el domingo. Cada mañana abrís y ya está el desayuno.',
+    steps:'Por cada frasco: 80g avena + 250ml leche vegetal + 2 cdas proteína de guisante + 1 cda chía. Mezclar. Tapar y refrigerar. Al servir agregar fruta fresca y mantequilla de maní.'
+  },
+  {
+    emoji:'🍲', name:'Sopa de verduras y lentejas para la semana',
+    time:'40 min (1 vez)', kcal:280, prot:'16g',
+    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'muy bajo',
+    desc:'2 litros de sopa nutritiva. Cenas listas para 5 días con solo recalentar.',
+    steps:'Rehogar cebolla, zanahoria, apio y ajo. Añadir 300g lentejas secas + 1.5L caldo + tomate triturado + especias. Cocinar 30 min. Guardar en porciones. Recalentar en microondas 3 min.'
   }
 ];
 
@@ -728,6 +1024,20 @@ const RAPIDAS_BATIDOS = [
     tags:['Vegano','Sin gluten','Sin lactosa'], presup:'medio',
     desc:'Antiinflamatorio. El jengibre reduce el dolor muscular de aparición tardía.',
     steps:'Licuar: 1 taza mango congelado + 250ml leche de coco + 2 cdas proteína de guisante + 1 cdita jengibre fresco rallado + zumo de limón. Servir frío.'
+  },
+  {
+    emoji:'🍓', name:'Batido de frutilla y remolacha post-entreno',
+    time:'4 min', kcal:295, prot:'22g',
+    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'bajo',
+    desc:'Nitratos de remolacha para recuperación vascular + antioxidantes de frutilla.',
+    steps:'Licuar: 1 taza frutillas congeladas + ½ remolacha pequeña cocida + 250ml agua de coco + 2 cdas proteína de guisante + zumo de limón + hielo. Procesar hasta suave.'
+  },
+  {
+    emoji:'🥑', name:'Batido verde de aguacate y espinaca sin azúcar',
+    time:'4 min', kcal:310, prot:'20g',
+    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'medio',
+    desc:'Sin fruta dulce. Grasas buenas + proteína + micronutrientes. Bajo en CHO.',
+    steps:'Licuar: ½ aguacate + 1 taza espinaca + 300ml leche de almendras sin azúcar + 2 cdas proteína de guisante + 1 cdita jengibre + 3 hielos. Procesar y servir de inmediato.'
   }
 ];
 
@@ -1119,6 +1429,28 @@ function init(){
 }
 
 init();
+
+// ── PASSWORD GATE ──
+const PWD = 'strenghtlab26s';
+function checkPass(){
+  const val = document.getElementById('gate-input').value.trim();
+  const err = document.getElementById('gate-error');
+  const inp = document.getElementById('gate-input');
+  if(val === PWD){
+    document.getElementById('gate').style.opacity = '0';
+    document.getElementById('gate').style.transition = 'opacity 0.4s';
+    setTimeout(()=>{ document.getElementById('gate').style.display='none'; document.getElementById('app').style.display='block'; },400);
+    try{ sessionStorage.setItem('sl_auth','1'); }catch(e){}
+  } else {
+    inp.classList.add('error');
+    err.textContent = 'Código incorrecto. Consultá con Renzo.';
+    setTimeout(()=>{ inp.classList.remove('error'); inp.value=''; },700);
+  }
+}
+// Auto-unlock if already authenticated this session
+try{ if(sessionStorage.getItem('sl_auth')==='1'){ document.getElementById('gate').style.display='none'; document.getElementById('app').style.display='block'; } }catch(e){}
+
 </script>
+</div><!-- /#app -->
 </body>
 </html>
