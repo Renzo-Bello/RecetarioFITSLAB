@@ -3,245 +3,308 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0A0A0A">
-<title>STRENGTHLAB | Recetario Fitness</title>
+<meta name="theme-color" content="#F7F4EE">
+<title>STRENGTHLAB | Recetario & Guía Nutricional</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{font-size:16px;scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
-
-/* ─── PASSWORD GATE ─── */
-#gate{position:fixed;inset:0;z-index:9999;background:#0A0A0A;display:flex;align-items:center;justify-content:center;padding:24px;}
-#gate-box{width:100%;max-width:340px;text-align:center;}
-#gate-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:#F0EDE8;margin-bottom:4px;}
-#gate-eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#C9A96E;font-weight:500;margin-bottom:6px;}
-#gate-handle{font-size:11px;color:#6E6A63;margin-bottom:32px;}
-#gate-divider{width:40px;height:1px;background:rgba(201,169,110,0.3);margin:0 auto 32px;}
-#gate-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6E6A63;font-weight:500;margin-bottom:10px;}
-#gate-input{width:100%;font-family:'Outfit',sans-serif;font-size:15px;font-weight:400;color:#F0EDE8;background:#1E1E1E;border:1px solid #2A2A2A;border-radius:12px;padding:14px 16px;text-align:center;letter-spacing:3px;outline:none;transition:border-color 0.2s;margin-bottom:12px;}
-#gate-input:focus{border-color:#8A6D3F;}
-#gate-input.error{border-color:#C0514A;animation:shake 0.3s ease;}
-#gate-btn{width:100%;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#0A0A0A;background:#C9A96E;border:none;border-radius:12px;padding:15px;cursor:pointer;transition:opacity 0.2s;}
-#gate-btn:active{opacity:0.8;}
-#gate-error{font-size:12px;color:#C0514A;margin-top:10px;min-height:18px;transition:opacity 0.2s;}
-#gate-footer{font-size:10px;color:#3A3A3A;margin-top:32px;letter-spacing:1px;}
-#app{display:none;}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+body{font-family:'DM Sans',system-ui,sans-serif;background:#F7F4EE;color:#1A1714;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6;}
 
 :root{
-  --lime:#C9A96E;--lime-dim:#8A6D3F;--lime-glow:rgba(201,169,110,0.12);--lime-line:rgba(201,169,110,0.25);
-  --ink:#0A0A0A;--ink2:#141414;--ink3:#1E1E1E;--ink4:#2A2A2A;--ink5:#363636;
-  --text:#F0EDE8;--text2:#B8B4AD;--text3:#6E6A63;
-  --mint:#4DC4A0;--mint-bg:rgba(77,196,160,0.1);
-  --ember:#E87040;--ember-bg:rgba(232,112,64,0.1);
-  --sky:#5AAAD4;--sky-bg:rgba(90,170,212,0.1);
-  --rose:#D44F7A;--rose-bg:rgba(212,79,122,0.1);
-  --gold:#C9A96E;--gold-bg:rgba(201,169,110,0.12);
+  --cream:#F7F4EE;--white:#FFFFFF;
+  --ink:#1A1714;--ink2:#3D3A35;--ink3:#6B6660;
+  --gold:#B8924A;--gold-dim:#8A6D34;--gold-bg:#F5ECD8;--gold-line:rgba(184,146,74,0.3);
+  --green:#1E5C3A;--green-bg:#E4F0E9;
+  --red:#8B1F2F;--red-bg:#F5E8EA;
+  --amber:#7A5015;--amber-bg:#FBF0DC;
+  --sky:#185FA5;--sky-bg:#E7EFF7;
+  --plum:#4A3AA0;--plum-bg:#ECE9F7;
+  --border:rgba(26,23,20,0.10);--border-md:rgba(26,23,20,0.18);
+  --r:14px;--r-sm:10px;
+  --fd:'DM Serif Display',Georgia,serif;
+  --fb:'DM Sans',system-ui,sans-serif;
+  --fm:'DM Mono',monospace;
   --r-safe-top:env(safe-area-inset-top,0px);--r-safe-bottom:env(safe-area-inset-bottom,0px);
 }
 
 ::-webkit-scrollbar{width:3px;height:3px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--lime-dim);border-radius:2px}
+::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px}
+
+/* ─── PASSWORD GATE ─── */
+#gate{position:fixed;inset:0;z-index:9999;background:var(--cream);display:flex;align-items:center;justify-content:center;padding:24px;}
+#gate-box{width:100%;max-width:340px;text-align:center;}
+#gate-logo{font-family:var(--fd);font-size:30px;color:var(--ink);margin-bottom:4px;}
+#gate-eyebrow{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:8px;}
+#gate-handle{font-size:12px;color:var(--ink3);margin-bottom:32px;}
+#gate-divider{width:40px;height:1.5px;background:var(--gold);margin:0 auto 32px;}
+#gate-label{font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin-bottom:10px;}
+#gate-input{width:100%;font-family:var(--fb);font-size:15px;font-weight:400;color:var(--ink);background:var(--white);border:1.5px solid var(--border-md);border-radius:var(--r-sm);padding:14px 16px;text-align:center;letter-spacing:3px;outline:none;transition:border-color 0.2s;margin-bottom:12px;}
+#gate-input:focus{border-color:var(--gold);}
+#gate-input.error{border-color:var(--red);animation:shake 0.3s ease;}
+#gate-btn{width:100%;font-family:var(--fm);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--cream);background:var(--ink);border:none;border-radius:100px;padding:15px;cursor:pointer;transition:opacity 0.2s;}
+#gate-btn:active{opacity:0.8;}
+#gate-error{font-size:12px;color:var(--red);margin-top:10px;min-height:18px;transition:opacity 0.2s;}
+#gate-footer{font-family:var(--fm);font-size:10px;color:var(--ink3);margin-top:32px;letter-spacing:.06em;opacity:0.6;}
+#app{display:none;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 
 /* ─── HEADER ─── */
-.app-header{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--lime-line);padding:calc(10px + var(--r-safe-top)) 20px 10px;}
+.app-header{position:sticky;top:0;z-index:100;background:rgba(247,244,238,0.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:calc(10px + var(--r-safe-top)) 20px 10px;}
 .header-inner{display:flex;align-items:center;justify-content:space-between;max-width:520px;margin:0 auto;}
-.header-brand{display:flex;align-items:center;gap:10px;}
-.header-icon{width:32px;height:32px;background:var(--lime-glow);border:1px solid var(--lime-line);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;}
 .header-texts{display:flex;flex-direction:column;gap:1px;}
-.header-eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--lime);font-weight:600;}
-.header-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:900;color:var(--text);line-height:1;}
-.header-filters{display:flex;gap:6px;align-items:center;}
-.filter-chip{font-size:10px;font-weight:500;padding:4px 9px;border-radius:12px;border:1px solid var(--ink5);color:var(--text3);background:none;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
-.filter-chip.active{background:var(--lime-glow);border-color:var(--lime-dim);color:var(--lime);}
-.filter-chip:active{opacity:0.7}
+.header-eyebrow{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+.header-title{font-family:var(--fd);font-size:18px;color:var(--ink);line-height:1;}
+.header-handle{font-family:var(--fm);font-size:10px;font-weight:500;background:var(--gold-bg);border:1px solid var(--gold-line);color:var(--gold-dim);padding:4px 10px;border-radius:100px;letter-spacing:.04em;white-space:nowrap;}
 
 /* ─── NAV ─── */
-.sticky-nav{position:sticky;top:53px;z-index:99;background:var(--ink2);}
-.nav-tabs{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:var(--ink2);border-bottom:1px solid var(--lime-line);padding:0 8px;max-width:100%;}
+.sticky-nav{position:sticky;top:53px;z-index:99;background:var(--cream);}
+.nav-tabs{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:var(--cream);border-bottom:1px solid var(--border);padding:0 8px;max-width:100%;}
 .nav-tabs::-webkit-scrollbar{display:none}
-.nav-tab{flex-shrink:0;font-family:'Outfit',sans-serif;font-size:12px;font-weight:400;color:var(--text3);padding:11px 13px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;letter-spacing:0.2px;}
-.nav-tab.active{color:var(--lime);border-bottom-color:var(--lime);font-weight:600;}
+.nav-tab{flex-shrink:0;font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.03em;color:var(--ink3);padding:12px 13px;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;text-transform:uppercase;}
+.nav-tab.active{color:var(--ink);border-bottom-color:var(--gold);font-weight:600;}
 .nav-tab:active{opacity:0.7}
 
 /* ─── PANEL ─── */
 .panel{display:none;max-width:520px;margin:0 auto;}
 .panel.active{display:block}
 
-/* ─── HERO ─── */
-.hero{background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:30px 20px 26px;border-bottom:1px solid var(--lime-line);}
-.hero-eyebrow{font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
-.hero-eyebrow::before{content:'';width:18px;height:1px;background:var(--lime);display:block;}
-.hero-h{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:10px;}
-.hero-h em{color:var(--lime);font-style:italic;}
-.hero-p{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:16px;}
-.hero-pills{display:flex;flex-wrap:wrap;gap:7px;}
-.hero-pill{font-size:10px;font-weight:500;padding:5px 10px;border-radius:20px;border:1px solid var(--ink5);color:var(--text3);}
-.hero-pill.active{background:var(--lime-glow);border-color:var(--lime-dim);color:var(--lime);}
-
-/* ─── FILTER BAR ─── */
-.filter-bar{padding:14px 20px 10px;border-bottom:1px solid var(--ink4);}
-.filter-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:600;margin-bottom:8px;}
-.chips-wrap{display:flex;flex-wrap:wrap;gap:6px;}
-.chip{font-family:'Outfit',sans-serif;font-size:11px;font-weight:400;color:var(--text3);padding:6px 12px;border-radius:16px;border:1px solid var(--ink5);background:none;cursor:pointer;transition:all 0.15s;}
-.chip.v{border-color:#4DC4A0;color:#4DC4A0;background:rgba(77,196,160,0.08);}
-.chip.gl{border-color:#C9A96E;color:#C9A96E;background:rgba(201,169,110,0.08);}
-.chip.lac{border-color:#5AAAD4;color:#5AAAD4;background:rgba(90,170,212,0.08);}
-.chip.vn{border-color:#D44F7A;color:#D44F7A;background:rgba(212,79,122,0.08);}
-.chip.eco{border-color:#A8D44F;color:#A8D44F;background:rgba(168,212,79,0.08);}
+/* ─── HERO (por sección) ─── */
+.tab-hero{padding:30px 20px 26px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;background:var(--cream);}
+.tab-hero::after{content:'';position:absolute;top:-70px;right:-70px;width:200px;height:200px;border-radius:50%;background:var(--gold-bg);opacity:.55;pointer-events:none;}
+.tab-eyebrow{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:12px;display:flex;align-items:center;gap:8px;position:relative;z-index:1;}
+.tab-eyebrow::before{content:'';width:16px;height:1.5px;background:var(--gold);display:block;flex-shrink:0;}
+.tab-h{font-family:var(--fd);font-size:30px;color:var(--ink);line-height:1.12;margin-bottom:10px;letter-spacing:-.01em;position:relative;z-index:1;}
+.tab-h em{color:var(--gold);font-style:italic;}
+.tab-p{font-size:13.5px;color:var(--ink3);line-height:1.65;position:relative;z-index:1;max-width:340px;}
 
 /* ─── SECTION HEADERS ─── */
-.section-head{padding:20px 20px 14px;display:flex;align-items:center;gap:12px;}
-.section-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.section-icon.lime{background:var(--lime-glow);border:1px solid var(--lime-line);}
-.section-icon.mint{background:var(--mint-bg);border:1px solid rgba(77,196,160,0.25);}
-.section-icon.ember{background:var(--ember-bg);border:1px solid rgba(232,112,64,0.25);}
-.section-icon.sky{background:var(--sky-bg);border:1px solid rgba(90,170,212,0.25);}
-.section-icon.rose{background:var(--rose-bg);border:1px solid rgba(212,79,122,0.25);}
-.section-icon.gold{background:var(--gold-bg);border:1px solid rgba(201,169,110,0.25);}
-.section-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--text);line-height:1.1;}
-.section-sub{font-size:11px;color:var(--text3);margin-top:3px;}
+.section-head{padding:22px 20px 16px;display:flex;align-items:baseline;gap:10px;}
+.section-num{font-family:var(--fm);font-size:10px;color:var(--gold);letter-spacing:.12em;flex-shrink:0;}
+.section-title{font-family:var(--fd);font-size:21px;color:var(--ink);line-height:1.2;}
+.section-sub{font-size:11.5px;color:var(--ink3);margin-top:4px;display:block;}
+
+.sec-divider{height:1px;background:var(--border);margin:4px 20px 4px;}
 
 /* ─── RECIPE CARDS ─── */
-.recipe-grid{padding:0 16px 6px;display:flex;flex-direction:column;gap:10px;}
-.recipe-card{background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
-.recipe-card:hover,.recipe-card:focus{border-color:var(--lime-dim);}
-.recipe-card.featured{border-color:var(--lime-dim);}
+.recipe-grid{padding:0 16px 8px;display:flex;flex-direction:column;gap:10px;}
+.recipe-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;cursor:pointer;transition:border-color 0.2s;}
+.recipe-card.featured{border-color:var(--gold);background:#FFFCF5;}
 .recipe-card-head{padding:14px 16px;display:flex;align-items:flex-start;gap:13px;}
-.recipe-emoji{font-size:28px;flex-shrink:0;margin-top:1px;}
+.recipe-emoji{font-size:26px;flex-shrink:0;margin-top:1px;}
 .recipe-info{flex:1;min-width:0;}
-.recipe-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:2px;}
-.recipe-desc{font-size:12px;color:var(--text2);line-height:1.5;}
-.recipe-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
-.meta-badge{font-size:10px;font-weight:500;padding:3px 8px;border-radius:6px;letter-spacing:0.2px;}
-.meta-badge.kcal{background:var(--lime-glow);color:var(--lime);border:1px solid var(--lime-line);}
-.meta-badge.time{background:var(--ink3);color:var(--text2);border:1px solid var(--ink5);}
-.meta-badge.prot{background:rgba(90,170,212,0.12);color:var(--sky);border:1px solid rgba(90,170,212,0.2);}
-.meta-badge.tag-v{background:var(--mint-bg);color:var(--mint);border:1px solid rgba(77,196,160,0.2);}
-.meta-badge.tag-gl{background:var(--gold-bg);color:var(--gold);border:1px solid rgba(201,169,110,0.2);}
-.meta-badge.tag-lac{background:var(--sky-bg);color:var(--sky);border:1px solid rgba(90,170,212,0.2);}
-.meta-badge.tag-vn{background:var(--rose-bg);color:var(--rose);border:1px solid rgba(212,79,122,0.2);}
-.meta-badge.tag-eco{background:var(--lime-glow);color:var(--lime);border:1px solid var(--lime-line);}
-.meta-badge.presup-bajo{background:rgba(77,196,160,0.1);color:var(--mint);}
-.meta-badge.presup-medio{background:rgba(201,169,110,0.1);color:var(--gold);}
-.meta-badge.presup-alto{background:rgba(232,112,64,0.1);color:var(--ember);}
-.recipe-expand{display:none;padding:0 16px 14px;border-top:1px solid var(--ink4);margin-top:0;}
+.recipe-name{font-family:var(--fd);font-size:16px;color:var(--ink);line-height:1.25;margin-bottom:3px;}
+.recipe-desc{font-size:12px;color:var(--ink3);line-height:1.5;}
+.recipe-meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.meta-badge{font-family:var(--fm);font-size:9.5px;font-weight:500;padding:3px 9px;border-radius:100px;letter-spacing:.02em;}
+.meta-badge.kcal{background:var(--gold-bg);color:var(--gold-dim);border:1px solid var(--gold-line);}
+.meta-badge.time{background:var(--cream);color:var(--ink3);border:1px solid var(--border-md);}
+.meta-badge.prot{background:var(--sky-bg);color:var(--sky);border:1px solid rgba(24,95,165,0.2);}
+.meta-badge.tag-v{background:var(--green-bg);color:var(--green);border:1px solid rgba(30,92,58,0.2);}
+.meta-badge.tag-gl{background:var(--gold-bg);color:var(--gold-dim);border:1px solid var(--gold-line);}
+.meta-badge.tag-lac{background:var(--sky-bg);color:var(--sky);border:1px solid rgba(24,95,165,0.2);}
+.meta-badge.tag-vn{background:var(--plum-bg);color:var(--plum);border:1px solid rgba(74,58,160,0.2);}
+.meta-badge.tag-eco{background:var(--green-bg);color:var(--green);border:1px solid rgba(30,92,58,0.2);}
+.meta-badge.presup-bajo{background:var(--green-bg);color:var(--green);}
+.meta-badge.presup-medio{background:var(--amber-bg);color:var(--amber);}
+.meta-badge.presup-alto{background:var(--red-bg);color:var(--red);}
+.recipe-expand{display:none;padding:0 16px 14px;border-top:1px solid var(--border);margin-top:0;}
 .recipe-expand.open{display:block;}
 .recipe-expand-inner{padding-top:12px;}
-.ing-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:600;margin-bottom:8px;}
+.ing-title{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin-bottom:8px;}
 .ing-list{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
-.ing-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);}
-.ing-dot{width:5px;height:5px;border-radius:50%;background:var(--lime);flex-shrink:0;}
+.ing-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2);}
+.ing-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;}
 .steps-list{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
 .step-row{display:flex;gap:10px;align-items:flex-start;}
-.step-num{width:20px;height:20px;border-radius:50%;background:var(--lime-glow);border:1px solid var(--lime-line);color:var(--lime);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-.step-txt{font-size:12.5px;color:var(--text2);line-height:1.55;flex:1;}
-.macro-strip{display:flex;gap:0;border:1px solid var(--ink5);border-radius:10px;overflow:hidden;margin-top:4px;}
-.macro-cell{flex:1;padding:9px 6px;text-align:center;border-right:1px solid var(--ink5);}
+.step-num{width:20px;height:20px;border-radius:50%;background:var(--gold-bg);border:1px solid var(--gold-line);color:var(--gold-dim);font-family:var(--fm);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-txt{font-size:12.5px;color:var(--ink2);line-height:1.55;flex:1;}
+.macro-strip{display:flex;gap:0;border:1px solid var(--border-md);border-radius:var(--r-sm);overflow:hidden;margin-top:4px;}
+.macro-cell{flex:1;padding:9px 6px;text-align:center;border-right:1px solid var(--border);}
 .macro-cell:last-child{border-right:none;}
-.macro-cell-val{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--text);}
-.macro-cell-key{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:2px;}
-.tip-strip{margin-top:10px;padding:10px 12px;background:var(--ink3);border-radius:9px;border-left:2px solid var(--lime-dim);}
-.tip-txt{font-size:12px;color:var(--text2);line-height:1.55;}
-.tip-txt strong{color:var(--text);}
-.recipe-star{position:absolute;top:12px;right:12px;font-size:12px;color:var(--lime);}
-.card-toggle-btn{width:100%;padding:8px;background:var(--ink3);border:none;color:var(--text3);font-size:11px;font-family:'Outfit',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:color 0.15s;}
-.card-toggle-btn:hover{color:var(--lime);}
+.macro-cell-val{font-family:var(--fd);font-size:16px;color:var(--ink);}
+.macro-cell-key{font-family:var(--fm);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);margin-top:2px;}
+.tip-strip{margin-top:10px;padding:10px 12px;background:var(--gold-bg);border-radius:var(--r-sm);border-left:2px solid var(--gold);}
+.tip-txt{font-size:12px;color:var(--amber);line-height:1.55;}
+.tip-txt strong{color:var(--ink);font-weight:500;}
+.card-toggle-btn{width:100%;padding:9px;background:var(--cream);border:none;color:var(--ink3);font-size:11px;font-family:var(--fb);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:color 0.15s;border-top:1px solid var(--border);}
+.card-toggle-btn:hover{color:var(--gold-dim);}
 .toggle-arrow{transition:transform 0.2s;display:inline-block;}
 .toggle-arrow.open{transform:rotate(180deg);}
 
-/* ─── SECTION DIVIDER ─── */
-.gold-divider{height:1px;background:var(--lime-line);margin:8px 16px 16px;}
-.section-gap{height:24px;}
+.section-gap{height:8px;}
 
-/* ─── INFO CARDS ─── */
-.info-card{margin:0 16px 12px;background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;padding:16px;}
-.info-card.highlight{border-color:var(--lime-dim);background:linear-gradient(135deg,#1A1308,#0F0B05);}
-.info-h{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;}
-.info-p{font-size:12.5px;color:var(--text2);line-height:1.6;}
+/* ─── INFO CARDS / ALERTS ─── */
+.alert-mini{padding:11px 13px;border-radius:var(--r-sm);font-size:12px;line-height:1.55;margin-bottom:10px;}
+.alert-mini.lime{background:var(--gold-bg);border:1px solid var(--gold-line);color:var(--amber);}
+.alert-mini.sky{background:var(--sky-bg);border:1px solid rgba(24,95,165,0.2);color:var(--sky);}
+.alert-mini.rose{background:var(--plum-bg);border:1px solid rgba(74,58,160,0.2);color:var(--plum);}
+.alert-mini.mint{background:var(--green-bg);border:1px solid rgba(30,92,58,0.2);color:var(--green);}
+.alert-mini.gold{background:var(--gold-bg);border:1px solid var(--gold-line);color:var(--gold-dim);}
 
 /* ─── DIETS PANEL ─── */
-.diet-card{margin:0 16px 12px;background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;overflow:hidden;}
-.diet-head{padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;background:linear-gradient(90deg,#1A1308,#111);}
-.diet-emoji{font-size:26px;}
-.diet-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text);}
-.diet-tagline{font-size:11px;color:var(--text3);margin-top:2px;}
-.diet-arrow{margin-left:auto;color:var(--lime);font-size:16px;transition:transform 0.2s;}
+.diet-card{margin:0 16px 12px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;}
+.diet-head{padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;}
+.diet-emoji{font-size:24px;}
+.diet-name{font-family:var(--fd);font-size:17px;color:var(--ink);}
+.diet-tagline{font-size:11px;color:var(--ink3);margin-top:2px;}
+.diet-arrow{margin-left:auto;color:var(--gold);font-size:16px;transition:transform 0.2s;}
 .diet-arrow.open{transform:rotate(180deg);}
-.diet-body{display:none;padding:16px;border-top:1px solid var(--ink4);}
+.diet-body{display:none;padding:16px;border-top:1px solid var(--border);}
 .diet-body.open{display:block;}
-.diet-section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:600;margin:12px 0 7px;}
-.diet-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;padding:9px 11px;background:var(--ink3);border-radius:10px;}
-.diet-item-e{font-size:18px;flex-shrink:0;}
-.diet-item-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;}
-.diet-item-w{font-size:12px;color:var(--text2);line-height:1.45;}
-.alert-mini{padding:10px 12px;border-radius:9px;font-size:12px;line-height:1.55;margin-bottom:10px;}
-.alert-mini.lime{background:var(--lime-glow);border:1px solid var(--lime-line);color:var(--lime);}
-.alert-mini.sky{background:var(--sky-bg);border:1px solid rgba(90,170,212,0.25);color:var(--sky);}
-.alert-mini.rose{background:var(--rose-bg);border:1px solid rgba(212,79,122,0.25);color:var(--rose);}
-.alert-mini.mint{background:var(--mint-bg);border:1px solid rgba(77,196,160,0.25);color:var(--mint);}
-.alert-mini.gold{background:var(--gold-bg);border:1px solid rgba(201,169,110,0.25);color:var(--gold);}
+.diet-section-label{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:500;margin:12px 0 7px;}
+.diet-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px;padding:9px 11px;background:var(--cream);border-radius:var(--r-sm);}
+.diet-item-e{font-size:17px;flex-shrink:0;}
+.diet-item-name{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:2px;}
+.diet-item-w{font-size:12px;color:var(--ink3);line-height:1.45;}
 
 /* ─── BUDGET PANEL ─── */
-.budget-tier{margin:0 16px 12px;background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;overflow:hidden;}
+.budget-tier{margin:0 16px 12px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;}
 .budget-header{padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;}
-.budget-level{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.budget-level.bajo{background:rgba(77,196,160,0.12);border:1px solid rgba(77,196,160,0.25);}
-.budget-level.medio{background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.25);}
-.budget-level.alto{background:rgba(232,112,64,0.12);border:1px solid rgba(232,112,64,0.25);}
-.budget-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;color:var(--text);}
-.budget-range{font-size:11px;margin-top:2px;}
-.budget-range.bajo{color:var(--mint);}
-.budget-range.medio{color:var(--gold);}
-.budget-range.alto{color:var(--ember);}
-.budget-body{display:none;padding:14px 16px;border-top:1px solid var(--ink4);}
+.budget-level{width:38px;height:38px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.budget-level.bajo{background:var(--green-bg);}
+.budget-level.medio{background:var(--gold-bg);}
+.budget-level.alto{background:var(--red-bg);}
+.budget-name{font-family:var(--fd);font-size:17px;color:var(--ink);}
+.budget-range{font-family:var(--fm);font-size:10.5px;margin-top:2px;letter-spacing:.02em;}
+.budget-range.bajo{color:var(--green);}
+.budget-range.medio{color:var(--gold-dim);}
+.budget-range.alto{color:var(--red);}
+.budget-body{display:none;padding:14px 16px;border-top:1px solid var(--border);}
 .budget-body.open{display:block;}
-.shopping-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--ink4);}
+.shopping-item{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);gap:10px;}
 .shopping-item:last-child{border-bottom:none;}
-.shop-name{font-size:13px;color:var(--text);font-weight:500;}
-.shop-note{font-size:11px;color:var(--text3);margin-top:1px;}
-.shop-price{font-size:12px;color:var(--text2);text-align:right;flex-shrink:0;}
+.shop-name{font-size:13px;color:var(--ink);font-weight:500;}
+.shop-note{font-size:11px;color:var(--ink3);margin-top:1px;}
+.shop-price{font-family:var(--fm);font-size:11px;color:var(--ink3);text-align:right;flex-shrink:0;}
 
 /* ─── QUICK PANEL ─── */
-.quick-card{margin:0 16px 10px;background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;padding:14px 16px;display:flex;gap:13px;align-items:flex-start;}
-.quick-card.lime-border{border-color:var(--lime-dim);}
-.quick-emoji{font-size:26px;flex-shrink:0;}
-.quick-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px;}
-.quick-time{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:4px;}
-.quick-steps{font-size:12px;color:var(--text2);line-height:1.55;}
-.quick-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+.quick-card{margin:0 16px 10px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 16px;display:flex;gap:13px;align-items:flex-start;}
+.quick-card.lime-border{border-color:var(--gold);background:#FFFCF5;}
+.quick-emoji{font-size:24px;flex-shrink:0;}
+.quick-name{font-family:var(--fd);font-size:15px;color:var(--ink);margin-bottom:3px;}
+.quick-time{font-family:var(--fm);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-dim);font-weight:500;margin-bottom:4px;}
+.quick-steps{font-size:12px;color:var(--ink3);line-height:1.55;}
+.quick-badges{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
 
 /* ─── MEAL PLAN ─── */
-.plan-day{margin:0 16px 14px;background:var(--ink2);border:1px solid var(--ink4);border-radius:14px;overflow:hidden;}
-.plan-day-head{padding:12px 16px;background:linear-gradient(90deg,#1A1308,#111);display:flex;align-items:center;justify-content:space-between;}
-.plan-day-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;color:var(--text);}
-.plan-day-kcal{font-size:11px;color:var(--lime);font-weight:600;}
-.plan-meal-row{padding:11px 16px;display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--ink4);}
+.plan-day{margin:0 16px 14px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden;}
+.plan-day-head{padding:12px 16px;background:var(--gold-bg);display:flex;align-items:center;justify-content:space-between;}
+.plan-day-name{font-family:var(--fd);font-size:16px;color:var(--ink);}
+.plan-day-kcal{font-family:var(--fm);font-size:10.5px;color:var(--gold-dim);font-weight:500;}
+.plan-meal-row{padding:11px 16px;display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--border);}
 .plan-meal-row:last-child{border-bottom:none;}
-.plan-meal-time{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);font-weight:600;width:70px;flex-shrink:0;}
+.plan-meal-time{font-family:var(--fm);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);font-weight:500;width:72px;flex-shrink:0;}
 .plan-meal-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
-.plan-meal-dot.lime{background:var(--lime);}
-.plan-meal-dot.mint{background:var(--mint);}
+.plan-meal-dot.lime{background:var(--gold);}
+.plan-meal-dot.mint{background:var(--green);}
 .plan-meal-dot.sky{background:var(--sky);}
-.plan-meal-dot.rose{background:var(--rose);}
-.plan-meal-dot.gold{background:var(--gold);}
-.plan-meal-name{font-size:13px;color:var(--text);flex:1;}
-.plan-meal-kcal{font-size:11px;color:var(--text3);flex-shrink:0;}
+.plan-meal-dot.rose{background:var(--plum);}
+.plan-meal-dot.gold{background:var(--gold-dim);}
+.plan-meal-name{font-size:13px;color:var(--ink);flex:1;}
+.plan-meal-kcal{font-family:var(--fm);font-size:10.5px;color:var(--ink3);flex-shrink:0;}
 
-/* ─── SAFE BOTTOM ─── */
+/* ─── SAFE BOTTOM / FOOTER ─── */
 .safe-bottom{height:calc(24px + var(--r-safe-bottom))}
+.app-footer{text-align:center;padding:24px 20px calc(16px + var(--r-safe-bottom));border-top:1px solid var(--border);background:var(--white);margin-top:0;}
+.app-footer-brand{font-family:var(--fd);font-size:18px;color:var(--ink);margin-bottom:4px;}
+.app-footer-eyebrow{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:2px;}
+.app-footer-handle{font-family:var(--fm);font-size:11px;color:var(--ink3);margin-top:6px;}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .fade-up{animation:fadeUp 0.3s ease;}
 
 @media(min-width:520px){
-  .app-header,.hero,.panel,.filter-bar,.sticky-nav{max-width:520px;margin-left:auto;margin-right:auto;}
+  .app-header,.panel,.sticky-nav{max-width:520px;margin-left:auto;margin-right:auto;}
   .sticky-nav{max-width:100%;}
 }
+
+/* ════════════════════════════════════════════
+   ETIQUETAS TAB — estilos específicos heredados
+   de la guía nutricional (anidados bajo #panel-etiquetas
+   para no chocar con el resto de la app)
+════════════════════════════════════════════ */
+#panel-etiquetas .et-sec{padding:22px 20px 6px;}
+#panel-etiquetas .et-sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:18px;}
+#panel-etiquetas .label-outer{border-radius:var(--r);overflow:hidden;border:1.5px solid var(--ink);margin:0 16px 18px;box-shadow:3px 3px 0 var(--ink);}
+#panel-etiquetas .label-bar{background:var(--ink);color:var(--cream);font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;}
+#panel-etiquetas .nf{font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#000;padding:10px 12px;background:#fff;line-height:1.3;}
+#panel-etiquetas .nf-title{font-size:22px;font-weight:900;border-bottom:7px solid #000;padding-bottom:3px;margin-bottom:4px;line-height:1.1}
+#panel-etiquetas .nf-srv{font-size:10.5px;border-bottom:.5px solid #ccc;padding-bottom:4px;margin-bottom:4px;display:flex;justify-content:space-between;align-items:baseline}
+#panel-etiquetas .nf-per{font-size:9.5px;margin-bottom:2px;color:#333}
+#panel-etiquetas .nf-cal{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px solid #000;padding:2px 0 3px;margin-bottom:1px}
+#panel-etiquetas .nf-cal-l{font-size:14px;font-weight:900}
+#panel-etiquetas .nf-cal-n{font-size:26px;font-weight:900}
+#panel-etiquetas .nf-dvh{text-align:right;font-size:9.5px;border-bottom:1px solid #000;padding:1px 0;margin-bottom:1px}
+#panel-etiquetas .r{display:flex;justify-content:space-between;border-bottom:.5px solid #ddd;padding:2px 0;gap:6px}
+#panel-etiquetas .r.tk{border-bottom:4px solid #000}
+#panel-etiquetas .r.md{border-bottom:2px solid #000}
+#panel-etiquetas .b{font-weight:700}
+#panel-etiquetas .sub{padding-left:12px}
+#panel-etiquetas .sub2{padding-left:24px}
+#panel-etiquetas .nf-note{font-size:9px;color:#555;margin-top:6px;line-height:1.4}
+#panel-etiquetas .zones{display:flex;flex-direction:column;gap:8px;padding:0 16px;}
+#panel-etiquetas .zone{display:flex;align-items:flex-start;gap:11px;padding:13px 14px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;text-align:left;width:100%;transition:border-color .15s,background .15s;}
+#panel-etiquetas .zone:active{background:var(--cream)}
+#panel-etiquetas .zone.open{border-color:var(--gold);background:#FFFCF5}
+#panel-etiquetas .zdot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:5px}
+#panel-etiquetas .zc{flex:1;min-width:0}
+#panel-etiquetas .zn{font-size:13.5px;font-weight:500;color:var(--ink);margin-bottom:2px}
+#panel-etiquetas .zs{font-size:12.5px;color:var(--ink3);line-height:1.5}
+#panel-etiquetas .zarr{font-size:13px;color:var(--ink3);flex-shrink:0;margin-top:1px;transition:transform .2s;line-height:1}
+#panel-etiquetas .zone.open .zarr{transform:rotate(90deg)}
+#panel-etiquetas .zd{display:none;margin-top:10px;padding:11px 13px;background:var(--gold-bg);border-left:2px solid var(--gold);border-radius:8px;font-size:12.5px;color:var(--amber);line-height:1.6;}
+#panel-etiquetas .zd.open{display:block}
+#panel-etiquetas .sema{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 16px 14px;}
+#panel-etiquetas .sem{background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 8px;text-align:center;}
+#panel-etiquetas .sem-c{width:40px;height:40px;border-radius:50%;margin:0 auto 9px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:15px;}
+#panel-etiquetas .sem-l{font-size:12px;font-weight:500;color:var(--ink);margin-bottom:3px}
+#panel-etiquetas .sem-d{font-size:11px;color:var(--ink3);line-height:1.45}
+#panel-etiquetas .tip-box{margin:0 16px;background:var(--white);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--r-sm);padding:14px 15px;font-size:13px;color:var(--ink3);line-height:1.65;}
+#panel-etiquetas .tip-box strong{color:var(--ink);font-weight:500}
+#panel-etiquetas .dual{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 16px;}
+#panel-etiquetas .nc{background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 12px;}
+#panel-etiquetas .nc-head{margin-bottom:12px;padding-bottom:9px;border-bottom:1px solid var(--border);}
+#panel-etiquetas .nbadge{font-family:var(--fm);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:100px;font-weight:500;display:inline-block;}
+#panel-etiquetas .bg-g{background:var(--green-bg);color:var(--green)}
+#panel-etiquetas .bg-r{background:var(--red-bg);color:var(--red)}
+#panel-etiquetas .nr{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:.5px solid var(--border);gap:4px}
+#panel-etiquetas .nr:last-child{border-bottom:none}
+#panel-etiquetas .nn{font-size:11.5px;color:var(--ink2)}
+#panel-etiquetas .nv{font-family:var(--fm);font-size:10.5px;white-space:nowrap}
+#panel-etiquetas .vg{color:var(--green)}
+#panel-etiquetas .vr{color:var(--red)}
+#panel-etiquetas .vd-list{display:flex;flex-direction:column;gap:8px;margin:0 16px;}
+#panel-etiquetas .vd{background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);padding:13px 15px;}
+#panel-etiquetas .vd-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+#panel-etiquetas .vd-top.wrap{flex-direction:column;align-items:flex-start;gap:2px}
+#panel-etiquetas .vd-top.wrap .vd-m{text-align:left}
+#panel-etiquetas .vd-n{font-size:13.5px;color:var(--ink);font-weight:500}
+#panel-etiquetas .vd-m{font-family:var(--fm);font-size:10px;color:var(--ink3)}
+#panel-etiquetas .bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+#panel-etiquetas .bf{height:100%;border-radius:3px}
+#panel-etiquetas .vbadge{display:inline-block;font-family:var(--fm);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:100px;margin-top:7px;}
+#panel-etiquetas .errs{display:flex;flex-direction:column;gap:10px;margin:0 16px;}
+#panel-etiquetas .err{display:flex;gap:13px;align-items:flex-start;padding:15px;background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);}
+#panel-etiquetas .en{font-family:var(--fd);font-size:26px;color:var(--gold);line-height:1;flex-shrink:0;width:26px;text-align:right;}
+#panel-etiquetas .et{font-size:13.5px;font-weight:500;color:var(--ink);margin-bottom:3px}
+#panel-etiquetas .ed{font-size:12.5px;color:var(--ink3);line-height:1.55}
+#panel-etiquetas .ings{display:flex;flex-direction:column;gap:10px;margin:0 16px;}
+#panel-etiquetas .ing{background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);padding:16px 14px;display:flex;gap:13px;align-items:flex-start;}
+#panel-etiquetas .ico{width:38px;height:38px;border-radius:9px;background:var(--gold-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;line-height:1;}
+#panel-etiquetas .it{font-size:13.5px;font-weight:500;color:var(--ink);margin-bottom:3px}
+#panel-etiquetas .id{font-size:12.5px;color:var(--ink3);line-height:1.55}
+#panel-etiquetas .stags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+#panel-etiquetas .stag{font-family:var(--fm);font-size:9.5px;padding:3px 9px;border-radius:100px;background:var(--red-bg);color:var(--red);letter-spacing:.03em;}
+#panel-etiquetas .et-cta{margin:24px 16px 0;background:var(--ink);border-radius:var(--r);padding:28px 22px;text-align:center;position:relative;overflow:hidden;}
+#panel-etiquetas .et-cta::before{content:'';position:absolute;bottom:-50px;right:-50px;width:160px;height:160px;border-radius:50%;background:var(--gold);opacity:.10;pointer-events:none;}
+#panel-etiquetas .cta-t{font-family:var(--fd);font-size:21px;color:var(--cream);margin-bottom:8px;line-height:1.2;position:relative;z-index:1;}
+#panel-etiquetas .cta-s{font-size:13px;color:rgba(247,244,238,.65);margin-bottom:18px;line-height:1.6;position:relative;z-index:1;}
+#panel-etiquetas .cta-btn{display:inline-block;background:var(--gold);color:var(--ink);font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;padding:13px 26px;border-radius:100px;text-decoration:none;border:none;cursor:pointer;position:relative;z-index:1;transition:opacity .15s;}
+#panel-etiquetas .cta-btn:active{opacity:.85}
 </style>
 </head>
 <body>
@@ -267,26 +330,25 @@ body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height
 <!-- ─── HEADER ─── -->
 <header class="app-header">
   <div class="header-inner">
-    <div class="header-brand">
-      <div class="header-texts">
-        <span class="header-eyebrow">STRENGTHLAB | ASESORÍAS PERSONALIZADAS</span>
-        <span class="header-title">RECETARIO FITNESS</span>
-      </div>
+    <div class="header-texts">
+      <span class="header-eyebrow">STRENGTHLAB | ASESORÍAS PERSONALIZADAS</span>
+      <span class="header-title">Recetario & Guía Nutricional</span>
     </div>
-    <span style="font-size:10px;font-weight:500;background:var(--lime-glow);border:1px solid var(--lime-line);color:var(--lime);padding:4px 10px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;">@reennzolifts</span>
+    <span class="header-handle">@reennzolifts</span>
   </div>
 </header>
 
 <!-- ─── NAV ─── -->
 <div class="sticky-nav">
   <nav class="nav-tabs" role="tablist">
-    <button class="nav-tab active" onclick="switchTab('desayunos',this)">☀️ Desayunos</button>
-    <button class="nav-tab" onclick="switchTab('almuerzos',this)">🥙 Almuerzos</button>
-    <button class="nav-tab" onclick="switchTab('cenas',this)">🌙 Cenas</button>
-    <button class="nav-tab" onclick="switchTab('rapidas',this)">⚡ Rápidas</button>
-    <button class="nav-tab" onclick="switchTab('dietas',this)">🌿 Dietas</button>
-    <button class="nav-tab" onclick="switchTab('presupuesto',this)">💰 Presupuesto</button>
-    <button class="nav-tab" onclick="switchTab('plan',this)">📅 Plan Semanal</button>
+    <button class="nav-tab active" onclick="switchTab('desayunos',this)">Desayunos</button>
+    <button class="nav-tab" onclick="switchTab('almuerzos',this)">Almuerzos</button>
+    <button class="nav-tab" onclick="switchTab('cenas',this)">Cenas</button>
+    <button class="nav-tab" onclick="switchTab('rapidas',this)">Rápidas</button>
+    <button class="nav-tab" onclick="switchTab('dietas',this)">Dietas</button>
+    <button class="nav-tab" onclick="switchTab('presupuesto',this)">Presupuesto</button>
+    <button class="nav-tab" onclick="switchTab('plan',this)">Plan Semanal</button>
+    <button class="nav-tab" onclick="switchTab('etiquetas',this)">Etiquetas</button>
   </nav>
 </div>
 
@@ -295,30 +357,27 @@ body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height
 ════════════════════════════════════════ -->
 <section class="panel active fade-up" id="panel-desayunos">
 
-  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
-    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 01</div>
-    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Desayunos <em style="color:var(--lime);font-style:italic;">que potencian</em></h1>
-    <p style="font-size:13px;color:var(--text2);line-height:1.65;">La primera comida define tu energía, foco y rendimiento en el entreno. Proteína primero, siempre.</p>
+  <div class="tab-hero">
+    <div class="tab-eyebrow">STRENGTHLAB · SECCIÓN 01</div>
+    <h1 class="tab-h">Desayunos <em>que potencian</em></h1>
+    <p class="tab-p">La primera comida define tu energía, foco y rendimiento en el entreno. Proteína primero, siempre.</p>
   </div>
 
   <div class="section-head">
-    <div class="section-icon lime">💪</div>
     <div><div class="section-title">Alto en proteína</div><div class="section-sub">Para construir músculo desde la primera comida</div></div>
   </div>
   <div class="recipe-grid" id="desayunos-prot"></div>
 
-  <div class="gold-divider"></div>
+  <div class="sec-divider"></div>
 
   <div class="section-head">
-    <div class="section-icon mint">🌿</div>
     <div><div class="section-title">Plant-based</div><div class="section-sub">Veggie, vegano y sin gluten</div></div>
   </div>
   <div class="recipe-grid" id="desayunos-plant"></div>
 
-  <div class="gold-divider"></div>
+  <div class="sec-divider"></div>
 
   <div class="section-head">
-    <div class="section-icon ember">🔥</div>
     <div><div class="section-title">Pre-entreno</div><div class="section-sub">Energía rápida antes de entrenar</div></div>
   </div>
   <div class="recipe-grid" id="desayunos-pretreno"></div>
@@ -331,22 +390,20 @@ body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height
 ════════════════════════════════════════ -->
 <section class="panel fade-up" id="panel-almuerzos">
 
-  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
-    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 02</div>
-    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Almuerzos <em style="color:var(--lime);font-style:italic;">de rendimiento</em></h1>
-    <p style="font-size:13px;color:var(--text2);line-height:1.65;">La comida más importante del día para un atleta. Más macros, más densidad nutricional.</p>
+  <div class="tab-hero">
+    <div class="tab-eyebrow">STRENGTHLAB · SECCIÓN 02</div>
+    <h1 class="tab-h">Almuerzos <em>de rendimiento</em></h1>
+    <p class="tab-p">La comida más importante del día para un atleta. Más macros, más densidad nutricional.</p>
   </div>
 
   <div class="section-head">
-    <div class="section-icon sky">🐟</div>
     <div><div class="section-title">Proteína animal</div><div class="section-sub">Pollo, pescado, carne magra</div></div>
   </div>
   <div class="recipe-grid" id="almuerzos-animal"></div>
 
-  <div class="gold-divider"></div>
+  <div class="sec-divider"></div>
 
   <div class="section-head">
-    <div class="section-icon mint">🌱</div>
     <div><div class="section-title">Proteína vegetal</div><div class="section-sub">Legumbres, tofu, tempeh</div></div>
   </div>
   <div class="recipe-grid" id="almuerzos-vegetal"></div>
@@ -359,22 +416,20 @@ body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height
 ════════════════════════════════════════ -->
 <section class="panel fade-up" id="panel-cenas">
 
-  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
-    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 03</div>
-    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Cenas <em style="color:var(--lime);font-style:italic;">que recuperan</em></h1>
-    <p style="font-size:13px;color:var(--text2);line-height:1.65;">La cena es reparación muscular. Proteína de digestión lenta, menos CHO refinados, más micronutrientes.</p>
+  <div class="tab-hero">
+    <div class="tab-eyebrow">STRENGTHLAB · SECCIÓN 03</div>
+    <h1 class="tab-h">Cenas <em>que recuperan</em></h1>
+    <p class="tab-p">La cena es reparación muscular. Proteína de digestión lenta, menos CHO refinados, más micronutrientes.</p>
   </div>
 
   <div class="section-head">
-    <div class="section-icon rose">🌙</div>
     <div><div class="section-title">Ligeras y reparadoras</div><div class="section-sub">300–450 kcal · Antiinflamatorias</div></div>
   </div>
   <div class="recipe-grid" id="cenas-light"></div>
 
-  <div class="gold-divider"></div>
+  <div class="sec-divider"></div>
 
   <div class="section-head">
-    <div class="section-icon gold">🧠</div>
     <div><div class="section-title">Post-entreno nocturno</div><div class="section-sub">Para quien entrena tarde o noche</div></div>
   </div>
   <div class="recipe-grid" id="cenas-posttreno"></div>
@@ -387,10 +442,10 @@ body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height
 ════════════════════════════════════════ -->
 <section class="panel fade-up" id="panel-rapidas">
 
-  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
-    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 04</div>
-    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">En <em style="color:var(--lime);font-style:italic;">15 minutos</em></h1>
-    <p style="font-size:13px;color:var(--text2);line-height:1.65;">Sin excusas. Estas recetas son tan rápidas que tardarás más en buscar el delivery.</p>
+  <div class="tab-hero">
+    <div class="tab-eyebrow">STRENGTHLAB · SECCIÓN 04</div>
+    <h1 class="tab-h">En <em>15 minutos</em></h1>
+    <p class="tab-p">Sin excusas. Estas recetas son tan rápidas que tardarás más en buscar el delivery.</p>
   </div>
 
   <div style="padding:14px 16px 0;">
@@ -398,23 +453,20 @@ body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height
   </div>
 
   <div class="section-head" style="padding-top:12px;">
-    <div class="section-icon lime">⚡</div>
     <div><div class="section-title">10 min o menos</div><div class="section-sub">Sin cocción, sin drama</div></div>
   </div>
   <div id="rapidas-10" style="padding:0 16px 0;display:flex;flex-direction:column;gap:10px;"></div>
 
-  <div class="gold-divider" style="margin-top:14px;"></div>
+  <div class="sec-divider" style="margin-top:14px;"></div>
 
   <div class="section-head">
-    <div class="section-icon mint">🥣</div>
     <div><div class="section-title">Meal prep express</div><div class="section-sub">Preparás 1 vez, comés toda la semana</div></div>
   </div>
   <div id="rapidas-mealprep" style="padding:0 16px 0;display:flex;flex-direction:column;gap:10px;"></div>
 
-  <div class="gold-divider" style="margin-top:14px;"></div>
+  <div class="sec-divider" style="margin-top:14px;"></div>
 
   <div class="section-head">
-    <div class="section-icon sky">🥤</div>
     <div><div class="section-title">Batidos & snacks</div><div class="section-sub">Sin lactosa, veganos y con proteína</div></div>
   </div>
   <div id="rapidas-batidos" style="padding:0 16px 0;display:flex;flex-direction:column;gap:10px;"></div>
@@ -427,10 +479,10 @@ body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height
 ════════════════════════════════════════ -->
 <section class="panel fade-up" id="panel-dietas">
 
-  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
-    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1pt;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 05</div>
-    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Tu <em style="color:var(--lime);font-style:italic;">estilo de vida</em></h1>
-    <p style="font-size:13px;color:var(--text2);line-height:1.65;">Guía completa por restricción: qué comer, qué evitar y cómo no quedarte sin proteína.</p>
+  <div class="tab-hero">
+    <div class="tab-eyebrow">STRENGTHLAB · SECCIÓN 05</div>
+    <h1 class="tab-h">Tu <em>estilo de vida</em></h1>
+    <p class="tab-p">Guía completa por restricción: qué comer, qué evitar y cómo no quedarte sin proteína.</p>
   </div>
 
   <div style="height:14px;"></div>
@@ -443,10 +495,10 @@ body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height
 ════════════════════════════════════════ -->
 <section class="panel fade-up" id="panel-presupuesto">
 
-  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
-    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 06</div>
-    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Comer fit <em style="color:var(--lime);font-style:italic;">sin arruinarte</em></h1>
-    <p style="font-size:13px;color:var(--text2);line-height:1.65;">Comer bien no requiere gastar más. Estrategia inteligente para cada bolsillo.</p>
+  <div class="tab-hero">
+    <div class="tab-eyebrow">STRENGTHLAB · SECCIÓN 06</div>
+    <h1 class="tab-h">Comer fit <em>sin arruinarte</em></h1>
+    <p class="tab-p">Comer bien no requiere gastar más. Estrategia inteligente para cada bolsillo.</p>
   </div>
 
   <div style="height:14px;"></div>
@@ -459,10 +511,10 @@ body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height
 ════════════════════════════════════════ -->
 <section class="panel fade-up" id="panel-plan">
 
-  <div style="background:linear-gradient(160deg,#1A1308 0%,#0A0A0A 65%);padding:26px 20px 22px;border-bottom:1px solid var(--lime-line);">
-    <div style="font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px;"><span style="width:18px;height:1px;background:var(--lime);display:block;"></span>STRENGTHLAB · SECCIÓN 07</div>
-    <h1 style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:900;color:var(--text);line-height:1.05;margin-bottom:8px;">Plan <em style="color:var(--lime);font-style:italic;">de la semana</em></h1>
-    <p style="font-size:13px;color:var(--text2);line-height:1.65;">Un plan de 7 días completo, equilibrado y variado. ~1800–2200 kcal/día según tamaño de porciones.</p>
+  <div class="tab-hero">
+    <div class="tab-eyebrow">STRENGTHLAB · SECCIÓN 07</div>
+    <h1 class="tab-h">Plan <em>de la semana</em></h1>
+    <p class="tab-p">Un plan de 7 días completo, equilibrado y variado. ~1800–2200 kcal/día según tamaño de porciones.</p>
   </div>
 
   <div style="height:14px;"></div>
@@ -470,10 +522,326 @@ body{font-family:'Outfit',sans-serif;background:#0A0A0A;color:#EFF0E8;min-height
   <div class="safe-bottom"></div>
 </section>
 
-<div style="text-align:center;padding:24px 20px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--lime-line);background:var(--ink2);margin-top:0;">
-  <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;">STRENGTHLAB</div>
-  <div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--lime);font-weight:500;margin-bottom:2px;">Asesorías Personalizadas</div>
-  <div style="font-size:11px;color:var(--text3);margin-top:6px;">@reennzolifts</div>
+<!-- ════════════════════════════════════════
+  PANEL: ETIQUETAS (Guía Nutricional)
+════════════════════════════════════════ -->
+<section class="panel fade-up" id="panel-etiquetas">
+
+  <div class="tab-hero">
+    <div class="tab-eyebrow">STRENGTHLAB · SECCIÓN 08</div>
+    <h1 class="tab-h">Cómo leer una <em>etiqueta</em></h1>
+    <p class="tab-p">Guía completa para entender cada sección y tomar decisiones informadas al elegir alimentos.</p>
+  </div>
+
+  <!-- 01 ANATOMÍA -->
+  <div class="et-sec">
+    <div class="et-sec-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Anatomía de la etiqueta</h2>
+    </div>
+  </div>
+
+  <div class="label-outer">
+    <div class="label-bar">Etiqueta de ejemplo — toca cada zona para aprender</div>
+    <div class="nf">
+      <div class="nf-title">Información Nutricional</div>
+      <div class="nf-srv">
+        <span>8 porciones por envase</span>
+      </div>
+      <div class="nf-srv">
+        <strong>Tamaño de porción</strong><strong>2/3 taza (55g)</strong>
+      </div>
+      <div class="nf-per">Cantidad por porción</div>
+      <div class="nf-cal">
+        <span class="nf-cal-l">Calorías</span>
+        <span class="nf-cal-n">230</span>
+      </div>
+      <div class="nf-dvh">% Valor Diario*</div>
+      <div class="r tk"><span><span class="b">Grasas totales</span> 8g</span><span class="b">10%</span></div>
+      <div class="r sub"><span>Grasas saturadas 1g</span><span>5%</span></div>
+      <div class="r sub"><span>Grasas <i>trans</i> 0g</span><span></span></div>
+      <div class="r md"><span><span class="b">Colesterol</span> 0mg</span><span class="b">0%</span></div>
+      <div class="r md"><span><span class="b">Sodio</span> 160mg</span><span class="b">7%</span></div>
+      <div class="r tk"><span><span class="b">Carbohidratos totales</span> 37g</span><span class="b">13%</span></div>
+      <div class="r sub"><span>Fibra dietética 4g</span><span>14%</span></div>
+      <div class="r sub"><span>Azúcares totales 12g</span><span></span></div>
+      <div class="r sub2"><span>Incl. 10g azúcares añadidos</span><span>20%</span></div>
+      <div class="r tk"><span><span class="b">Proteína</span> 3g</span><span></span></div>
+      <div class="r"><span>Vitamina D 2mcg</span><span>10%</span></div>
+      <div class="r"><span>Calcio 260mg</span><span>20%</span></div>
+      <div class="r"><span>Hierro 8mg</span><span>45%</span></div>
+      <div class="r" style="border-bottom:none"><span>Potasio 235mg</span><span>6%</span></div>
+      <div class="nf-note">*El % Valor Diario indica cuánto contribuye un nutriente de una porción a una dieta diaria. Se usa como referencia general una dieta de 2000 calorías al día.</div>
+    </div>
+  </div>
+
+  <div class="zones">
+    <button class="zone" onclick="toggleZone(this,'zd1')">
+      <div class="zdot" style="background:#185FA5"></div>
+      <div class="zc">
+        <div class="zn">① Tamaño de porción</div>
+        <div class="zs">Base de toda la información. Todos los valores se refieren a UNA porción.</div>
+        <div class="zd" id="zd1">Un envase puede contener 2, 4 o hasta 8 porciones. Si consumes todo el paquete, debes multiplicar calorías y nutrientes por ese número. Es el error con mayor impacto calórico sin que el asesorado lo note.</div>
+      </div>
+      <span class="zarr">›</span>
+    </button>
+    <button class="zone" onclick="toggleZone(this,'zd2')">
+      <div class="zdot" style="background:#8B1F2F"></div>
+      <div class="zc">
+        <div class="zn">② Calorías totales</div>
+        <div class="zs">Energía que aporta una porción. La sección más visible y usada como referencia rápida.</div>
+        <div class="zd" id="zd2">Proteínas y carbohidratos aportan 4 kcal/g; las grasas, 9 kcal/g. 200 kcal de nueces y 200 kcal de galletas tienen impactos metabólicos completamente distintos — las calorías no lo dicen todo.</div>
+      </div>
+      <span class="zarr">›</span>
+    </button>
+    <button class="zone" onclick="toggleZone(this,'zd3')">
+      <div class="zdot" style="background:#7A5015"></div>
+      <div class="zc">
+        <div class="zn">③ Macronutrientes</div>
+        <div class="zs">Grasas, carbohidratos y proteínas. La base de cualquier plan nutricional.</div>
+        <div class="zd" id="zd3">Prioriza proteína (mínimo 10 g/porción en snacks) y fibra (mínimo 3 g). Revisa que los azúcares añadidos sean bajos. Para pérdida de peso, controla grasas saturadas y carbohidratos refinados.</div>
+      </div>
+      <span class="zarr">›</span>
+    </button>
+    <button class="zone" onclick="toggleZone(this,'zd4')">
+      <div class="zdot" style="background:#1E5C3A"></div>
+      <div class="zc">
+        <div class="zn">④ % Valor Diario</div>
+        <div class="zs">Qué porcentaje del requerimiento diario aporta este nutriente (base: 2000 kcal/día).</div>
+        <div class="zd" id="zd4">Regla rápida: 5% o menos = BAJO · 20% o más = ALTO. Busca ALTO en fibra y micronutrientes. Busca BAJO en sodio, grasas saturadas y azúcares añadidos.</div>
+      </div>
+      <span class="zarr">›</span>
+    </button>
+    <button class="zone" onclick="toggleZone(this,'zd5')">
+      <div class="zdot" style="background:#4A3AA0"></div>
+      <div class="zc">
+        <div class="zn">⑤ Micronutrientes</div>
+        <div class="zs">Vitaminas y minerales. Clave en dietas restrictivas o con necesidades especiales.</div>
+        <div class="zd" id="zd5">Vitamina D, calcio, hierro y potasio son de declaración obligatoria — y frecuentemente deficientes en la dieta. Útiles para identificar si se necesita suplementación.</div>
+      </div>
+      <span class="zarr">›</span>
+    </button>
+  </div>
+
+  <div class="section-gap"></div>
+  <div class="sec-divider"></div>
+
+  <!-- 02 REGLA 5/20 -->
+  <div class="et-sec">
+    <div class="et-sec-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">La regla del 5/20</h2>
+    </div>
+  </div>
+  <div class="sema">
+    <div class="sem">
+      <div class="sem-c" style="background:var(--green-bg);color:var(--green)">5%</div>
+      <div class="sem-l">Bajo</div>
+      <div class="sem-d">Ideal para sodio y grasas saturadas</div>
+    </div>
+    <div class="sem">
+      <div class="sem-c" style="background:var(--amber-bg);color:var(--amber)">5–19</div>
+      <div class="sem-l">Moderado</div>
+      <div class="sem-d">Analiza el contexto del día completo</div>
+    </div>
+    <div class="sem">
+      <div class="sem-c" style="background:var(--red-bg);color:var(--red)">20%</div>
+      <div class="sem-l">Alto</div>
+      <div class="sem-d">Ideal para fibra y micronutrientes</div>
+    </div>
+  </div>
+  <div class="tip-box">
+    <strong>Ejemplo práctico:</strong> Un producto con 25% VD de sodio es muy alto. Uno con 30% VD de fibra es excelente. El mismo porcentaje — interpretaciones opuestas.
+  </div>
+
+  <div class="section-gap"></div>
+  <div class="sec-divider"></div>
+
+  <!-- 03 NUTRIENTES -->
+  <div class="et-sec">
+    <div class="et-sec-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Qué buscar y qué evitar</h2>
+    </div>
+  </div>
+  <div class="dual">
+    <div class="nc">
+      <div class="nc-head"><span class="nbadge bg-g">✓ Buscar alto</span></div>
+      <div class="nr"><span class="nn">Fibra</span><span class="nv vg">≥3g</span></div>
+      <div class="nr"><span class="nn">Proteína</span><span class="nv vg">≥10g</span></div>
+      <div class="nr"><span class="nn">Vitamina D</span><span class="nv vg">≥15%</span></div>
+      <div class="nr"><span class="nn">Calcio</span><span class="nv vg">≥15%</span></div>
+      <div class="nr"><span class="nn">Hierro</span><span class="nv vg">≥15%</span></div>
+      <div class="nr"><span class="nn">Potasio</span><span class="nv vg">≥15%</span></div>
+    </div>
+    <div class="nc">
+      <div class="nc-head"><span class="nbadge bg-r">✗ Limitar</span></div>
+      <div class="nr"><span class="nn">Sodio</span><span class="nv vr">&lt;600mg</span></div>
+      <div class="nr"><span class="nn">G. saturada</span><span class="nv vr">&lt;5% VD</span></div>
+      <div class="nr"><span class="nn">G. trans</span><span class="nv vr">0g</span></div>
+      <div class="nr"><span class="nn">Az. añadida</span><span class="nv vr">&lt;10% VD</span></div>
+      <div class="nr"><span class="nn">Colesterol</span><span class="nv vr">&lt;10% VD</span></div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+  <div class="sec-divider"></div>
+
+  <!-- 04 VALORES DIARIOS -->
+  <div class="et-sec">
+    <div class="et-sec-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Referencia de valores diarios</h2>
+    </div>
+  </div>
+  <div class="vd-list">
+    <div class="vd">
+      <div class="vd-top wrap"><span class="vd-n">Grasas totales</span><span class="vd-m">Varía según plan: 15–30% del total calórico diario</span></div>
+      <div class="bar"><div class="bf" style="width:50%;background:#C8922A"></div></div>
+      <span class="vbadge" style="background:var(--amber-bg);color:var(--amber)">Según objetivo</span>
+    </div>
+    <div class="vd">
+      <div class="vd-top"><span class="vd-n">Grasas saturadas</span><span class="vd-m">20g / día</span></div>
+      <div class="bar"><div class="bf" style="width:28%;background:var(--red)"></div></div>
+      <span class="vbadge" style="background:var(--red-bg);color:var(--red)">Limitar</span>
+    </div>
+    <div class="vd">
+      <div class="vd-top"><span class="vd-n">Grasas trans</span><span class="vd-m">0g — evitar</span></div>
+      <div class="bar"><div class="bf" style="width:5%;background:var(--red)"></div></div>
+      <span class="vbadge" style="background:var(--red-bg);color:var(--red)">Evitar siempre</span>
+    </div>
+    <div class="vd">
+      <div class="vd-top"><span class="vd-n">Sodio</span><span class="vd-m">2300mg / día</span></div>
+      <div class="bar"><div class="bf" style="width:40%;background:var(--red)"></div></div>
+      <span class="vbadge" style="background:var(--red-bg);color:var(--red)">Limitar</span>
+    </div>
+    <div class="vd">
+      <div class="vd-top"><span class="vd-n">Carbohidratos totales</span><span class="vd-m">Varía según plan</span></div>
+      <div class="bar"><div class="bf" style="width:50%;background:#C8922A"></div></div>
+      <span class="vbadge" style="background:var(--amber-bg);color:var(--amber)">Según objetivo</span>
+    </div>
+    <div class="vd">
+      <div class="vd-top"><span class="vd-n">Fibra dietética</span><span class="vd-m">28g / día</span></div>
+      <div class="bar"><div class="bf" style="width:82%;background:var(--green)"></div></div>
+      <span class="vbadge" style="background:var(--green-bg);color:var(--green)">Aumentar</span>
+    </div>
+    <div class="vd">
+      <div class="vd-top"><span class="vd-n">Azúcares añadidos</span><span class="vd-m">50g / día</span></div>
+      <div class="bar"><div class="bf" style="width:22%;background:var(--red)"></div></div>
+      <span class="vbadge" style="background:var(--red-bg);color:var(--red)">Limitar</span>
+    </div>
+    <div class="vd">
+      <div class="vd-top"><span class="vd-n">Proteína</span><span class="vd-m">Varía según plan</span></div>
+      <div class="bar"><div class="bf" style="width:50%;background:#C8922A"></div></div>
+      <span class="vbadge" style="background:var(--amber-bg);color:var(--amber)">Según objetivo</span>
+    </div>
+    <div class="vd">
+      <div class="vd-top"><span class="vd-n">Vitamina D</span><span class="vd-m">20mcg / día</span></div>
+      <div class="bar"><div class="bf" style="width:60%;background:var(--green)"></div></div>
+      <span class="vbadge" style="background:var(--green-bg);color:var(--green)">Prioritario</span>
+    </div>
+    <div class="vd">
+      <div class="vd-top"><span class="vd-n">Calcio</span><span class="vd-m">1300mg / día</span></div>
+      <div class="bar"><div class="bf" style="width:70%;background:var(--green)"></div></div>
+      <span class="vbadge" style="background:var(--green-bg);color:var(--green)">Prioritario</span>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+  <div class="sec-divider"></div>
+
+  <!-- 05 ERRORES -->
+  <div class="et-sec">
+    <div class="et-sec-head">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Errores frecuentes</h2>
+    </div>
+  </div>
+  <div class="errs">
+    <div class="err">
+      <span class="en">1</span>
+      <div><div class="et">No revisar el tamaño de porción</div><div class="ed">Asumen que el envase equivale a una porción. Es el error más común y el de mayor impacto calórico sin que el asesorado lo note.</div></div>
+    </div>
+    <div class="err">
+      <span class="en">2</span>
+      <div><div class="et">Confundir azúcar total con azúcar añadida</div><div class="ed">La leche y la fruta contienen azúcar natural. El azúcar añadida es la que se incorpora durante la producción — y es la que hay que controlar.</div></div>
+    </div>
+    <div class="err">
+      <span class="en">3</span>
+      <div><div class="et">Enfocarse solo en calorías</div><div class="ed">Ignoran calidad nutricional: fibra, proteína, micronutrientes y tipo de grasa. 200 kcal de avena y 200 kcal de galletas no son equivalentes.</div></div>
+    </div>
+    <div class="err">
+      <span class="en">4</span>
+      <div><div class="et">Creer el marketing del frente del envase</div><div class="ed">"Light", "natural" o "sin grasa" no garantizan que sea saludable. Un producto sin grasa puede tener el doble de azúcar. La verdad siempre está en la parte trasera.</div></div>
+    </div>
+    <div class="err">
+      <span class="en">5</span>
+      <div><div class="et">Ignorar el sodio</div><div class="ed">Especialmente en latas, sopas y procesados. Se acumula a lo largo del día sin notarse y puede superar fácilmente el límite diario.</div></div>
+    </div>
+    <div class="err">
+      <span class="en">6</span>
+      <div><div class="et">No leer la lista de ingredientes</div><div class="ed">Si el azúcar aparece entre los tres primeros, el producto es alto en azúcar aunque la etiqueta no lo haga evidente. La lista nunca miente.</div></div>
+    </div>
+  </div>
+
+  <div class="section-gap"></div>
+  <div class="sec-divider"></div>
+
+  <!-- 06 INGREDIENTES -->
+  <div class="et-sec">
+    <div class="et-sec-head">
+      <span class="section-num">06</span>
+      <h2 class="section-title">La lista de ingredientes</h2>
+    </div>
+  </div>
+  <div class="ings">
+    <div class="ing">
+      <div class="ico">↓</div>
+      <div>
+        <div class="it">Orden de aparición</div>
+        <div class="id">Los ingredientes se listan de mayor a menor cantidad en peso. El primero es el más abundante en el producto.</div>
+      </div>
+    </div>
+    <div class="ing">
+      <div class="ico">⚠</div>
+      <div>
+        <div class="it">El azúcar tiene muchos nombres</div>
+        <div class="id">Puede aparecer disfrazada para no aparecer como el primer ingrediente.</div>
+        <div class="stags">
+          <span class="stag">Jarabe de maíz</span>
+          <span class="stag">Dextrosa</span>
+          <span class="stag">Maltosa</span>
+          <span class="stag">Sacarosa</span>
+          <span class="stag">Fructosa</span>
+          <span class="stag">Miel</span>
+          <span class="stag">Melaza</span>
+          <span class="stag">Azúcar invertido</span>
+        </div>
+      </div>
+    </div>
+    <div class="ing">
+      <div class="ico">✓</div>
+      <div>
+        <div class="it">La regla de los 5 ingredientes</div>
+        <div class="id">Menos ingredientes y más reconocibles, mejor. Cinco o menos indica un alimento mínimamente procesado con mayor valor nutricional real.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="et-cta">
+    <div class="cta-t">¿Tienes una etiqueta para analizar?</div>
+    <div class="cta-s">Comparte los datos del producto y lo desglosamos nutriente por nutriente.</div>
+    <button class="cta-btn" onclick="document.getElementById('panel-etiquetas').scrollIntoView({behavior:'smooth'})">Volver al inicio de la guía ↑</button>
+  </div>
+
+  <div class="safe-bottom"></div>
+</section>
+
+<div class="app-footer">
+  <div class="app-footer-brand">STRENGTHLAB</div>
+  <div class="app-footer-eyebrow">Asesorías Personalizadas</div>
+  <div class="app-footer-handle">@reennzolifts</div>
 </div>
 
 <script>
@@ -601,8 +969,7 @@ const ALMUERZOS_ANIMAL = [
     macros:{kcal:'610',prot:'48g',cho:'45g',gra:'14g'},
     tip:'<strong>Post-entreno de fuerza:</strong> El hierro hemo y la creatina de la carne roja son únicos. No los subestimes.'
   },
-
-  ,{
+  {
     emoji:'🍤', name:'Camarones salteados con arroz de coliflor y mango',
     desc:'Proteína magra de mar + antioxidantes. Bajo en calorías, alto en sabor.',
     kcal:390, time:'15 min', prot:'34g', tags:['Sin gluten','Sin lactosa'],
@@ -651,8 +1018,8 @@ const ALMUERZOS_ANIMAL = [
     steps:['Precalentar horno a 190°C.','Saltear cebolla, pimiento y zucchini en sartén apta horno 5 min.','Batir huevos con claras, sal y orégano. Añadir atún escurrido.','Verter sobre vegetales. Hornear 12 min hasta cuajar.'],
     macros:{kcal:'380',prot:'38g',cho:'8g',gra:'16g'},
     tip:'<strong>Meal prep:</strong> La frittata aguanta 4 días en heladera. Comé fría o calentar 1 min en microondas.'
-  }
-  ,{
+  },
+  {
     emoji:'🫙', name:'Atún natural con garbanzos, tomate y aceitunas',
     desc:'Proteína + legumbres + grasas buenas. Sin necesidad de cocción.',
     kcal:420, time:'5 min', prot:'36g', tags:['Sin gluten','Sin lactosa'],
@@ -685,8 +1052,7 @@ const ALMUERZOS_VEGETAL = [
     macros:{kcal:'520',prot:'30g',cho:'48g',gra:'18g'},
     tip:'<strong>Fermentado:</strong> El tempeh es más nutritivo que el tofu regular. Mejor absorción de zinc y hierro.'
   },
-
-  ,{
+  {
     emoji:'🫛', name:'Edamame bowl con arroz integral y aderezo de sésamo',
     desc:'Proteína de soja completa + CHO complejos + grasas de sésamo. Bowl vegano de alto rendimiento.',
     kcal:490, time:'10 min', prot:'28g', tags:['Vegano','Sin gluten','Sin lactosa'],
@@ -735,8 +1101,8 @@ const ALMUERZOS_VEGETAL = [
     steps:['Cocinar polenta con caldo según paquete. Agregar levadura nutricional al final.','Saltear ajo en oliva, añadir portobellos laminados. Cocinar 8 min.','Incorporar espinaca y saltear 2 min más.','Servir polenta cremosa con hongos y espinaca encima.'],
     macros:{kcal:'380',prot:'14g',cho:'52g',gra:'12g'},
     tip:'<strong>Levadura nutricional:</strong> Añade sabor a queso sin lactosa + vitaminas del grupo B. Indispensable en la cocina vegana.'
-  }
-  ,{
+  },
+  {
     emoji:'🌯', name:'Wrap de tofu salteado con vegetales y guacamole',
     desc:'Sin lactosa, sin gluten (con wrap de maíz). Proteína vegetal completa.',
     kcal:440, time:'15 min', prot:'22g', tags:['Vegano','Sin lactosa','Sin gluten'],
@@ -759,8 +1125,7 @@ const CENAS_LIGHT = [
     macros:{kcal:'380',prot:'34g',cho:'14g',gra:'22g'},
     tip:'<strong>Pre-cama:</strong> El salmón tiene triptófano que favorece la síntesis de melatonina. Cena perfecta.'
   },
-
-  ,{
+  {
     emoji:'🥒', name:'Pechuga de pavo al limón con ensalada de pepino y yogur',
     desc:'La cena más limpia del recetario. Proteína magra + probióticos + cero CHO refinados.',
     kcal:310, time:'15 min', prot:'38g', tags:['Sin gluten'],
@@ -809,8 +1174,8 @@ const CENAS_LIGHT = [
     steps:['Cubrir merluza con zumo de limón. Dejar macerar 15 min en heladera.','Escurrir el exceso de limón.','Mezclar con cebolla, ají y cilantro.','Servir con batata cocida y granos de choclo al lado.'],
     macros:{kcal:'340',prot:'32g',cho:'28g',gra:'6g'},
     tip:'<strong>Seguridad:</strong> Usar pescado fresco o congelado de calidad. El limón "cocina" la proteína pero no elimina parásitos como el calor.'
-  }
-  ,{
+  },
+  {
     emoji:'🍳', name:'Revuelto de champiñones con espinaca y huevo',
     desc:'Ligero, rápido y cargado de vitamina D, hierro y B12.',
     kcal:290, time:'12 min', prot:'22g', tags:['Veggie','Sin gluten','Sin lactosa'],
@@ -843,8 +1208,7 @@ const CENAS_POSTTRENO = [
     macros:{kcal:'480',prot:'24g',cho:'62g',gra:'12g'},
     tip:'<strong>Post-entreno nocturno:</strong> Los CHO ayudan a reponer glucógeno muscular. No los temas de noche si entrenaste.'
   },
-
-  ,{
+  {
     emoji:'🍝', name:'Pasta de lentejas rojas con salsa de tomate y albahaca',
     desc:'Pasta sin gluten de legumbres = doble proteína que la pasta normal. Recuperación real.',
     kcal:490, time:'15 min', prot:'28g', tags:['Vegano','Sin gluten','Sin lactosa'],
@@ -893,8 +1257,8 @@ const CENAS_POSTTRENO = [
     steps:['Dorar pollo en trozos. Retirar y reservar.','Saltear cebolla, zanahoria y ajo en la misma olla.','Añadir tomates, especias y caldo. Cocinar 5 min.','Incorporar pollo y garbanzos. Cocinar 15 min a fuego bajo.'],
     macros:{kcal:'540',prot:'46g',cho:'44g',gra:'12g'},
     tip:'<strong>Una sola olla:</strong> Menos lavar, más tiempo libre. Esta cazuela dura 3 días en heladera y mejora de sabor con el tiempo.'
-  }
-  ,{
+  },
+  {
     emoji:'🥚', name:'Tortilla de batata con ricota sin lactosa',
     desc:'Proteína lenta (caseína) + CHO de índice medio. Ideal antes de dormir.',
     kcal:420, time:'20 min', prot:'28g', tags:['Veggie','Sin lactosa','Sin gluten'],
@@ -907,144 +1271,35 @@ const CENAS_POSTTRENO = [
 ];
 
 const RAPIDAS_10 = [
-  {
-    emoji:'🥫', name:'Bowl de atún con arroz y palta',
-    time:'5 min', kcal:380, prot:'32g',
-    tags:['Sin gluten','Sin lactosa'], presup:'bajo',
-    desc:'El almuerzo fitness más rápido y económico que existe.',
-    steps:'Mezclar 1 lata de atún (escurrido) con 150g arroz cocido (del día anterior) y ½ palta. Sal, limón y listo.'
-  },
-  {
-    emoji:'🥗', name:'Ensalada de garbanzos express',
-    time:'3 min', kcal:320, prot:'16g',
-    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'bajo',
-    desc:'Sin cocción. Abrir lata, mezclar, comer.',
-    steps:'Escurrir 1 lata de garbanzos. Añadir tomate cherry, pepino, aceite de oliva, limón y orégano. Mezclar y servir.'
-  },
-  {
-    emoji:'🧀', name:'Tostadas de arroz con cottage y pavo',
-    time:'4 min', kcal:260, prot:'24g',
-    tags:['Sin gluten'], presup:'bajo',
-    desc:'Sin cocción. Proteína rápida en menos de 5 minutos.',
-    steps:'Untar cottage sobre tostadas de arroz. Añadir fetas de pavo cocido, rúcula y tomate cherry. Listo.'
-  },
-  {
-    emoji:'🥚', name:'Huevos revueltos en microondas con queso',
-    time:'3 min', kcal:280, prot:'22g',
-    tags:['Sin gluten','Veggie'], presup:'bajo',
-    desc:'La receta más rápida del universo fitness. Sin sartén, sin lavar.',
-    steps:'Romper 3 huevos en taza grande. Batir con tenedor. Agregar sal y 20g queso rallado. Microondas 90 segundos, revolver a mitad. Listo.'
-  },
-  {
-    emoji:'🍌', name:'Bowl de banana con mantequilla de almendras y proteína',
-    time:'2 min', kcal:320, prot:'22g',
-    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'bajo',
-    desc:'Sin cocción. Pre o post-entreno. Energía + proteína en 2 minutos.',
-    steps:'Cortar 1 banana en rodajas en un bowl. Añadir 2 cdas mantequilla de almendras + 1 scoop proteína de guisante + 1 cda semillas de cáñamo. Mezclar y comer.'
-  },
-  {
-    emoji:'🫙', name:'Skyr con nueces y arándanos',
-    time:'2 min', kcal:250, prot:'20g',
-    tags:['Sin gluten','Veggie'], presup:'medio',
-    desc:'El yogur islandés con más proteína del mercado. Sin azúcar agregada.',
-    steps:'Servir 200g skyr natural en bowl. Añadir puñado de arándanos + 15g nueces. Opcional: cdita de miel. Sin más pasos.'
-  },
-  {
-    emoji:'🌯', name:'Wrap de pechuga con palta y mostaza',
-    time:'5 min', kcal:380, prot:'34g',
-    tags:['Sin lactosa'], presup:'bajo',
-    desc:'Con pechuga pre-cocida del meal prep. Wrap listo en 5 minutos.',
-    steps:'Untar 1 tortilla integral con mostaza. Añadir 120g pechuga desmechada, ½ palta en rodajas, rúcula y tomate. Enrollar y comer.'
-  },
-  {
-    emoji:'🍳', name:'Huevo frito con arroz y kimchi',
-    time:'6 min', kcal:350, prot:'18g',
-    tags:['Sin gluten','Sin lactosa'], presup:'bajo',
-    desc:'El bowl de huevo coreano. Probióticos del kimchi + proteína + CHO de calidad.',
-    steps:'Freír 2 huevos en sartén con aceite mínimo. Calentar 150g arroz cocido en microondas. Armar bowl: arroz + huevo + 3 cdas kimchi. Salsa de soja al gusto.'
-  }
+  { emoji:'🥫', name:'Bowl de atún con arroz y palta', time:'5 min', kcal:380, prot:'32g', tags:['Sin gluten','Sin lactosa'], presup:'bajo', desc:'El almuerzo fitness más rápido y económico que existe.', steps:'Mezclar 1 lata de atún (escurrido) con 150g arroz cocido (del día anterior) y ½ palta. Sal, limón y listo.' },
+  { emoji:'🥗', name:'Ensalada de garbanzos express', time:'3 min', kcal:320, prot:'16g', tags:['Vegano','Sin gluten','Sin lactosa'], presup:'bajo', desc:'Sin cocción. Abrir lata, mezclar, comer.', steps:'Escurrir 1 lata de garbanzos. Añadir tomate cherry, pepino, aceite de oliva, limón y orégano. Mezclar y servir.' },
+  { emoji:'🧀', name:'Tostadas de arroz con cottage y pavo', time:'4 min', kcal:260, prot:'24g', tags:['Sin gluten'], presup:'bajo', desc:'Sin cocción. Proteína rápida en menos de 5 minutos.', steps:'Untar cottage sobre tostadas de arroz. Añadir fetas de pavo cocido, rúcula y tomate cherry. Listo.' },
+  { emoji:'🥚', name:'Huevos revueltos en microondas con queso', time:'3 min', kcal:280, prot:'22g', tags:['Sin gluten','Veggie'], presup:'bajo', desc:'La receta más rápida del universo fitness. Sin sartén, sin lavar.', steps:'Romper 3 huevos en taza grande. Batir con tenedor. Agregar sal y 20g queso rallado. Microondas 90 segundos, revolver a mitad. Listo.' },
+  { emoji:'🍌', name:'Bowl de banana con mantequilla de almendras y proteína', time:'2 min', kcal:320, prot:'22g', tags:['Vegano','Sin gluten','Sin lactosa'], presup:'bajo', desc:'Sin cocción. Pre o post-entreno. Energía + proteína en 2 minutos.', steps:'Cortar 1 banana en rodajas en un bowl. Añadir 2 cdas mantequilla de almendras + 1 scoop proteína de guisante + 1 cda semillas de cáñamo. Mezclar y comer.' },
+  { emoji:'🫙', name:'Skyr con nueces y arándanos', time:'2 min', kcal:250, prot:'20g', tags:['Sin gluten','Veggie'], presup:'medio', desc:'El yogur islandés con más proteína del mercado. Sin azúcar agregada.', steps:'Servir 200g skyr natural en bowl. Añadir puñado de arándanos + 15g nueces. Opcional: cdita de miel. Sin más pasos.' },
+  { emoji:'🌯', name:'Wrap de pechuga con palta y mostaza', time:'5 min', kcal:380, prot:'34g', tags:['Sin lactosa'], presup:'bajo', desc:'Con pechuga pre-cocida del meal prep. Wrap listo en 5 minutos.', steps:'Untar 1 tortilla integral con mostaza. Añadir 120g pechuga desmechada, ½ palta en rodajas, rúcula y tomate. Enrollar y comer.' },
+  { emoji:'🍳', name:'Huevo frito con arroz y kimchi', time:'6 min', kcal:350, prot:'18g', tags:['Sin gluten','Sin lactosa'], presup:'bajo', desc:'El bowl de huevo coreano. Probióticos del kimchi + proteína + CHO de calidad.', steps:'Freír 2 huevos en sartén con aceite mínimo. Calentar 150g arroz cocido en microondas. Armar bowl: arroz + huevo + 3 cdas kimchi. Salsa de soja al gusto.' }
 ];
 
 const RAPIDAS_MEALPREP = [
-  {
-    emoji:'🍱', name:'Pollo horneado batch (para 5 días)',
-    time:'30 min (1 vez)', kcal:160, prot:'30g',
-    tags:['Sin gluten','Sin lactosa'], presup:'bajo',
-    desc:'Cocinás 1 kg de pollo el domingo y tenés proteína lista para toda la semana.',
-    steps:'Marinar 1 kg de pechugas con oliva, ajo, limón y orégano. Hornear 25 min a 200°C. Refrigerar. Usarlo en bowls, ensaladas, wraps o solo.'
-  },
-  {
-    emoji:'🫘', name:'Legumbres cocidas en cantidad',
-    time:'40 min (1 vez)', kcal:200, prot:'12g',
-    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'muy bajo',
-    desc:'Las legumbres secas cuestan 5x menos que las de lata. Cocinás y congelás.',
-    steps:'Remojar 500g de lentejas/garbanzos 8 horas. Cocinar 30–40 min. Dividir en porciones de 200g y congelar. Descongelar en microondas en 3 minutos.'
-  },
-  {
-    emoji:'🥚', name:'Huevos duros en batch (12 unidades)',
-    time:'12 min (1 vez)', kcal:78, prot:'6g',
-    tags:['Sin gluten','Sin lactosa','Veggie'], presup:'muy bajo',
-    desc:'La proteína más portable que existe. Preparás 12 y tenés snack para toda la semana.',
-    steps:'Poner 12 huevos en olla con agua fría. Llevar a hervor. Cocinar 10 min. Enfriar en agua con hielo. Pelar y refrigerar hasta 7 días. Comer solos, con sal o con mostaza.'
-  },
-  {
-    emoji:'🥣', name:'Avena overnight en frascos (5 días)',
-    time:'15 min (domingo)', kcal:400, prot:'20g',
-    tags:['Vegano','Sin lactosa'], presup:'bajo',
-    desc:'Preparás 5 frascos el domingo. Cada mañana abrís y ya está el desayuno.',
-    steps:'Por cada frasco: 80g avena + 250ml leche vegetal + 2 cdas proteína de guisante + 1 cda chía. Mezclar. Tapar y refrigerar. Al servir agregar fruta fresca y mantequilla de maní.'
-  },
-  {
-    emoji:'🍲', name:'Sopa de verduras y lentejas para la semana',
-    time:'40 min (1 vez)', kcal:280, prot:'16g',
-    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'muy bajo',
-    desc:'2 litros de sopa nutritiva. Cenas listas para 5 días con solo recalentar.',
-    steps:'Rehogar cebolla, zanahoria, apio y ajo. Añadir 300g lentejas secas + 1.5L caldo + tomate triturado + especias. Cocinar 30 min. Guardar en porciones. Recalentar en microondas 3 min.'
-  }
+  { emoji:'🍱', name:'Pollo horneado batch (para 5 días)', time:'30 min (1 vez)', kcal:160, prot:'30g', tags:['Sin gluten','Sin lactosa'], presup:'bajo', desc:'Cocinás 1 kg de pollo el domingo y tenés proteína lista para toda la semana.', steps:'Marinar 1 kg de pechugas con oliva, ajo, limón y orégano. Hornear 25 min a 200°C. Refrigerar. Usarlo en bowls, ensaladas, wraps o solo.' },
+  { emoji:'🫘', name:'Legumbres cocidas en cantidad', time:'40 min (1 vez)', kcal:200, prot:'12g', tags:['Vegano','Sin gluten','Sin lactosa'], presup:'muy bajo', desc:'Las legumbres secas cuestan 5x menos que las de lata. Cocinás y congelás.', steps:'Remojar 500g de lentejas/garbanzos 8 horas. Cocinar 30–40 min. Dividir en porciones de 200g y congelar. Descongelar en microondas en 3 minutos.' },
+  { emoji:'🥚', name:'Huevos duros en batch (12 unidades)', time:'12 min (1 vez)', kcal:78, prot:'6g', tags:['Sin gluten','Sin lactosa','Veggie'], presup:'muy bajo', desc:'La proteína más portable que existe. Preparás 12 y tenés snack para toda la semana.', steps:'Poner 12 huevos en olla con agua fría. Llevar a hervor. Cocinar 10 min. Enfriar en agua con hielo. Pelar y refrigerar hasta 7 días. Comer solos, con sal o con mostaza.' },
+  { emoji:'🥣', name:'Avena overnight en frascos (5 días)', time:'15 min (domingo)', kcal:400, prot:'20g', tags:['Vegano','Sin lactosa'], presup:'bajo', desc:'Preparás 5 frascos el domingo. Cada mañana abrís y ya está el desayuno.', steps:'Por cada frasco: 80g avena + 250ml leche vegetal + 2 cdas proteína de guisante + 1 cda chía. Mezclar. Tapar y refrigerar. Al servir agregar fruta fresca y mantequilla de maní.' },
+  { emoji:'🍲', name:'Sopa de verduras y lentejas para la semana', time:'40 min (1 vez)', kcal:280, prot:'16g', tags:['Vegano','Sin gluten','Sin lactosa'], presup:'muy bajo', desc:'2 litros de sopa nutritiva. Cenas listas para 5 días con solo recalentar.', steps:'Rehogar cebolla, zanahoria, apio y ajo. Añadir 300g lentejas secas + 1.5L caldo + tomate triturado + especias. Cocinar 30 min. Guardar en porciones. Recalentar en microondas 3 min.' }
 ];
 
 const RAPIDAS_BATIDOS = [
-  {
-    emoji:'🥤', name:'Batido proteico verde vegano',
-    time:'4 min', kcal:340, prot:'28g',
-    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'medio',
-    desc:'Proteína completa sin ningún producto animal.',
-    steps:'Licuar: 300ml leche de avena + 2 cdas proteína de guisante + 1 banana congelada + 1 puñado espinaca + 1 cda mantequilla de almendras. Añadir hielo y procesar.'
-  },
-  {
-    emoji:'🍫', name:'Shake de chocolate sin lactosa',
-    time:'3 min', kcal:290, prot:'25g',
-    tags:['Sin lactosa','Sin gluten'], presup:'bajo',
-    desc:'Para cuando el antojo de dulce y la proteína tienen que convivir.',
-    steps:'Licuar: 300ml leche sin lactosa + 2 cdas proteína whey isolada (sin lactosa) + 1 cda cacao puro + 1 cdita canela + 3 hielos. Batir y tomar.'
-  },
-  {
-    emoji:'🥭', name:'Batido post-entreno de mango y jengibre',
-    time:'3 min', kcal:310, prot:'22g',
-    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'medio',
-    desc:'Antiinflamatorio. El jengibre reduce el dolor muscular de aparición tardía.',
-    steps:'Licuar: 1 taza mango congelado + 250ml leche de coco + 2 cdas proteína de guisante + 1 cdita jengibre fresco rallado + zumo de limón. Servir frío.'
-  },
-  {
-    emoji:'🍓', name:'Batido de frutilla y remolacha post-entreno',
-    time:'4 min', kcal:295, prot:'22g',
-    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'bajo',
-    desc:'Nitratos de remolacha para recuperación vascular + antioxidantes de frutilla.',
-    steps:'Licuar: 1 taza frutillas congeladas + ½ remolacha pequeña cocida + 250ml agua de coco + 2 cdas proteína de guisante + zumo de limón + hielo. Procesar hasta suave.'
-  },
-  {
-    emoji:'🥑', name:'Batido verde de aguacate y espinaca sin azúcar',
-    time:'4 min', kcal:310, prot:'20g',
-    tags:['Vegano','Sin gluten','Sin lactosa'], presup:'medio',
-    desc:'Sin fruta dulce. Grasas buenas + proteína + micronutrientes. Bajo en CHO.',
-    steps:'Licuar: ½ aguacate + 1 taza espinaca + 300ml leche de almendras sin azúcar + 2 cdas proteína de guisante + 1 cdita jengibre + 3 hielos. Procesar y servir de inmediato.'
-  }
+  { emoji:'🥤', name:'Batido proteico verde vegano', time:'4 min', kcal:340, prot:'28g', tags:['Vegano','Sin gluten','Sin lactosa'], presup:'medio', desc:'Proteína completa sin ningún producto animal.', steps:'Licuar: 300ml leche de avena + 2 cdas proteína de guisante + 1 banana congelada + 1 puñado espinaca + 1 cda mantequilla de almendras. Añadir hielo y procesar.' },
+  { emoji:'🍫', name:'Shake de chocolate sin lactosa', time:'3 min', kcal:290, prot:'25g', tags:['Sin lactosa','Sin gluten'], presup:'bajo', desc:'Para cuando el antojo de dulce y la proteína tienen que convivir.', steps:'Licuar: 300ml leche sin lactosa + 2 cdas proteína whey isolada (sin lactosa) + 1 cda cacao puro + 1 cdita canela + 3 hielos. Batir y tomar.' },
+  { emoji:'🥭', name:'Batido post-entreno de mango y jengibre', time:'3 min', kcal:310, prot:'22g', tags:['Vegano','Sin gluten','Sin lactosa'], presup:'medio', desc:'Antiinflamatorio. El jengibre reduce el dolor muscular de aparición tardía.', steps:'Licuar: 1 taza mango congelado + 250ml leche de coco + 2 cdas proteína de guisante + 1 cdita jengibre fresco rallado + zumo de limón. Servir frío.' },
+  { emoji:'🍓', name:'Batido de frutilla y remolacha post-entreno', time:'4 min', kcal:295, prot:'22g', tags:['Vegano','Sin gluten','Sin lactosa'], presup:'bajo', desc:'Nitratos de remolacha para recuperación vascular + antioxidantes de frutilla.', steps:'Licuar: 1 taza frutillas congeladas + ½ remolacha pequeña cocida + 250ml agua de coco + 2 cdas proteína de guisante + zumo de limón + hielo. Procesar hasta suave.' },
+  { emoji:'🥑', name:'Batido verde de aguacate y espinaca sin azúcar', time:'4 min', kcal:310, prot:'20g', tags:['Vegano','Sin gluten','Sin lactosa'], presup:'medio', desc:'Sin fruta dulce. Grasas buenas + proteína + micronutrientes. Bajo en CHO.', steps:'Licuar: ½ aguacate + 1 taza espinaca + 300ml leche de almendras sin azúcar + 2 cdas proteína de guisante + 1 cdita jengibre + 3 hielos. Procesar y servir de inmediato.' }
 ];
 
 const DIETAS_DATA = [
   {
-    emoji:'🌿', name:'Vegetariana fitness',
-    tagline:'Huevos, lácteos, legumbres — sin carne ni pescado',
+    emoji:'🌿', name:'Vegetariana fitness', tagline:'Huevos, lácteos, legumbres — sin carne ni pescado',
     alerta:{tipo:'lime', txt:'✅ La dieta vegetariana bien planificada puede cubrir todos los requerimientos. La clave es combinar fuentes proteicas para obtener aminoácidos completos.'},
     claves:[
       {e:'🥚', n:'Huevo entero', w:'La proteína de mayor valor biológico. 6 unidades por día es completamente seguro.'},
@@ -1057,8 +1312,7 @@ const DIETAS_DATA = [
     suplementos:['Vitamina B12 (especialmente si sos veggie estricto)','Omega-3 de algas (EPA/DHA si no comés pescado)','Opcional: hierro + vitamina C si el análisis lo indica']
   },
   {
-    emoji:'🌾', name:'Sin gluten',
-    tagline:'Celíaco o sensibilidad al gluten — comer fit igual',
+    emoji:'🌾', name:'Sin gluten', tagline:'Celíaco o sensibilidad al gluten — comer fit igual',
     alerta:{tipo:'gold', txt:'⚠ Muchos productos "fit" tienen gluten oculto (avena no certificada, salsas, proteína en polvo). Leer siempre etiquetas.'},
     claves:[
       {e:'🍚', n:'Arroz blanco / integral', w:'El carbohidrato base sin gluten más accesible. Post-entreno ideal.'},
@@ -1071,8 +1325,7 @@ const DIETAS_DATA = [
     suplementos:['Revisar que todos los suplementos estén certificados sin gluten','Vitamina D si hay malabsorción intestinal previa']
   },
   {
-    emoji:'🥛', name:'Sin lactosa',
-    tagline:'Intolerancia a la lactosa — la proteína no está solo en los lácteos',
+    emoji:'🥛', name:'Sin lactosa', tagline:'Intolerancia a la lactosa — la proteína no está solo en los lácteos',
     alerta:{tipo:'sky', txt:'💡 La intolerancia a la lactosa no es alergia a las proteínas de la leche. Muchos toleran queso curado, yogur griego y whey isolada (casi sin lactosa).'},
     claves:[
       {e:'🥚', n:'Huevo entero', w:'Proteína completa sin ninguna lactosa. Usalo como base.'},
@@ -1085,8 +1338,7 @@ const DIETAS_DATA = [
     suplementos:['Enzima lactasa (si comés lácteos esporádicamente)','Calcio vegetal si eliminás todos los lácteos']
   },
   {
-    emoji:'🌱', name:'Vegana fitness',
-    tagline:'Sin ningún producto animal — alto rendimiento igual',
+    emoji:'🌱', name:'Vegana fitness', tagline:'Sin ningún producto animal — alto rendimiento igual',
     alerta:{tipo:'rose', txt:'❗ La dieta vegana requiere planificación extra. Vitamina B12 y omega-3 EPA/DHA no están en plantas — suplementación esencial.'},
     claves:[
       {e:'🌱', n:'Tofu y tempeh', w:'Proteína completa. El tempeh además tiene probióticos por ser fermentado.'},
@@ -1102,9 +1354,7 @@ const DIETAS_DATA = [
 
 const PRESUPUESTO_DATA = [
   {
-    nivel:'bajo', icon:'🟢', name:'Presupuesto bajo',
-    desc:'Comés fit gastando poco. Estos son los mejores ingredientes por precio/proteína.',
-    range:'Económico — máximo rendimiento por peso',
+    nivel:'bajo', icon:'🟢', name:'Presupuesto bajo', desc:'Comés fit gastando poco. Estos son los mejores ingredientes por precio/proteína.', range:'Económico — máximo rendimiento por peso',
     items:[
       {n:'Huevo entero', nota:'La proteína más barata por gramo. Comprar en docena.', macro:'6g prot/unidad'},
       {n:'Lentejas secas', nota:'500g rinden para semanas. Cocinarlas uno mismo.', macro:'9g prot/100g cocida'},
@@ -1117,9 +1367,7 @@ const PRESUPUESTO_DATA = [
     ]
   },
   {
-    nivel:'medio', icon:'🟡', name:'Presupuesto medio',
-    desc:'Podés incorporar más variedad sin salirte del presupuesto mensual.',
-    range:'Equilibrado — calidad y variedad',
+    nivel:'medio', icon:'🟡', name:'Presupuesto medio', desc:'Podés incorporar más variedad sin salirte del presupuesto mensual.', range:'Equilibrado — calidad y variedad',
     items:[
       {n:'Salmón rosado (no premium)', nota:'Omega-3 real a precio accesible. Buscar congelado.', macro:'20g prot/100g'},
       {n:'Queso cottage', nota:'Caseína natural para antes de dormir.', macro:'11g prot/100g'},
@@ -1132,9 +1380,7 @@ const PRESUPUESTO_DATA = [
     ]
   },
   {
-    nivel:'alto', icon:'🔴', name:'Presupuesto alto',
-    desc:'Cuando priorizás lo mejor de lo mejor. No significa mejor resultado — solo más opciones.',
-    range:'Premium — lo óptimo sin límite',
+    nivel:'alto', icon:'🔴', name:'Presupuesto alto', desc:'Cuando priorizás lo mejor de lo mejor. No significa mejor resultado — solo más opciones.', range:'Premium — lo óptimo sin límite',
     items:[
       {n:'Salmón salvaje fresco', nota:'Omega-3 concentrado, sin aditivos. Sabor superior.', macro:'20g prot · omega-3 alto'},
       {n:'Proteína whey isolate importada', nota:'99% libre de lactosa. Mejor ratio precio/calidad en dólar.', macro:'25g prot/medida'},
@@ -1147,70 +1393,49 @@ const PRESUPUESTO_DATA = [
 ];
 
 const PLAN_SEMANAL = [
-  {
-    dia:'Lunes', total:'1.950 kcal',
-    comidas:[
+  { dia:'Lunes', total:'1.950 kcal', comidas:[
       {t:'Desayuno',dot:'lime',n:'Tortilla de claras con espinaca',kcal:'320 kcal'},
       {t:'Media mañana',dot:'mint',n:'Banana + mantequilla de maní',kcal:'280 kcal'},
       {t:'Almuerzo',dot:'sky',n:'Bowl de pollo mediterráneo + quinoa',kcal:'580 kcal'},
       {t:'Snack',dot:'gold',n:'Queso cottage con arándanos',kcal:'200 kcal'},
       {t:'Cena',dot:'rose',n:'Salmón al vapor + puré de coliflor',kcal:'380 kcal'},
-    ]
-  },
-  {
-    dia:'Martes', total:'1.880 kcal',
-    comidas:[
+  ]},
+  { dia:'Martes', total:'1.880 kcal', comidas:[
       {t:'Desayuno',dot:'lime',n:'Smoothie bowl vegano de plátano',kcal:'380 kcal'},
       {t:'Pre-entreno',dot:'mint',n:'Arroz blanco + pollo',kcal:'490 kcal'},
       {t:'Almuerzo',dot:'sky',n:'Atún con garbanzos y tomate',kcal:'420 kcal'},
       {t:'Cena',dot:'rose',n:'Revuelto de champiñones y espinaca',kcal:'290 kcal'},
-    ]
-  },
-  {
-    dia:'Miércoles', total:'2.020 kcal',
-    comidas:[
+  ]},
+  { dia:'Miércoles', total:'2.020 kcal', comidas:[
       {t:'Desayuno',dot:'lime',n:'Avena overnight con almendras',kcal:'420 kcal'},
       {t:'Almuerzo',dot:'sky',n:'Salmón con batata y brócoli',kcal:'520 kcal'},
       {t:'Snack',dot:'gold',n:'Bowl de cottage con nueces',kcal:'290 kcal'},
       {t:'Cena',dot:'rose',n:'Arroz integral con tofu teriyaki',kcal:'480 kcal'},
-    ]
-  },
-  {
-    dia:'Jueves', total:'1.910 kcal',
-    comidas:[
+  ]},
+  { dia:'Jueves', total:'1.910 kcal', comidas:[
       {t:'Desayuno',dot:'lime',n:'Huevos con salmón ahumado + palta',kcal:'440 kcal'},
       {t:'Almuerzo',dot:'sky',n:'Dal de lentejas + arroz de coliflor',kcal:'480 kcal'},
       {t:'Snack',dot:'gold',n:'Batido verde vegano',kcal:'340 kcal'},
       {t:'Cena',dot:'rose',n:'Ensalada de pollo con aguacate',kcal:'340 kcal'},
-    ]
-  },
-  {
-    dia:'Viernes', total:'2.080 kcal',
-    comidas:[
+  ]},
+  { dia:'Viernes', total:'2.080 kcal', comidas:[
       {t:'Desayuno',dot:'lime',n:'Tostadas de arroz con hummus',kcal:'260 kcal'},
       {t:'Almuerzo',dot:'sky',n:'Lomo magro con arroz y rúcula',kcal:'610 kcal'},
       {t:'Snack',dot:'gold',n:'Batido de chocolate sin lactosa',kcal:'290 kcal'},
       {t:'Cena',dot:'rose',n:'Tortilla de batata con ricota',kcal:'420 kcal'},
-    ]
-  },
-  {
-    dia:'Sábado', total:'1.840 kcal',
-    comidas:[
+  ]},
+  { dia:'Sábado', total:'1.840 kcal', comidas:[
       {t:'Desayuno',dot:'lime',n:'Smoothie bowl con granola',kcal:'380 kcal'},
       {t:'Almuerzo',dot:'sky',n:'Tempeh con quinoa y tahini',kcal:'520 kcal'},
       {t:'Snack',dot:'gold',n:'Banana + nueces',kcal:'220 kcal'},
       {t:'Cena',dot:'rose',n:'Ensalada garbanzos express',kcal:'320 kcal'},
-    ]
-  },
-  {
-    dia:'Domingo', total:'2.100 kcal',
-    comidas:[
+  ]},
+  { dia:'Domingo', total:'2.100 kcal', comidas:[
       {t:'Desayuno',dot:'lime',n:'Meal prep: huevos revueltos + palta',kcal:'440 kcal'},
       {t:'Almuerzo',dot:'sky',n:'Bowl pollo + vegetales asados + quinoa',kcal:'580 kcal'},
       {t:'Snack',dot:'gold',n:'Batido mango y jengibre',kcal:'310 kcal'},
       {t:'Cena',dot:'rose',n:'Wrap tofu + guacamole',kcal:'440 kcal'},
-    ]
-  }
+  ]}
 ];
 
 // ══════════════════════════════════════════════
@@ -1219,14 +1444,12 @@ const PLAN_SEMANAL = [
 
 function tagsToHTML(tags, presup){
   let h = '';
-  const tagMap = {
-    'Sin lactosa':'tag-lac','Sin gluten':'tag-gl','Vegano':'tag-vn','Veggie':'tag-v','Sin lactosa':'tag-lac'
-  };
+  const tagMap = { 'Sin lactosa':'tag-lac','Sin gluten':'tag-gl','Vegano':'tag-vn','Veggie':'tag-v' };
   tags.forEach(t => {
     const cls = tagMap[t] || 'tag-v';
     h += `<span class="meta-badge ${cls}">${t}</span>`;
   });
-  const presupMap = {bajo:'presup-bajo',medio:'presup-medio',alto:'presup-alto',muy_bajo:'presup-bajo'};
+  const presupMap = {bajo:'presup-bajo',medio:'presup-medio',alto:'presup-alto','muy bajo':'presup-bajo'};
   const presupLabel = {bajo:'💚 Económico',medio:'💛 Medio',alto:'🔴 Premium','muy bajo':'💚 Muy bajo'};
   if(presup) h += `<span class="meta-badge ${presupMap[presup] || 'presup-bajo'}">${presupLabel[presup] || presup}</span>`;
   return h;
@@ -1271,7 +1494,6 @@ function buildRecipeCard(r, idx, prefix){
 }
 
 function buildQuickCard(r, idx, prefix){
-  const id = `qk-${prefix}-${idx}`;
   return `
     <div class="quick-card ${r.presup==='bajo'?'lime-border':''}">
       <div class="quick-emoji">${r.emoji}</div>
@@ -1310,9 +1532,9 @@ function buildDietas(){
             <div><div class="diet-item-name">${c.n}</div><div class="diet-item-w">${c.w}</div></div>
           </div>`).join('')}
         <div class="diet-section-label">A evitar o tener en cuenta</div>
-        ${d.evitar.map(e=>`<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:12.5px;color:var(--text2)"><span style="color:var(--ember);flex-shrink:0">✗</span>${e}</div>`).join('')}
+        ${d.evitar.map(e=>`<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:12.5px;color:var(--ink3)"><span style="color:var(--red);flex-shrink:0">✗</span>${e}</div>`).join('')}
         <div class="diet-section-label">Suplementos recomendados</div>
-        ${d.suplementos.map(s=>`<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:12.5px;color:var(--text2)"><span style="color:var(--lime);flex-shrink:0">✓</span>${s}</div>`).join('')}
+        ${d.suplementos.map(s=>`<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:12.5px;color:var(--ink3)"><span style="color:var(--green);flex-shrink:0">✓</span>${s}</div>`).join('')}
       </div>
     </div>`;
   });
@@ -1330,10 +1552,10 @@ function buildPresupuesto(){
           <div class="budget-name">${p.name}</div>
           <div class="budget-range ${p.nivel}">${p.range}</div>
         </div>
-        <div style="margin-left:auto;color:var(--lime);font-size:16px;transition:transform 0.2s" id="bud-arr-${i}">⌄</div>
+        <div style="margin-left:auto;color:var(--gold);font-size:16px;transition:transform 0.2s" id="bud-arr-${i}">⌄</div>
       </div>
       <div class="budget-body" id="bud-body-${i}">
-        <p style="font-size:12.5px;color:var(--text2);margin-bottom:12px;line-height:1.5;">${p.desc}</p>
+        <p style="font-size:12.5px;color:var(--ink3);margin-bottom:12px;line-height:1.5;">${p.desc}</p>
         ${p.items.map(it=>`
           <div class="shopping-item">
             <div><div class="shop-name">${it.n}</div><div class="shop-note">${it.nota}</div></div>
@@ -1377,7 +1599,6 @@ function toggleCard(id){
   const isOpen = exp.classList.contains('open');
   exp.classList.toggle('open');
   arr.classList.toggle('open');
-  btn.querySelector('span:first-child') && null;
   btn.childNodes.forEach(n => { if(n.nodeType === 3) n.textContent = isOpen ? 'Ver receta completa ' : 'Cerrar receta '; });
 }
 
@@ -1403,26 +1624,33 @@ function switchTab(id, btn){
   if(btn){ btn.classList.add('active'); btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}); }
 }
 
+// Toggle de zonas de la etiqueta nutricional (sección Etiquetas)
+function toggleZone(btn, id) {
+  var detail = document.getElementById(id);
+  var isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.zone').forEach(function(b){ b.classList.remove('open'); });
+  document.querySelectorAll('.zd').forEach(function(d){ d.classList.remove('open'); });
+  if (!isOpen) {
+    btn.classList.add('open');
+    detail.classList.add('open');
+  }
+}
+
 // ══════════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════════
 
 function init(){
-  // Desayunos
   document.getElementById('desayunos-prot').innerHTML = DESAYUNOS_PROT.map((r,i)=>buildRecipeCard(r,i,'dp')).join('');
   document.getElementById('desayunos-plant').innerHTML = DESAYUNOS_PLANT.map((r,i)=>buildRecipeCard(r,i,'dpl')).join('');
   document.getElementById('desayunos-pretreno').innerHTML = DESAYUNOS_PRETRENO.map((r,i)=>buildRecipeCard(r,i,'dpt')).join('');
-  // Almuerzos
   document.getElementById('almuerzos-animal').innerHTML = ALMUERZOS_ANIMAL.map((r,i)=>buildRecipeCard(r,i,'aa')).join('');
   document.getElementById('almuerzos-vegetal').innerHTML = ALMUERZOS_VEGETAL.map((r,i)=>buildRecipeCard(r,i,'av')).join('');
-  // Cenas
   document.getElementById('cenas-light').innerHTML = CENAS_LIGHT.map((r,i)=>buildRecipeCard(r,i,'cl')).join('');
   document.getElementById('cenas-posttreno').innerHTML = CENAS_POSTTRENO.map((r,i)=>buildRecipeCard(r,i,'cp')).join('');
-  // Rápidas
   document.getElementById('rapidas-10').innerHTML = RAPIDAS_10.map((r,i)=>buildQuickCard(r,i,'r10')).join('');
   document.getElementById('rapidas-mealprep').innerHTML = RAPIDAS_MEALPREP.map((r,i)=>buildQuickCard(r,i,'rmp')).join('');
   document.getElementById('rapidas-batidos').innerHTML = RAPIDAS_BATIDOS.map((r,i)=>buildQuickCard(r,i,'rb')).join('');
-  // Dietas, Presupuesto, Plan
   buildDietas();
   buildPresupuesto();
   buildPlan();
@@ -1447,7 +1675,6 @@ function checkPass(){
     setTimeout(()=>{ inp.classList.remove('error'); inp.value=''; },700);
   }
 }
-// Auto-unlock if already authenticated this session
 try{ if(sessionStorage.getItem('sl_auth')==='1'){ document.getElementById('gate').style.display='none'; document.getElementById('app').style.display='block'; } }catch(e){}
 
 </script>
